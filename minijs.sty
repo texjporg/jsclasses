@@ -1,0 +1,28 @@
+% minimal jsarticle-like fonts
+\expandafter\def\csname ver@jsarticle.cls\endcsname{minijs}
+\expandafter\let\csname JY1/mc/m/n/10\endcsname\relax
+\expandafter\let\csname JY1/gt/m/n/10\endcsname\relax
+\expandafter\let\csname JT1/mc/m/n/10\endcsname\relax
+\expandafter\let\csname JT1/gt/m/n/10\endcsname\relax
+\DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] jis}{}
+\DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] jisg}{}
+\DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.961] tmin10}{}
+\DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.961] tgoth10}{}
+\def\@setfontsize#1#2#3{\@nomath#1%
+  \ifx\protect\@typeset@protect
+    \let\@currsize#1%
+  \fi
+  \fontsize{#2}{#3}\selectfont
+  \ifdim\parindent>\z@ \parindent=1zw \fi
+  \kanjiskip=0zw plus .1zw minus .01zw
+  \xkanjiskip=0.25em plus 0.15em minus 0.06em}
+\DeclareRobustCommand\rmfamily
+        {\not@math@alphabet\rmfamily\mathrm
+         \romanfamily\rmdefault\kanjifamily\mcdefault\selectfont}
+\DeclareRobustCommand\sffamily
+        {\not@math@alphabet\sffamily\mathsf
+         \romanfamily\sfdefault\kanjifamily\gtdefault\selectfont}
+\DeclareRobustCommand\ttfamily
+        {\not@math@alphabet\ttfamily\mathtt
+         \romanfamily\ttdefault\kanjifamily\gtdefault\selectfont}
+\normalsize

@@ -1,0 +1,311 @@
+% ^^A -*- japanese-latex -*-
+% \CheckSum{142}
+% \iffalse
+%
+%  モリサワ基本5書体を使うためのパッケージ
+%
+%  奥村晴彦 <okumura@matsusaka-u.ac.jp>
+%
+%  [2002-12-19] いろいろなものに収録していただく際にライセンスを明確にする
+%  必要が生じてきました。アスキーのものが最近はmodified BSDライセンスになっ
+%  ていますので，私のものもそれに準じてmodified BSDとすることにします。
+%
+%<morisawa>\NeedsTeXFormat{pLaTeX2e}
+%<morisawa>\ProvidesPackage{morisawa}[2003/02/09 okumura]
+%<*driver>
+\documentclass{jsarticle}
+\usepackage{doc}
+\usepackage{morisawa}
+\addtolength{\textwidth}{-1in}
+\addtolength{\evensidemargin}{1in}
+\addtolength{\oddsidemargin}{1in}
+\addtolength{\marginparwidth}{1in}
+\setlength\marginparsep{5pt}
+\setlength\marginparpush{0pt}
+% \OnlyDescription
+\DisableCrossrefs
+\setcounter{StandardModuleDepth}{1}
+\GetFileInfo{morisawa.sty}
+\begin{document}
+  \DocInput{morisawa.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \title{モリサワ基本5書体パッケージ}
+% \author{奥村晴彦}
+% \date{\filedate}
+% \maketitle
+%
+% \MakeShortVerb{\|}
+%
+% \section{はじめに}
+%
+% これはモリサワ基本5書体を使うためのパッケージです。
+% ご自由に修正してお使いください。
+%
+% モリサワ基本5書体とは
+% \begin{itemize}
+% \item リュウミンL（Ryumin-Light），
+% \item 中ゴシックBBB（GothicBBB-Medium）
+% \item 太ミン（FutoMinA101-Bold）
+% \item 太ゴ（FutoGoB101-Bold）
+% \item じゅん（Jun101-Light）
+% \end{itemize}
+% のことです。
+%
+% これらを使うには，アスキーが配布している |morisawa.tar.gz|
+% が必要です。また，dvips(k)のmapファイルに次のように書いておきます。
+%
+%\begin{verbatim}
+% rml             Ryumin-Light-H
+% rmlv            Ryumin-Light-V
+% gbm             GothicBBB-Medium-H
+% gbmv            GothicBBB-Medium-V
+% ryumin-l        Ryumin-Light-H
+% ryumin-l-v      Ryumin-Light-V
+% gtbbb-m         GothicBBB-Medium-H
+% gtbbb-m-v       GothicBBB-Medium-V
+% futomin-b       FutoMinA101-Bold-H
+% futomin-b-v     FutoMinA101-Bold-V
+% futogo-b        FutoGoB101-Bold-H
+% futogo-b-v      FutoGoB101-Bold-V
+% jun101-l        Jun101-Light-H
+% jun101-l-v      Jun101-Light-V
+%\end{verbatim}
+%
+% もともとPSプリンタに実装されている場合以外は，
+% モリサワ5書体を買い揃えてもしかたがありませんが，
+% これらの名前は標準的なので，
+% 実際の出力時には他のフォントで置き換える場合でも，
+% これらの名前を仮に使っておくと便利です。
+%
+% たとえば『［改訂版］\LaTeXe 美文書作成入門』（2000年）
+% ではヒラギノに置き換えるために dvips(k)のmapファイルに
+% 次のように書いておきました。
+%
+%\begin{verbatim}
+% rml             Ryumin-Light-H
+% rmlv            Ryumin-Light-V
+% gbm             GothicBBB-Medium-H
+% gbmv            GothicBBB-Medium-V
+% ryumin-l        HiraginoMin-W3-H
+% ryumin-l-v      HiraginoMin-W3-V
+% gtbbb-m         HiraginoKaku-W5-H
+% gtbbb-m-v       HiraginoKaku-W5-V
+% futomin-b       HiraginoMin-W3-H
+% futomin-b-v     HiraginoMin-W3-H
+% futogo-b        HiraginoKaku-W5-H
+% futogo-b-v      HiraginoKaku-W5-V
+% jun101-l        HiraginoKaku-W2-H
+% jun101-l-v      HiraginoKaku-W2-V
+%\end{verbatim}
+%
+% \section{簡単な使い方}
+%
+% |{\kanjifamily{rml}\selectfont リュウミン}| → {\kanjifamily{rml}\selectfont リュウミン}
+%
+% |{\kanjifamily{gbm}\selectfont 中ゴシック}| → {\kanjifamily{gbm}\selectfont 中ゴシック}
+%
+% |{\kanjifamily{fma}\selectfont 太ミン}| → {\kanjifamily{fma}\selectfont 太ミン}
+%
+% |{\kanjifamily{gbm}\fontseries{bx}\selectfont 太ゴ}| → {\kanjifamily{gbm}\fontseries{bx}\selectfont 太ゴ}
+%
+% |{\kanjifamily{jun}\selectfont じゅん}| → {\kanjifamily{jun}\selectfont じゅん}
+%
+% |\textgt{\bfseries 太ゴ}| と書くと\textgt{\bfseries 太ゴ}になります。
+%
+% |\textbf{\gtfamily 太ゴ}| と書いても\textbf{\gtfamily 太ゴ}になります。
+%
+% |\textmg{じゅん}| または |{\mgfamily じゅん}| と書くと\textmg{じゅん}になります。
+%
+% |\texttt{じゅん}| や |{\ttfamily じゅん}| でも\texttt{じゅん}になります。
+%
+% 本文を{\kanjifamily{fma}\selectfont 太ミン}にするには |\renewcommand{\mcdefault}{fma}| とします。
+%
+% \StopEventually{}
+% 
+% \section{オプションの定義}
+% 
+%    \begin{macrocode}
+%<*morisawa>
+\newif\if@fake \@fakefalse
+\DeclareOption{fake}{\@faketrue}
+\ProcessOptions\relax
+%    \end{macrocode}
+% 
+% \section{各フォントの定義}
+%
+% \texttt{fd} ファイルを使用するのはやめました。
+%
+% 明朝体です。ボールドを太ミンにするには
+%\begin{verbatim}
+% \DeclareFontShape{JY1}{rml}{bx}{n}{<-> s * [0.961] FutoMinA101-Bold-J}{}
+%\end{verbatim}
+% とすればいいのですが，ここでは互換性のため明朝のボールドを中ゴシックにします。
+%
+%    \begin{macrocode}
+\DeclareKanjiFamily{JY1}{rml}{}
+\DeclareKanjiFamily{JT1}{rml}{}
+\if@fake
+  \DeclareFontShape{JY1}{rml}{m}{n}{<-> s * [0.961] jis}{}
+  \DeclareFontShape{JY1}{rml}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{rml}{m}{n}{<-> s * [0.961] tmin10}{}
+  \DeclareFontShape{JT1}{rml}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{rml}{m}{n}{<-> s * [0.961] Ryumin-Light-J}{}
+  \DeclareFontShape{JY1}{rml}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JT1}{rml}{m}{n}{<-> s * [0.961] Ryumin-Light-V}{}
+  \DeclareFontShape{JT1}{rml}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-V}{}
+\fi
+%    \end{macrocode}
+%
+% 太明朝体です。
+%
+%    \begin{macrocode}
+\DeclareKanjiFamily{JY1}{fma}{}
+\DeclareKanjiFamily{JT1}{fma}{}
+\if@fake
+  \DeclareFontShape{JY1}{fma}{m}{n}{<-> s * [0.961] jis}{}
+  \DeclareFontShape{JY1}{fma}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{fma}{m}{n}{<-> s * [0.961] tmin10}{}
+  \DeclareFontShape{JT1}{fma}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{fma}{m}{n}{<-> s * [0.961] FutoMinA101-Bold-J}{}
+  \DeclareFontShape{JY1}{fma}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JT1}{fma}{m}{n}{<-> s * [0.961] FutoMinA101-Bold-V}{}
+  \DeclareFontShape{JT1}{fma}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-V}{}
+\fi
+%    \end{macrocode}
+%
+% ゴシック体です。ボールド体にすると太ゴになります。
+%
+%    \begin{macrocode}
+\DeclareKanjiFamily{JY1}{gbm}{}
+\DeclareKanjiFamily{JT1}{gbm}{}
+\if@fake
+  \DeclareFontShape{JY1}{gbm}{m}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JY1}{gbm}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{gbm}{m}{n}{<-> s * [0.961] tgoth10}{}
+  \DeclareFontShape{JT1}{gbm}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{gbm}{m}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JY1}{gbm}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-J}{}
+  \DeclareFontShape{JT1}{gbm}{m}{n}{<-> s * [0.961] GothicBBB-Medium-V}{}
+  \DeclareFontShape{JT1}{gbm}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-V}{}
+\fi
+%    \end{macrocode}
+%
+% 丸ゴシックの「じゅん101」です。
+%
+%    \begin{macrocode}
+\DeclareKanjiFamily{JY1}{jun}{}
+\DeclareKanjiFamily{JT1}{jun}{}
+\if@fake
+  \DeclareFontShape{JY1}{jun}{m}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JY1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+  \DeclareFontShape{JT1}{jun}{m}{n}{<-> s * [0.961] tgoth10}{}
+  \DeclareFontShape{JT1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+\else
+  \DeclareFontShape{JY1}{jun}{m}{n}{<-> s * [0.961] Jun101-Light-J}{}
+  \DeclareFontShape{JY1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+  \DeclareFontShape{JT1}{jun}{m}{n}{<-> s * [0.961] Jun101-Light-V}{}
+  \DeclareFontShape{JT1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+\fi
+%    \end{macrocode}
+%
+% \section{フォント関連コマンド}
+%
+% 標準の明朝を \texttt{rml}，標準のゴシックを \texttt{gbm} とします。
+% 欧文にサンセリフ体を選ぶと和文はゴシック体になるようにします。
+%
+%    \begin{macrocode}
+\renewcommand{\mcdefault}{rml}
+\renewcommand{\gtdefault}{gbm}
+% \DeclareRobustCommand\gtfamily{%
+%   \not@math@alphabet\gtfamily\textgt
+%   \romanfamily\sfdefault
+%   \kanjifamily\gtdefault
+%   \selectfont}
+\DeclareRobustCommand\sffamily{%
+  \not@math@alphabet\sffamily\mathsf
+  \romanfamily\sfdefault
+  \kanjifamily\gtdefault
+  \selectfont}
+%    \end{macrocode}
+%
+% \begin{macro}{\mgfamily}
+% \begin{macro}{\mgdefault}
+% \begin{macro}{\textmg}
+%
+% 丸ゴシック関連のコマンド |\mgfamily|，|\mgdefault|，|\textmg|
+% を新設します。標準の丸ゴシックを \texttt{jun} とします。
+%
+% 欧文にタイプライタ体を選ぶと和文は丸ゴシック体になるようにしていましたが，
+% 中ゴシック体のほうがいいというご意見で，元に戻しました。
+% いや，それは単にmapファイルの問題だ，というのでまた丸ゴシック体に戻りました。|^^;|
+%
+%    \begin{macrocode}
+\newcommand{\mgdefault}{jun}
+\DeclareRobustCommand\mgfamily{%
+  \not@math@alphabet\mgfamily\textmg
+% \romanfamily\ttdefault
+  \kanjifamily\mgdefault
+  \selectfont}
+\DeclareRobustCommand\ttfamily{%
+  \not@math@alphabet\ttfamily\mathtt
+  \romanfamily\ttdefault
+  \kanjifamily\mgdefault
+% \kanjifamily\gtdefault
+  \selectfont}
+% \DeclareTextFontCommand{\textmg}{\mgfamily}
+\def\textmg#1{\relax\ifmmode\hbox\fi{\mgfamily #1}}
+%    \end{macrocode}
+%
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% 基準となる長さを再設定をします。
+% これをしておかないと，標準ドキュメントクラスと組み合わせると
+% 段落の字下げが揃わなくなります。
+%
+%    \begin{macrocode}
+\normalfont\normalsize
+\setbox0\hbox{\char\euc"A1A1}%
+\setlength\Cht{\ht0}
+\setlength\Cdp{\dp0}
+\setlength\Cwd{\wd0}
+\setlength\Cvs{\baselineskip}
+\setlength\Chs{\wd0}
+\setlength\parindent{1\Cwd}
+%    \end{macrocode}
+%
+% 以上です。
+%
+%    \begin{macrocode}
+%</morisawa>
+\endinput
+%    \end{macrocode}
+%
+% ^^A \endinput の後に \CharacterTable を書いておけば，子ファイルには
+% ^^A 出力されません。チェックは *.dtx を処理したときにしてくれます。
+%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+% \Finale

@@ -1,13 +1,11 @@
 # jsclasses
 
-Japanese classes written by Haruhiko Okumura (okumura@okumuralab.org).
-jsarticle, jsbook, and jspf classes are provided. In addition, several
-style files are provided, too.
+Japanese classes written by Haruhiko Okumura (okumura@okumuralab.org),
+including jsarticle, jsbook, and miscellaneous classes and style files.
 
 The classes themselves do not automatically enable the support of
 Japanese language. You'll need to set up LaTeX environment appropriately
-so that it can handle Japanese, not only LaTeX itself but also viewers
-of outputs.
+so that it can handle Japanese.
 
 WWW: http://oku.edu.mie-u.ac.jp/~okumura/jsclasses/
 

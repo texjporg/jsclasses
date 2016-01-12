@@ -1,0 +1,108 @@
+%%
+%% This is file `morisawa.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% morisawa.dtx  (with options: `morisawa')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from morisawa.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file morisawa.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesPackage{morisawa}[2003/02/09 okumura]
+\newif\if@fake \@fakefalse
+\DeclareOption{fake}{\@faketrue}
+\ProcessOptions\relax
+\DeclareKanjiFamily{JY1}{rml}{}
+\DeclareKanjiFamily{JT1}{rml}{}
+\if@fake
+  \DeclareFontShape{JY1}{rml}{m}{n}{<-> s * [0.961] jis}{}
+  \DeclareFontShape{JY1}{rml}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{rml}{m}{n}{<-> s * [0.961] tmin10}{}
+  \DeclareFontShape{JT1}{rml}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{rml}{m}{n}{<-> s * [0.961] Ryumin-Light-J}{}
+  \DeclareFontShape{JY1}{rml}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JT1}{rml}{m}{n}{<-> s * [0.961] Ryumin-Light-V}{}
+  \DeclareFontShape{JT1}{rml}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-V}{}
+\fi
+\DeclareKanjiFamily{JY1}{fma}{}
+\DeclareKanjiFamily{JT1}{fma}{}
+\if@fake
+  \DeclareFontShape{JY1}{fma}{m}{n}{<-> s * [0.961] jis}{}
+  \DeclareFontShape{JY1}{fma}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{fma}{m}{n}{<-> s * [0.961] tmin10}{}
+  \DeclareFontShape{JT1}{fma}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{fma}{m}{n}{<-> s * [0.961] FutoMinA101-Bold-J}{}
+  \DeclareFontShape{JY1}{fma}{bx}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JT1}{fma}{m}{n}{<-> s * [0.961] FutoMinA101-Bold-V}{}
+  \DeclareFontShape{JT1}{fma}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-V}{}
+\fi
+\DeclareKanjiFamily{JY1}{gbm}{}
+\DeclareKanjiFamily{JT1}{gbm}{}
+\if@fake
+  \DeclareFontShape{JY1}{gbm}{m}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JY1}{gbm}{bx}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JT1}{gbm}{m}{n}{<-> s * [0.961] tgoth10}{}
+  \DeclareFontShape{JT1}{gbm}{bx}{n}{<-> s * [0.961] tgoth10}{}
+\else
+  \DeclareFontShape{JY1}{gbm}{m}{n}{<-> s * [0.961] GothicBBB-Medium-J}{}
+  \DeclareFontShape{JY1}{gbm}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-J}{}
+  \DeclareFontShape{JT1}{gbm}{m}{n}{<-> s * [0.961] GothicBBB-Medium-V}{}
+  \DeclareFontShape{JT1}{gbm}{bx}{n}{<-> s * [0.961] FutoGoB101-Bold-V}{}
+\fi
+\DeclareKanjiFamily{JY1}{jun}{}
+\DeclareKanjiFamily{JT1}{jun}{}
+\if@fake
+  \DeclareFontShape{JY1}{jun}{m}{n}{<-> s * [0.961] jisg}{}
+  \DeclareFontShape{JY1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+  \DeclareFontShape{JT1}{jun}{m}{n}{<-> s * [0.961] tgoth10}{}
+  \DeclareFontShape{JT1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+\else
+  \DeclareFontShape{JY1}{jun}{m}{n}{<-> s * [0.961] Jun101-Light-J}{}
+  \DeclareFontShape{JY1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+  \DeclareFontShape{JT1}{jun}{m}{n}{<-> s * [0.961] Jun101-Light-V}{}
+  \DeclareFontShape{JT1}{jun}{bx}{n}{<->ssub*jun/m/n}{}
+\fi
+\renewcommand{\mcdefault}{rml}
+\renewcommand{\gtdefault}{gbm}
+\DeclareRobustCommand\sffamily{%
+  \not@math@alphabet\sffamily\mathsf
+  \romanfamily\sfdefault
+  \kanjifamily\gtdefault
+  \selectfont}
+\newcommand{\mgdefault}{jun}
+\DeclareRobustCommand\mgfamily{%
+  \not@math@alphabet\mgfamily\textmg
+  \kanjifamily\mgdefault
+  \selectfont}
+\DeclareRobustCommand\ttfamily{%
+  \not@math@alphabet\ttfamily\mathtt
+  \romanfamily\ttdefault
+  \kanjifamily\mgdefault
+  \selectfont}
+\def\textmg#1{\relax\ifmmode\hbox\fi{\mgfamily #1}}
+\normalfont\normalsize
+\setbox0\hbox{\char\euc"A1A1}%
+\setlength\Cht{\ht0}
+\setlength\Cdp{\dp0}
+\setlength\Cwd{\wd0}
+\setlength\Cvs{\baselineskip}
+\setlength\Chs{\wd0}
+\setlength\parindent{1\Cwd}
+\endinput
+%%
+%% End of file `morisawa.sty'.

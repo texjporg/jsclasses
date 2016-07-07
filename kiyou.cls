@@ -95,26 +95,30 @@
 \newif\if@slide
 \@slidefalse
 \newcommand{\@ptsize}{0}
-\DeclareOption{slide}{\@slidetrue\renewcommand{\@ptsize}{26}\@landscapetrue\@titlepagetrue}
-\DeclareOption{8pt}{\renewcommand{\@ptsize}{-2}}
-\DeclareOption{9pt}{\renewcommand{\@ptsize}{-1}}
-\DeclareOption{10pt}{\renewcommand{\@ptsize}{0}}
-\DeclareOption{11pt}{\renewcommand{\@ptsize}{1}}
-\DeclareOption{12pt}{\renewcommand{\@ptsize}{2}}
-\DeclareOption{14pt}{\renewcommand{\@ptsize}{4}}
-\DeclareOption{17pt}{\renewcommand{\@ptsize}{7}}
-\DeclareOption{20pt}{\renewcommand{\@ptsize}{10}}
-\DeclareOption{21pt}{\renewcommand{\@ptsize}{11}}
-\DeclareOption{25pt}{\renewcommand{\@ptsize}{15}}
-\DeclareOption{30pt}{\renewcommand{\@ptsize}{20}}
-\DeclareOption{36pt}{\renewcommand{\@ptsize}{26}}
-\DeclareOption{43pt}{\renewcommand{\@ptsize}{33}}
-\DeclareOption{12Q}{\renewcommand{\@ptsize}{1200}}
-\DeclareOption{14Q}{\renewcommand{\@ptsize}{1400}}
-\DeclareOption{10ptj}{\renewcommand{\@ptsize}{1001}}
-\DeclareOption{10.5ptj}{\renewcommand{\@ptsize}{1051}}
-\DeclareOption{11ptj}{\renewcommand{\@ptsize}{1101}}
-\DeclareOption{12ptj}{\renewcommand{\@ptsize}{1201}}
+\newif\ifjs@mag\js@magtrue
+\def\js@magscale{1}
+\DeclareOption{slide}{\@slidetrue\def\js@magscale{3.583}\renewcommand{\@ptsize}{26}\@landscapetrue\@titlepagetrue}
+\DeclareOption{8pt}{\def\js@magscale{0.83}\renewcommand{\@ptsize}{-2}}
+\DeclareOption{9pt}{\def\js@magscale{0.913}\renewcommand{\@ptsize}{-1}}
+\DeclareOption{10pt}{\def\js@magscale{1}\renewcommand{\@ptsize}{0}}
+\DeclareOption{11pt}{\def\js@magscale{1.095}\renewcommand{\@ptsize}{1}}
+\DeclareOption{12pt}{\def\js@magscale{1.200}\renewcommand{\@ptsize}{2}}
+\DeclareOption{14pt}{\def\js@magscale{1.440}\renewcommand{\@ptsize}{4}}
+\DeclareOption{17pt}{\def\js@magscale{1.728}\renewcommand{\@ptsize}{7}}
+\DeclareOption{20pt}{\def\js@magscale{2}\renewcommand{\@ptsize}{10}}
+\DeclareOption{21pt}{\def\js@magscale{2.074}\renewcommand{\@ptsize}{11}}
+\DeclareOption{25pt}{\def\js@magscale{2.488}\renewcommand{\@ptsize}{15}}
+\DeclareOption{30pt}{\def\js@magscale{2.986}\renewcommand{\@ptsize}{20}}
+\DeclareOption{36pt}{\def\js@magscale{3.583}\renewcommand{\@ptsize}{26}}
+\DeclareOption{43pt}{\def\js@magscale{4.300}\renewcommand{\@ptsize}{33}}
+\DeclareOption{12Q}{\def\js@magscale{0.923}\renewcommand{\@ptsize}{1200}}
+\DeclareOption{14Q}{\def\js@magscale{1.077}\renewcommand{\@ptsize}{1400}}
+\DeclareOption{10ptj}{\def\js@magscale{1.085}\renewcommand{\@ptsize}{1001}}
+\DeclareOption{10.5ptj}{\def\js@magscale{1.139}\renewcommand{\@ptsize}{1051}}
+\DeclareOption{11ptj}{\def\js@magscale{1.194}\renewcommand{\@ptsize}{1101}}
+\DeclareOption{12ptj}{\def\js@magscale{1.302}\renewcommand{\@ptsize}{1201}}
+\DeclareOption{mag}{\js@magtrue}
+\DeclareOption{real}{\js@magfalse}
 \hour\time \divide\hour by 60\relax
 \@tempcnta\hour \multiply\@tempcnta 60\relax
 \minute\time \advance\minute-\@tempcnta
@@ -226,83 +230,96 @@
   \AtBeginDvi{\special{papersize=\the\@tempdima,\the\@tempdimb}}
 \fi
 \def\n@baseline{14.897}
+\newdimen\js@mpt
 \def\inv@mag{1}
-\ifnum\@ptsize=-2
-  \mag 833
-  \def\inv@mag{1.20048}
-  \def\n@baseline{15}%
+\ifjs@mag
+  \js@mpt=1\p@
+  \ifnum\@ptsize=-2
+    \mag 833
+    \def\inv@mag{1.20048}
+    \def\n@baseline{15}%
+  \fi
+  \ifnum\@ptsize=-1
+    \mag 913 % formerly 900
+    \def\inv@mag{1.09529}
+    \def\n@baseline{15}%
+  \fi
+  \ifnum\@ptsize=1
+    \mag 1095 % formerly 1100
+    \def\inv@mag{0.913242}
+  \fi
+  \ifnum\@ptsize=2
+    \mag 1200
+    \def\inv@mag{0.833333}
+  \fi
+  \ifnum\@ptsize=4
+    \mag 1440
+    \def\inv@mag{0.694444}
+  \fi
+  \ifnum\@ptsize=7
+    \mag 1728
+    \def\inv@mag{0.578704}
+  \fi
+  \ifnum\@ptsize=10
+    \mag 2000
+    \def\inv@mag{0.5}
+  \fi
+  \ifnum\@ptsize=11
+    \mag 2074
+    \def\inv@mag{0.48216}
+  \fi
+  \ifnum\@ptsize=15
+    \mag 2488
+    \def\inv@mag{0.401929}
+  \fi
+  \ifnum\@ptsize=20
+    \mag 2986
+    \def\inv@mag{0.334896}
+  \fi
+  \ifnum\@ptsize=26
+    \mag 3583
+    \def\inv@mag{0.279096}
+  \fi
+  \ifnum\@ptsize=33
+    \mag 4300
+    \def\inv@mag{0.232558}
+  \fi
+  \ifnum\@ptsize=1200
+    \mag 923
+    \def\inv@mag{1.0834236}
+  \fi
+  \ifnum\@ptsize=1400
+    \mag 1077
+    \def\inv@mag{0.928505}
+  \fi
+  \ifnum\@ptsize=1001
+    \mag 1085
+    \def\inv@mag{0.921659}
+  \fi
+  \ifnum\@ptsize=1051
+    \mag 1139
+    \def\inv@mag{0.877963}
+  \fi
+  \ifnum\@ptsize=1101
+    \mag 1194
+    \def\inv@mag{0.837521}
+  \fi
+  \ifnum\@ptsize=1201
+    \mag 1302
+    \def\inv@mag{0.768049}
+  \fi
+\else
+  \js@mpt=\js@magscale\p@
+  \def\inv@mag{1}
 \fi
-\ifnum\@ptsize=-1
-  \mag 913 % formerly 900
-  \def\inv@mag{1.09529}
-  \def\n@baseline{15}%
+\def\js@magscale{0.9769230}
+\ifjs@mag
+  \mag 977
+  \def\inv@mag{1.02354}
+  \js@mpt=1\p@
+\else
+  \js@mpt=\ltjs@magscale\p@
 \fi
-\ifnum\@ptsize=1
-  \mag 1095 % formerly 1100
-  \def\inv@mag{0.913242}
-\fi
-\ifnum\@ptsize=2
-  \mag 1200
-  \def\inv@mag{0.833333}
-\fi
-\ifnum\@ptsize=4
-  \mag 1440
-  \def\inv@mag{0.694444}
-\fi
-\ifnum\@ptsize=7
-  \mag 1728
-  \def\inv@mag{0.578704}
-\fi
-\ifnum\@ptsize=10
-  \mag 2000
-  \def\inv@mag{0.5}
-\fi
-\ifnum\@ptsize=11
-  \mag 2074
-  \def\inv@mag{0.48216}
-\fi
-\ifnum\@ptsize=15
-  \mag 2488
-  \def\inv@mag{0.401929}
-\fi
-\ifnum\@ptsize=20
-  \mag 2986
-  \def\inv@mag{0.334896}
-\fi
-\ifnum\@ptsize=26
-  \mag 3583
-  \def\inv@mag{0.279096}
-\fi
-\ifnum\@ptsize=33
-  \mag 4300
-  \def\inv@mag{0.232558}
-\fi
-\ifnum\@ptsize=1200
-  \mag 923
-  \def\inv@mag{1.0834236}
-\fi
-\ifnum\@ptsize=1400
-  \mag 1077
-  \def\inv@mag{0.928505}
-\fi
-\ifnum\@ptsize=1001
-  \mag 1085
-  \def\inv@mag{0.921659}
-\fi
-\ifnum\@ptsize=1051
-  \mag 1139
-  \def\inv@mag{0.877963}
-\fi
-\ifnum\@ptsize=1101
-  \mag 1194
-  \def\inv@mag{0.837521}
-\fi
-\ifnum\@ptsize=1201
-  \mag 1302
-  \def\inv@mag{0.768049}
-\fi
-\mag 977
-\def\inv@mag{1.02354}
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
 \ifwinjis
@@ -584,6 +601,8 @@
       \xkanjiskip=0.25em plus 0.15em minus 0.06em
     \fi
   \fi}
+\def\js@setfontsize#1#2#3{%
+  \@setfontsize#1{#2\js@mpt}{#3\js@mpt}}
 \emergencystretch 3zw
 \newif\ifnarrowbaselines
 \if@english
@@ -603,13 +622,13 @@
 \def\widebaselines{\narrowbaselinesfalse\@currsize\selectfont}
 \renewcommand{\normalsize}{%
   \ifnarrowbaselines
-    \@setfontsize\normalsize\@xpt\@xiipt
+    \js@setfontsize\normalsize\@xpt\@xiipt
   \else
-    \@setfontsize\normalsize\@xpt{\n@baseline}%
+    \js@setfontsize\normalsize\@xpt{\n@baseline}%
   \fi
-  \abovedisplayskip 11\p@ \@plus3\p@ \@minus4\p@
-  \abovedisplayshortskip \z@ \@plus3\p@
-  \belowdisplayskip 9\p@ \@plus3\p@ \@minus4\p@
+  \abovedisplayskip 11\js@mpt \@plus3\js@mpt \@minus4\js@mpt
+  \abovedisplayshortskip \z@ \@plus3\js@mpt
+  \belowdisplayskip 9\js@mpt \@plus3\js@mpt \@minus4\js@mpt
   \belowdisplayshortskip \belowdisplayskip
   \let\@listi\@listI}
 \normalsize
@@ -621,12 +640,12 @@
 \setlength\Chs{\wd0}
 \newcommand{\small}{%
   \ifnarrowbaselines
-    \@setfontsize\small{8.8888}{11}%
+    \js@setfontsize\small{8.8888}{11}%
   \else
-    \@setfontsize\small{8.8888}{13.2418}%
+    \js@setfontsize\small{8.8888}{13.2418}%
   \fi
-  \abovedisplayskip 9\p@ \@plus3\p@ \@minus4\p@
-  \abovedisplayshortskip  \z@ \@plus3\p@
+  \abovedisplayskip 9\js@mpt \@plus3\js@mpt \@minus4\js@mpt
+  \abovedisplayshortskip  \z@ \@plus3\js@mpt
   \belowdisplayskip \abovedisplayskip
   \belowdisplayshortskip \belowdisplayskip
   \def\@listi{\leftmargin\leftmargini
@@ -635,40 +654,40 @@
               \itemsep \parsep}}
 \newcommand{\footnotesize}{%
   \ifnarrowbaselines
-    \@setfontsize\footnotesize{8.8888}{11}%
+    \js@setfontsize\footnotesize{8.8888}{11}%
   \else
-    \@setfontsize\footnotesize{8.8888}{13.2418}%
+    \js@setfontsize\footnotesize{8.8888}{13.2418}%
   \fi
-  \abovedisplayskip 6\p@ \@plus2\p@ \@minus3\p@
-  \abovedisplayshortskip  \z@ \@plus2\p@
+  \abovedisplayskip 6\js@mpt \@plus2\js@mpt \@minus3\js@mpt
+  \abovedisplayshortskip  \z@ \@plus2\js@mpt
   \belowdisplayskip \abovedisplayskip
   \belowdisplayshortskip \belowdisplayskip
   \def\@listi{\leftmargin\leftmargini
               \topsep \z@
               \parsep \z@
               \itemsep \parsep}}
-\newcommand{\scriptsize}{\@setfontsize\scriptsize\@viipt\@viiipt}
-\newcommand{\tiny}{\@setfontsize\tiny\@vpt\@vipt}
+\newcommand{\scriptsize}{\js@setfontsize\scriptsize\@viipt\@viiipt}
+\newcommand{\tiny}{\js@setfontsize\tiny\@vpt\@vipt}
 \if@twocolumn
-  \newcommand{\large}{\@setfontsize\large{11.111}{\n@baseline}}
+  \newcommand{\large}{\js@setfontsize\large{11.111}{\n@baseline}}
 \else
-  \newcommand{\large}{\@setfontsize\large{11.111}{17}}
+  \newcommand{\large}{\js@setfontsize\large{11.111}{17}}
 \fi
-\newcommand{\Large}{\@setfontsize\Large{12.222}{21}}
-\newcommand{\LARGE}{\@setfontsize\LARGE\@xviipt{25}}
-\newcommand{\huge}{\@setfontsize\huge\@xxpt{28}}
-\newcommand{\Huge}{\@setfontsize\Huge\@xxvpt{33}}
-\newcommand{\HUGE}{\@setfontsize\HUGE{30}{40}}
+\newcommand{\Large}{\js@setfontsize\Large{12.222}{21}}
+\newcommand{\LARGE}{\js@setfontsize\LARGE\@xviipt{25}}
+\newcommand{\huge}{\js@setfontsize\huge\@xxpt{28}}
+\newcommand{\Huge}{\js@setfontsize\Huge\@xxvpt{33}}
+\newcommand{\HUGE}{\js@setfontsize\HUGE{30}{40}}
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
 \newcommand{\headfont}{\gtfamily\sffamily}
 \setlength\columnsep{28truebp}
-\setlength\columnseprule{0\p@}
-\setlength\lineskip{1\p@}
-\setlength\normallineskip{1\p@}
-\setlength\lineskiplimit{1\p@}
-\setlength\normallineskiplimit{1\p@}
+\setlength\columnseprule{0\js@mpt}
+\setlength\lineskip{1\js@mpt}
+\setlength\normallineskip{1\js@mpt}
+\setlength\lineskiplimit{1\js@mpt}
+\setlength\normallineskiplimit{1\js@mpt}
 \renewcommand{\baselinestretch}{}
-\setlength\parskip{0\p@}
+\setlength\parskip{0\js@mpt}
 \if@slide
   \setlength\parindent{0zw}
 \else
@@ -677,9 +696,9 @@
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-\setlength\topskip{10\p@}
+\setlength\topskip{10\js@mpt}
 \if@slide
-  \setlength\headheight{0\p@}
+  \setlength\headheight{0\js@mpt}
 \else
   \setlength\headheight{2\topskip}
 \fi
@@ -691,8 +710,8 @@
     \setlength\footskip{\baselineskip}
   \fi
 \fi
-\setlength\headheight{0\p@}
-\setlength\headsep{0\p@}
+\setlength\headheight{0\js@mpt}
+\setlength\headsep{0\js@mpt}
 \setlength\maxdepth{.5\topskip}
 \newdimen\fullwidth
 \setlength\fullwidth{48zw}
@@ -700,7 +719,7 @@
 \setlength\textwidth{\fullwidth}
 \setlength{\textheight}{47\baselineskip}
 \addtolength{\textheight}{\topskip}
-\addtolength{\textheight}{0.1\p@}
+\addtolength{\textheight}{0.1\js@mpt}
 \setlength\marginparsep{\columnsep}
 \setlength\marginparpush{\baselineskip}
 \setlength{\oddsidemargin}{\paperwidth}
@@ -743,7 +762,7 @@
 \fi
 {\footnotesize\global\setlength\footnotesep{\baselineskip}}
 \setlength\footnotesep{0.7\footnotesep}
-\setlength{\skip\footins}{16\p@ \@plus 5\p@ \@minus 2\p@}
+\setlength{\skip\footins}{16\js@mpt \@plus 5\js@mpt \@minus 2\js@mpt}
 \setcounter{topnumber}{9}
 \renewcommand{\topfraction}{.85}
 \setcounter{bottomnumber}{9}
@@ -754,17 +773,17 @@
 \setcounter{dbltopnumber}{9}
 \renewcommand{\dbltopfraction}{.8}
 \renewcommand{\dblfloatpagefraction}{.8}
-\setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\textfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
-\setlength\intextsep   {12\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
-\setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
-\setlength\@fptop{0\p@ \@plus 1fil}
-\setlength\@fpsep{8\p@ \@plus 2fil}
-\setlength\@fpbot{0\p@ \@plus 1fil}
-\setlength\@dblfptop{0\p@ \@plus 1fil}
-\setlength\@dblfpsep{8\p@ \@plus 2fil}
-\setlength\@dblfpbot{0\p@ \@plus 1fil}
+\setlength\floatsep    {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
+\setlength\textfloatsep{20\js@mpt \@plus 2\js@mpt \@minus 4\js@mpt}
+\setlength\intextsep   {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
+\setlength\dblfloatsep    {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
+\setlength\dbltextfloatsep{20\js@mpt \@plus 2\js@mpt \@minus 4\js@mpt}
+\setlength\@fptop{0\js@mpt \@plus 1fil}
+\setlength\@fpsep{8\js@mpt \@plus 2fil}
+\setlength\@fpbot{0\js@mpt \@plus 1fil}
+\setlength\@dblfptop{0\js@mpt \@plus 1fil}
+\setlength\@dblfpsep{8\js@mpt \@plus 2fil}
+\setlength\@dblfpbot{0\js@mpt \@plus 1fil}
 \def\ps@plainfoot{%
   \let\@mkboth\@gobbletwo
   \let\@oddhead\@empty
@@ -844,16 +863,16 @@
         \begin{center}
           \mbox{} \\[1zw]
           \large
-          {\maybeblue\hrule height0pt depth2pt\relax}\par
+          {\maybeblue\hrule height0\js@mpt depth2\js@mpt\relax}\par
           \smallskip
           \@title
           \smallskip
-          {\maybeblue\hrule height0pt depth2pt\relax}\par
+          {\maybeblue\hrule height0\js@mpt depth2\js@mpt\relax}\par
           \vfill
           {\small \@author}%
         \end{center}
       \else
-      \vskip 60\p@
+      \vskip 60\js@mpt
       \begin{center}%
         {\LARGE \@title \par}%
         \vskip 3em%
@@ -1015,7 +1034,7 @@
     \@afterheading
   \fi
   \if@slide
-    {\vskip-6pt\maybeblue\hrule height0pt depth1pt\vskip7pt\relax}%
+    {\vskip-6\js@mpt\maybeblue\hrule height0\js@mpt depth1\js@mpt\vskip7\js@mpt\relax}%
   \fi
   \par  % 2000-12-18
   \ignorespaces}
@@ -1296,14 +1315,14 @@
   \gdef\postsectionname{}%
   \gdef\thesection{\presectionname\@Alph\c@section\postsectionname}%
   \gdef\thesubsection{\@Alph\c@section.\@arabic\c@subsection}}
-\setlength\arraycolsep{5\p@}
-\setlength\tabcolsep{6\p@}
-\setlength\arrayrulewidth{.4\p@}
-\setlength\doublerulesep{2\p@}
+\setlength\arraycolsep{5\js@mpt}
+\setlength\tabcolsep{6\js@mpt}
+\setlength\arrayrulewidth{.4\js@mpt}
+\setlength\doublerulesep{2\js@mpt}
 \setlength\tabbingsep{\labelsep}
 \skip\@mpfootins = \skip\footins
-\setlength\fboxsep{3\p@}
-\setlength\fboxrule{.4\p@}
+\setlength\fboxsep{3\js@mpt}
+\setlength\fboxrule{.4\js@mpt}
 \renewcommand \theequation {\@arabic\c@equation}
 \newcounter{figure}
 \renewcommand \thefigure {\@arabic\c@figure}
@@ -1331,8 +1350,8 @@
                {\end@dblfloat}
 \newlength\abovecaptionskip
 \newlength\belowcaptionskip
-\setlength\abovecaptionskip{5\p@} % 元: 10\p@
-\setlength\belowcaptionskip{5\p@} % 元: 0\p@
+\setlength\abovecaptionskip{5\js@mpt} % 元: 10\p@
+\setlength\belowcaptionskip{5\js@mpt} % 元: 0\p@
 \long\def\@makecaption#1#2{{\small
   \advance\leftskip .0628\linewidth
   \advance\rightskip .0628\linewidth
@@ -1369,7 +1388,7 @@
 \newcommand*{\l@part}[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty\@secpenalty
-    \addvspace{2.25em \@plus\p@}%
+    \addvspace{2.25em \@plus\js@mpt}%
     \begingroup
       \parindent \z@
       \rightskip \@tocrmarg
@@ -1384,7 +1403,7 @@
 \newcommand*{\l@section}[2]{%
   \ifnum \c@tocdepth >\z@
     \addpenalty{\@secpenalty}%
-    \addvspace{1.0em \@plus\p@}%
+    \addvspace{1.0em \@plus\js@mpt}%
     \begingroup
       \parindent\z@
       \rightskip\@tocrmarg
@@ -1411,7 +1430,7 @@
 \newdimen\@lnumwidth
 \def\numberline#1{\hb@xt@\@lnumwidth{#1\hfil}\hspace{0pt}}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
-  \vskip \z@ \@plus.2\p@
+  \vskip \z@ \@plus.2\js@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
     \parindent #2\relax\@afterindenttrue
    \interlinepenalty\@M
@@ -1486,7 +1505,7 @@
     \@mkboth{\indexname}{\indexname}%
     \plainifnotempty % \thispagestyle{plain}
     \parindent\z@
-    \parskip\z@ \@plus .3\p@\relax
+    \parskip\z@ \@plus .3\js@mpt\relax
     \let\item\@idxitem
     \raggedright
     \footnotesize\narrowbaselines
@@ -1501,7 +1520,7 @@
 \newcommand{\@idxitem}{\par\hangindent 4zw} % 元 40pt
 \newcommand{\subitem}{\@idxitem \hspace*{2zw}} % 元 20pt
 \newcommand{\subsubitem}{\@idxitem \hspace*{3zw}} % 元 30pt
-\newcommand{\indexspace}{\par \vskip 10\p@ \@plus5\p@ \@minus3\p@\relax}
+\newcommand{\indexspace}{\par \vskip 10\js@mpt \@plus5\js@mpt \@minus3\js@mpt\relax}
 \newcommand\seename{\if@english see\else →\fi}
 \newcommand\alsoname{\if@english see also\else →\fi}
 \let\footnotes@ve=\footnote
@@ -1513,9 +1532,9 @@
   \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}\hbox{}}
 \def\thefootnote{\ifnum\c@footnote>\z@\leavevmode\lower.5ex\hbox{*}\@arabic\c@footnote\fi}
 \renewcommand{\footnoterule}{%
-  \kern-3\p@
-  \hrule width .4\columnwidth
-  \kern 2.6\p@}
+  \kern-3\js@mpt
+  \hrule width .4\columnwidth height 0.4\js@mpt
+  \kern 2.6\js@mpt}
 \long\def\@footnotetext{%
   \insert\footins\bgroup
     \normalfont\footnotesize

@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2014/02/07 okumura]
+  [2016/07/07 H. Okumura/Japanese TeX Development Community]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -216,14 +216,15 @@
   \setlength\paperheight{\paperwidth}
   \setlength\paperwidth {\@tempdima}
 \fi
+\newdimen\stockwidth \newdimen\stockheight
+\setlength{\stockwidth}{\paperwidth}
+\setlength{\stockheight}{\paperheight}
 \ifpapersize
-  \setlength{\@tempdima}{\paperwidth}
-  \setlength{\@tempdimb}{\paperheight}
   \iftombow
-    \advance \@tempdima 2in
-    \advance \@tempdimb 2in
+    \advance \stockwidth 2in
+    \advance \stockheight 2in
   \fi
-  \AtBeginDvi{\special{papersize=\the\@tempdima,\the\@tempdimb}}
+  \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
 \fi
 \def\n@baseline{14.897}
 \def\inv@mag{1}
@@ -305,6 +306,8 @@
 \def\inv@mag{1.02354}
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
+\setlength\stockwidth{\inv@mag\stockwidth}%
+\setlength\stockheight{\inv@mag\stockheight}%
 \ifwinjis
   \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] winjis}{}
   \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] winjisg}{}

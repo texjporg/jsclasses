@@ -19,7 +19,7 @@
 %  Copyright 1995-1999 ASCII Corporation.
 %
 % \fi
-% \CheckSum{5668}
+% \CheckSum{5680}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -47,7 +47,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2014/02/07 okumura]
+  [2016/07/07 H. Okumura/Japanese TeX Development Community]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -593,15 +593,19 @@
 %
 % [2003-05-17] トンボをプレビューに使うことを考えて1インチを2インチにしました。
 %
+% [2016-07-07] memoirクラスのマニュアルによると，トンボを含めた用紙の寸法は
+% |\stockwidth|，|\stockheight|と呼ぶようですので，これを使うことにしました。
+%
 %    \begin{macrocode}
+\newdimen\stockwidth \newdimen\stockheight
+\setlength{\stockwidth}{\paperwidth}
+\setlength{\stockheight}{\paperheight}
 \ifpapersize
-  \setlength{\@tempdima}{\paperwidth}
-  \setlength{\@tempdimb}{\paperheight}
   \iftombow
-    \advance \@tempdima 2in
-    \advance \@tempdimb 2in
+    \advance \stockwidth 2in
+    \advance \stockheight 2in
   \fi
-  \AtBeginDvi{\special{papersize=\the\@tempdima,\the\@tempdimb}}
+  \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
 \fi
 %    \end{macrocode}
 %
@@ -713,8 +717,17 @@
 \mag 977
 \def\inv@mag{1.02354}
 %</kiyou>
+%    \end{macrocode}
+%
+% [2016-07-07] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
+% スケールします。新しいgraphicx/colorパッケージのドライバは，
+% この値を使って用紙サイズを設定するはずです。
+%
+%    \begin{macrocode}
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
+\setlength\stockwidth{\inv@mag\stockwidth}%
+\setlength\stockheight{\inv@mag\stockheight}%
 %    \end{macrocode}
 %
 % \paragraph{pagesizeスペシャルの出力}

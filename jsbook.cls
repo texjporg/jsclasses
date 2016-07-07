@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2016/07/07 H. Okumura/Japanese TeX Development Community]
+  [2016/07/08 H. Okumura/Japanese TeX Development Community]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@openright
@@ -226,11 +226,11 @@
 \newdimen\stockwidth \newdimen\stockheight
 \setlength{\stockwidth}{\paperwidth}
 \setlength{\stockheight}{\paperheight}
+\iftombow
+  \advance \stockwidth 2in
+  \advance \stockheight 2in
+\fi
 \ifpapersize
-  \iftombow
-    \advance \stockwidth 2in
-    \advance \stockheight 2in
-  \fi
   \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
 \fi
 \if@slide\def\n@baseline{13}\else\def\n@baseline{16}\fi

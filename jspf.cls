@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/07/07 H. Okumura/Japanese TeX Development Community]
+  [2016/07/08 H. Okumura/Japanese TeX Development Community]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -219,11 +219,11 @@
 \newdimen\stockwidth \newdimen\stockheight
 \setlength{\stockwidth}{\paperwidth}
 \setlength{\stockheight}{\paperheight}
+\iftombow
+  \advance \stockwidth 2in
+  \advance \stockheight 2in
+\fi
 \ifpapersize
-  \iftombow
-    \advance \stockwidth 2in
-    \advance \stockheight 2in
-  \fi
   \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
 \fi
 \def\n@baseline{14.554375}

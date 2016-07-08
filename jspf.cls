@@ -97,7 +97,10 @@
 \newcommand{\@ptsize}{0}
 \newif\ifjs@mag\js@magtrue
 \def\js@magscale{1}
-\DeclareOption{slide}{\@slidetrue\def\js@magscale{3.583}\renewcommand{\@ptsize}{26}\@landscapetrue\@titlepagetrue}
+\DeclareOption{slide}{%
+  \@slidetrue\def\js@magscale{3.583}
+  \renewcommand{\@ptsize}{26}
+  \@landscapetrue\@titlepagetrue}
 \DeclareOption{8pt}{\def\js@magscale{0.83}\renewcommand{\@ptsize}{-2}}
 \DeclareOption{9pt}{\def\js@magscale{0.913}\renewcommand{\@ptsize}{-1}}
 \DeclareOption{10pt}{\def\js@magscale{1}\renewcommand{\@ptsize}{0}}
@@ -231,9 +234,11 @@
 \fi
 \def\n@baseline{14.554375}
 \newdimen\js@mpt
+\newdimen\js@mmm
 \def\inv@mag{1}
 \ifjs@mag
   \js@mpt=1\p@
+  \js@mmm=1mm
   \ifnum\@ptsize=-2
     \mag 833
     \def\inv@mag{1.20048}
@@ -310,6 +315,7 @@
   \fi
 \else
   \js@mpt=\js@magscale\p@
+  \js@mmm=\js@magscale mm
   \def\inv@mag{1}
 \fi
 \setlength\paperwidth{\inv@mag\paperwidth}%
@@ -694,18 +700,18 @@
 \else
   \setlength\headheight{2\topskip}
 \fi
-\setlength\footskip{9mm}
-\setlength\headsep{9mm}
+\setlength\footskip{9\js@mmm}
+\setlength\headsep{9\js@mmm}
 \addtolength\headsep{-\topskip}
 \setlength\maxdepth{.5\topskip}
 \newdimen\fullwidth
 \setlength\fullwidth{50zw}
-\addtolength\fullwidth{8mm}
+\addtolength\fullwidth{8\js@mmm}
 \setlength\textwidth{\fullwidth}
 \setlength{\textheight}{51\baselineskip}
 \addtolength{\textheight}{\topskip}
 \addtolength{\textheight}{0.1\js@mpt}
-\setlength{\mathindent}{10mm}
+\setlength{\mathindent}{10\js@mmm}
 \setlength\marginparsep{\columnsep}
 \setlength\marginparpush{\baselineskip}
 \setlength{\oddsidemargin}{\paperwidth}
@@ -725,7 +731,7 @@
 \addtolength\marginparwidth{-\oddsidemargin}
 \addtolength\marginparwidth{-\inv@mag in}
 \addtolength\marginparwidth{-\textwidth}
-\addtolength\marginparwidth{-1cm}
+\addtolength\marginparwidth{-10\js@mmm}
 \addtolength\marginparwidth{-\marginparsep}
 \@tempdima=1zw
 \divide\marginparwidth\@tempdima
@@ -873,7 +879,7 @@
   \centerline{\box\@abstractbox}
   \ifx\@keywords\@undefined\else
     \vskip 1.5em
-    \centerline{\parbox{157mm}{\textsf{Keywords:}\\ \small\@keywords}}
+    \centerline{\parbox{157\js@mmm}{\textsf{Keywords:}\\ \small\@keywords}}
   \fi
   \vskip 1.5em}
 \def\@startsection#1#2#3#4#5#6{%
@@ -1153,9 +1159,9 @@
 \newbox\@abstractbox
 \newenvironment{abstract}{%
   \global\setbox\@abstractbox\hbox\bgroup
-  \begin{minipage}[b]{157mm}{\sffamily Abstract}\par
+  \begin{minipage}[b]{157\js@mmm}{\sffamily Abstract}\par
     \small
-    \if@english \parindent6mm \else \parindent1zw \fi}%
+    \if@english \parindent6\js@mmm \else \parindent1zw \fi}%
   {\end{minipage}\egroup}
 \newenvironment{verse}{%
   \let \\=\@centercr
@@ -1245,9 +1251,9 @@
         \itemsep    \z@
         \itemindent \z@
         \labelsep   \z@
-        \labelwidth 11mm
+        \labelwidth 11\js@mmm
         \listparindent\z@
-        \leftmargin 11mm}\item\relax #2\endlist}
+        \leftmargin 11\js@mmm}\item\relax #2\endlist}
   \else
     \global \@minipagefalse
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%

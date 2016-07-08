@@ -99,7 +99,10 @@
 \newcommand{\@ptsize}{0}
 \newif\ifjs@mag\js@magtrue
 \def\js@magscale{1}
-\DeclareOption{slide}{\@slidetrue\def\js@magscale{3.583}\renewcommand{\@ptsize}{26}\@landscapetrue\@titlepagetrue}
+\DeclareOption{slide}{%
+  \@slidetrue\def\js@magscale{3.583}
+  \renewcommand{\@ptsize}{26}
+  \@landscapetrue\@titlepagetrue}
 \DeclareOption{8pt}{\def\js@magscale{0.83}\renewcommand{\@ptsize}{-2}}
 \DeclareOption{9pt}{\def\js@magscale{0.913}\renewcommand{\@ptsize}{-1}}
 \DeclareOption{10pt}{\def\js@magscale{1}\renewcommand{\@ptsize}{0}}
@@ -238,9 +241,11 @@
 \fi
 \if@slide\def\n@baseline{13}\else\def\n@baseline{16}\fi
 \newdimen\js@mpt
+\newdimen\js@mmm
 \def\inv@mag{1}
 \ifjs@mag
   \js@mpt=1\p@
+  \js@mmm=1mm
   \ifnum\@ptsize=-2
     \mag 833
     \def\inv@mag{1.20048}
@@ -317,6 +322,7 @@
   \fi
 \else
   \js@mpt=\js@magscale\p@
+  \js@mmm=\js@magscale mm
   \def\inv@mag{1}
 \fi
 \setlength\paperwidth{\inv@mag\paperwidth}%
@@ -713,7 +719,7 @@
   \setlength\headsep{\footskip}
   \addtolength\headsep{-\topskip}
 \else
-  \setlength\headsep{6mm}
+  \setlength\headsep{6\js@mmm}
 \fi
 \setlength\maxdepth{.5\topskip}
 \newdimen\fullwidth
@@ -721,7 +727,7 @@
   \setlength\fullwidth{0.76\paperwidth}
 \else
   \setlength\fullwidth{\paperwidth}
-  \addtolength\fullwidth{-36mm}
+  \addtolength\fullwidth{-36\js@mmm}
 \fi
 \if@twocolumn \@tempdima=2zw \else \@tempdima=1zw \fi
 \divide\fullwidth\@tempdima \multiply\fullwidth\@tempdima
@@ -765,7 +771,7 @@
 \addtolength\marginparwidth{-\oddsidemargin}
 \addtolength\marginparwidth{-\inv@mag in}
 \addtolength\marginparwidth{-\textwidth}
-\addtolength\marginparwidth{-1cm}
+\addtolength\marginparwidth{-10\js@mmm}
 \addtolength\marginparwidth{-\marginparsep}
 \@tempdima=1zw
 \divide\marginparwidth\@tempdima

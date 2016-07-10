@@ -19,7 +19,7 @@
 %  Copyright 1995-1999 ASCII Corporation.
 %
 % \fi
-% \CheckSum{5778}
+% \CheckSum{5788}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -731,6 +731,12 @@
   \js@mpt=\js@magscale\p@
   \js@mmm=\js@magscale mm
   \def\inv@mag{1}
+  \ifnum\@ptsize=-2
+    \def\n@baseline{15}%
+  \fi
+  \ifnum\@ptsize=-1
+    \def\n@baseline{15}%
+  \fi  
 \fi
 %<*kiyou>
 \def\js@magscale{0.9769230}

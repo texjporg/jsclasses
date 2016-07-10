@@ -317,6 +317,12 @@
   \js@mpt=\js@magscale\p@
   \js@mmm=\js@magscale mm
   \def\inv@mag{1}
+  \ifnum\@ptsize=-2
+    \def\n@baseline{15}%
+  \fi
+  \ifnum\@ptsize=-1
+    \def\n@baseline{15}%
+  \fi
 \fi
 \def\js@magscale{0.9769230}
 \ifjs@mag

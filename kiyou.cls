@@ -1511,9 +1511,9 @@
 \def\footnote{\inhibitglue\footnotes@ve}
 \let\footnotemarks@ve=\footnotemark
 \def\footnotemark{\inhibitglue\footnotemarks@ve}
-\renewcommand\@makefnmark{\hbox{}\hbox{%
-  \ifydir \@textsuperscript{\normalfont\@thefnmark}%
-  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}\hbox{}}
+\renewcommand\@makefnmark{%
+  \ifydir \hbox{}\hbox{\@textsuperscript{\normalfont\@thefnmark}}\hbox{}%
+  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}
 \def\thefootnote{\ifnum\c@footnote>\z@\leavevmode\lower.5ex\hbox{*}\@arabic\c@footnote\fi}
 \renewcommand{\footnoterule}{%
   \kern-3\p@

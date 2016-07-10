@@ -4885,10 +4885,12 @@
 %
 % [2013-05-14] plcore.ltx に倣った形に書き直しました（Thanks: 北川さん）。
 %
+% [2016-07-08] コミュニティ版p\LaTeX の変更に追随しました（Thanks: 角藤さん）。
+%
 %    \begin{macrocode}
-\renewcommand\@makefnmark{\hbox{}\hbox{%
-  \ifydir \@textsuperscript{\normalfont\@thefnmark}%
-  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}\hbox{}}
+\renewcommand\@makefnmark{%
+  \ifydir \hbox{}\hbox{\@textsuperscript{\normalfont\@thefnmark}}\hbox{}%
+  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}
 %    \end{macrocode}
 % \end{macro}
 %

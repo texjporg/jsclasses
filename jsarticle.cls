@@ -120,8 +120,8 @@
 \DeclareOption{10.5ptj}{\def\js@magscale{1.139}\renewcommand{\@ptsize}{1051}}
 \DeclareOption{11ptj}{\def\js@magscale{1.194}\renewcommand{\@ptsize}{1101}}
 \DeclareOption{12ptj}{\def\js@magscale{1.302}\renewcommand{\@ptsize}{1201}}
-\DeclareOption{mag}{\js@magtrue}
-\DeclareOption{real}{\js@magfalse}
+\DeclareOption{usemag}{\js@magtrue}
+\DeclareOption{nomag}{\js@magfalse}
 \hour\time \divide\hour by 60\relax
 \@tempcnta\hour \multiply\@tempcnta 60\relax
 \minute\time \advance\minute-\@tempcnta

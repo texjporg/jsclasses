@@ -22,7 +22,7 @@
 %  Copyright 1995-1999 ASCII Corporation.
 %
 % \fi
-% \CheckSum{5788}
+% \CheckSum{5800}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -606,15 +606,19 @@
 %
 % [2003-05-17] トンボをプレビューに使うことを考えて1インチを2インチにしました。
 %
+% [2016-07-11] memoirクラスのマニュアルによると，トンボを含めた用紙の寸法は
+% |\stockwidth|，|\stockheight|と呼ぶようですので，これを使うことにしました。
+%
 %    \begin{macrocode}
+\newdimen\stockwidth \newdimen\stockheight
+\setlength{\stockwidth}{\paperwidth}
+\setlength{\stockheight}{\paperheight}
+\iftombow
+  \advance \stockwidth 2in
+  \advance \stockheight 2in
+\fi
 \ifpapersize
-  \setlength{\@tempdima}{\paperwidth}
-  \setlength{\@tempdimb}{\paperheight}
-  \iftombow
-    \advance \@tempdima 2in
-    \advance \@tempdimb 2in
-  \fi
-  \AtBeginDvi{\special{papersize=\the\@tempdima,\the\@tempdimb}}
+  \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
 \fi
 %    \end{macrocode}
 %
@@ -754,8 +758,16 @@
   \def\inv@mag{1}
 \fi
 %</kiyou>
+%    \end{macrocode}
+%
+% [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
+% スケールします。
+%
+%    \begin{macrocode}
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
+\setlength\stockwidth{\inv@mag\stockwidth}%
+\setlength\stockheight{\inv@mag\stockheight}%
 %    \end{macrocode}
 %
 % \paragraph{pagesizeスペシャルの出力}
@@ -4922,10 +4934,12 @@
 %
 % [2013-05-14] plcore.ltx に倣った形に書き直しました（Thanks: 北川さん）。
 %
+% [2016-07-11] コミュニティ版p\LaTeX の変更に追随しました（Thanks: 角藤さん）。
+%
 %    \begin{macrocode}
-\renewcommand\@makefnmark{\hbox{}\hbox{%
-  \ifydir \@textsuperscript{\normalfont\@thefnmark}%
-  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}\hbox{}}
+\renewcommand\@makefnmark{%
+  \ifydir \hbox{}\hbox{\@textsuperscript{\normalfont\@thefnmark}}\hbox{}%
+  \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}
 %    \end{macrocode}
 % \end{macro}
 %

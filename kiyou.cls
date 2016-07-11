@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2016/07/08 H. Okumura/Japanese TeX Development Community]
+  [2016/07/11 okumura]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue

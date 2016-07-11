@@ -47,7 +47,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/07/08 H. Okumura/Japanese TeX Development Community]
+  [2016/07/11 okumura]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -593,7 +593,7 @@
 %
 % [2003-05-17] トンボをプレビューに使うことを考えて1インチを2インチにしました。
 %
-% [2016-07-08] memoirクラスのマニュアルによると，トンボを含めた用紙の寸法は
+% [2016-07-11] memoirクラスのマニュアルによると，トンボを含めた用紙の寸法は
 % |\stockwidth|，|\stockheight|と呼ぶようですので，これを使うことにしました。
 %
 %    \begin{macrocode}
@@ -719,9 +719,8 @@
 %</kiyou>
 %    \end{macrocode}
 %
-% [2016-07-08] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
-% スケールします。新しいgraphicx/colorパッケージの|setpagesize|オプションは，
-% この値を使って用紙サイズを設定するはずです。
+% [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
+% スケールします。
 %
 %    \begin{macrocode}
 \setlength\paperwidth{\inv@mag\paperwidth}%
@@ -4885,7 +4884,7 @@
 %
 % [2013-05-14] plcore.ltx に倣った形に書き直しました（Thanks: 北川さん）。
 %
-% [2016-07-08] コミュニティ版p\LaTeX の変更に追随しました（Thanks: 角藤さん）。
+% [2016-07-11] コミュニティ版p\LaTeX の変更に追随しました（Thanks: 角藤さん）。
 %
 %    \begin{macrocode}
 \renewcommand\@makefnmark{%

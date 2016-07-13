@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
-  [2016/07/11 okumura]
+  [2016/07/13 okumura]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -189,9 +189,8 @@
     \tabskip\z@skip\cr
     }}
 \DeclareOption{disablejfam}{\@enablejfamfalse}
-\newif\ifdraft
-\DeclareOption{draft}{\drafttrue \setlength\overfullrule{5pt}}
-\DeclareOption{final}{\draftfalse \setlength\overfullrule{0pt}}
+\DeclareOption{draft}{\setlength\overfullrule{5pt}}
+\DeclareOption{final}{\setlength\overfullrule{0pt}}
 \newif\ifwinjis
 \winjisfalse
 \newif\ifmingoth

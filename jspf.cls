@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/07/13 okumura]
+  [2016/07/13 okumura, texjporg]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue

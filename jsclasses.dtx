@@ -22,7 +22,7 @@
 %  Copyright 1995-1999 ASCII Corporation.
 %
 % \fi
-% \CheckSum{5800}
+% \CheckSum{5796}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -50,7 +50,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/07/11 okumura]
+  [2016/07/13 okumura]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -499,10 +499,11 @@
 %
 % \texttt{draft} でoverfull boxの起きた行末に5ptの罫線を引きます。
 %
+% [2016-07-13] |\ifdraft| を定義するのをやめました。
+%
 %    \begin{macrocode}
-\newif\ifdraft
-\DeclareOption{draft}{\drafttrue \setlength\overfullrule{5pt}}
-\DeclareOption{final}{\draftfalse \setlength\overfullrule{0pt}}
+\DeclareOption{draft}{\setlength\overfullrule{5pt}}
+\DeclareOption{final}{\setlength\overfullrule{0pt}}
 %    \end{macrocode}
 %
 % \paragraph{和文フォントメトリックの選択}

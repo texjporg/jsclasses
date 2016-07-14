@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5418}
+% \CheckSum{5424}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -5217,9 +5217,19 @@
 % [2016-07-14] ロゴの定義は\texttt{jslogo}パッケージに移転しました。
 % 後方互換のため，\texttt{jsclasses}ではデフォルトでこれを読み込みます。
 %
+% 文字を小さめに出したり上寄りに小さめに出したりする命令を，
+% \texttt{jslogo}では名称変更してありますので，コピーします。
+%
+% \begin{macro}{\小}
+% \begin{macro}{\上小}
 %    \begin{macrocode}
 \RequirePackage{jslogo}
+\def\小{\jslg@small}
+\def\上小{\jslg@uppersmall}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
 %
 % \section{\texttt{amsmath} との衝突の回避}
 %

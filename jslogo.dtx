@@ -27,7 +27,7 @@
 % \iffalse
 %
 %    \begin{macrocode}
-%<package>\NeedsTeXFormat{pLaTeX2e}
+%<package>\NeedsTeXFormat{LaTeX2e}
 %<package>\ProvidesPackage{jslogo}
 %<*driver>
 \ProvidesFile{jslogo.dtx}
@@ -79,18 +79,18 @@
 %
 % \LaTeX 関連のロゴを作り直します。
 %
-% \begin{macro}{\小}
-% \begin{macro}{\上小}
+% \begin{macro}{\jslg@small}
+% \begin{macro}{\jslg@uppersmall}
 %
 % 文字を小さめに出したり上寄りに小さめに出したりする命令です。
 %
 %    \begin{macrocode}
-\def\小#1{\hbox{$\m@th$%
+\def\jslg@small#1{\hbox{$\m@th$%
   \csname S@\f@size\endcsname
   \fontsize\sf@size\z@
   \math@fontsfalse\selectfont
   #1}}
-\def\上小#1{{\sbox\z@ T\vbox to\ht0{\小{#1}\vss}}}
+\def\jslg@uppersmall#1{{\sbox\z@ T\vbox to\ht0{\jslg@small{#1}\vss}}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -112,12 +112,12 @@
   \fi}
 \def\cmrLaTeX{%
   \ifdim \fontdimen\@ne\font >\z@
-    L\kern-.32em\上小{A}\kern-.22em\cmrTeX
+    L\kern-.32em\jslg@uppersmall{A}\kern-.22em\cmrTeX
   \else
-    L\kern-.36em\上小{A}\kern-.15em\cmrTeX
+    L\kern-.36em\jslg@uppersmall{A}\kern-.15em\cmrTeX
   \fi}
 \def\sfTeX{T\kern-.1em\lower.4ex\hbox{E}\kern-.07emX\@}
-\def\sfLaTeX{L\kern-.25em\上小{A}\kern-.08em\sfTeX}
+\def\sfLaTeX{L\kern-.25em\jslg@uppersmall{A}\kern-.08em\sfTeX}
 \def\ptmTeX{%
   \ifdim \fontdimen\@ne\font >\z@
     T\kern-.12em\lower.37ex\hbox{E}\kern-.02emX\@
@@ -126,9 +126,9 @@
   \fi}
 \def\ptmLaTeX{%
   \ifdim \fontdimen\@ne\font >\z@
-    L\kern-.2em\上小{A}\kern-.1em\ptmTeX
+    L\kern-.2em\jslg@uppersmall{A}\kern-.1em\ptmTeX
   \else
-    L\kern-.3em\上小{A}\kern-.1em\ptmTeX
+    L\kern-.3em\jslg@uppersmall{A}\kern-.1em\ptmTeX
   \fi}
 \def\pncTeX{%
   \ifdim \fontdimen\@ne\font >\z@
@@ -138,9 +138,9 @@
   \fi}
 \def\pncLaTeX{%
   \ifdim \fontdimen\@ne\font >\z@
-    L\kern-.3em\上小{A}\kern-.1em\pncTeX
+    L\kern-.3em\jslg@uppersmall{A}\kern-.1em\pncTeX
   \else
-    L\kern-.3em\上小{A}\kern-.1em\pncTeX
+    L\kern-.3em\jslg@uppersmall{A}\kern-.1em\pncTeX
   \fi}
 \def\pplTeX{%
   \ifdim \fontdimen\@ne\font >\z@
@@ -150,9 +150,9 @@
   \fi}
 \def\pplLaTeX{%
   \ifdim \fontdimen\@ne\font >\z@
-    L\kern-.27em\上小{A}\kern-.12em\pplTeX
+    L\kern-.27em\jslg@uppersmall{A}\kern-.12em\pplTeX
   \else
-    L\kern-.3em\上小{A}\kern-.15em\pplTeX
+    L\kern-.3em\jslg@uppersmall{A}\kern-.15em\pplTeX
   \fi}
 \def\ugmTeX{%
   \ifdim \fontdimen\@ne\font >\z@
@@ -162,9 +162,9 @@
   \fi}
 \def\ugmLaTeX{%
   \ifdim \fontdimen\@ne\font >\z@
-    L\kern-.2em\上小{A}\kern-.13em\ugmTeX
+    L\kern-.2em\jslg@uppersmall{A}\kern-.13em\ugmTeX
   \else
-    L\kern-.3em\上小{A}\kern-.13em\ugmTeX
+    L\kern-.3em\jslg@uppersmall{A}\kern-.13em\ugmTeX
   \fi}
 \DeclareRobustCommand{\TeX}{%
   \def\@tempa{cmr}%
@@ -273,10 +273,10 @@
 %    {\def\BibTeX{{\rmfamily B\kern-.05em%
 %     \textsc{i\kern-.025em b}\kern-.08em%
 %     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}}{}
-\DeclareRobustCommand{\BibTeX}{B\kern-.05em\小{I\kern-.025em B}%
+\DeclareRobustCommand{\BibTeX}{B\kern-.05em\jslg@small{I\kern-.025em B}%
   \ifx\f@family\cmr\kern-.08em\else\kern-.15em\fi\TeX}
 \DeclareRobustCommand{\SliTeX}{%
-  S\kern-.06emL\kern-.18em\上小{I}\kern -.03em\TeX}
+  S\kern-.06emL\kern-.18em\jslg@uppersmall{I}\kern -.03em\TeX}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

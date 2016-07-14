@@ -1684,6 +1684,8 @@
     \inhibitglue \ignorespaces
   \fi}
 \RequirePackage{jslogo}
+\def\小{\jslg@small}
+\def\上小{\jslg@uppersmall}
 \let\ltx@ifnextchar\@ifnextchar
 \def\ProvidesFile#1{%
   \begingroup

@@ -54,7 +54,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/07/13 okumura, texjporg]
+  [2016/07/14 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1241,8 +1241,10 @@
 % では |I watch TV\@.| と書くと V とピリオドのペアカーニングが効かなくなります。
 % そこで，次のような定義に直し，|I watch TV.\@| と書くことにします。
 %
+% [2016-07-14] |{}| を補いました。
+%
 %    \begin{macrocode}
-\def\@{\spacefactor3000\space}
+\def\@{\spacefactor3000\space{}}
 %    \end{macrocode}
 % \end{macro}
 %

@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/07/13 okumura, texjporg]
+  [2016/07/14 okumura, texjporg]
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -588,7 +588,7 @@
 \xspcode`^^fd=3
 \xspcode`^^fe=3
 \xspcode`^^ff=3
-\def\@{\spacefactor3000\space}
+\def\@{\spacefactor3000\space{}}
 \def\@setfontsize#1#2#3{%
   \ifx\protect\@typeset@protect
     \let\@currsize#1%

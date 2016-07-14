@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5796}
+% \CheckSum{5795}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1241,10 +1241,11 @@
 % では |I watch TV\@.| と書くと V とピリオドのペアカーニングが効かなくなります。
 % そこで，次のような定義に直し，|I watch TV.\@| と書くことにします。
 %
-% [2016-07-14] |{}| を補いました。
+% [2016-07-14] 2015-01-01の\LaTeX で，auxiliary filesに書き出されたときに
+% スペースが食われないようにする修正が入りました。これに合わせて |{}| を補いました。
 %
 %    \begin{macrocode}
-\def\@{\spacefactor3000\space{}}
+\def\@{\spacefactor3000{}}
 %    \end{macrocode}
 % \end{macro}
 %

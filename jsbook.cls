@@ -595,7 +595,7 @@
 \xspcode`^^fd=3
 \xspcode`^^fe=3
 \xspcode`^^ff=3
-\def\@{\spacefactor3000\space{}}
+\def\@{\spacefactor3000{}}
 \def\@setfontsize#1#2#3{%
   \ifx\protect\@typeset@protect
     \let\@currsize#1%

@@ -101,7 +101,7 @@
 % これらは \texttt{ltlogos.dtx} で定義されていますが，
 % TimesやHelveticaでも見栄えがするように若干変更しました。
 %
-% [2003-06-12] Palatinoも加えました（要調整）。
+% Computer Modern Romanです（ファミリ名cmr）。
 %
 %    \begin{macrocode}
 \def\cmrTeX{%
@@ -116,8 +116,20 @@
   \else
     L\kern-.36em\jslg@uppersmall{A}\kern-.15em\cmrTeX
   \fi}
+%    \end{macrocode}
+%
+% Helveticaなどのサンセリフ体です。
+% 特別に定義しない場合に用います。
+%
+%    \begin{macrocode}
 \def\sfTeX{T\kern-.1em\lower.4ex\hbox{E}\kern-.07emX\@}
 \def\sfLaTeX{L\kern-.25em\jslg@uppersmall{A}\kern-.08em\sfTeX}
+%    \end{macrocode}
+%
+% Timesです（ファミリ名ptm）。
+% TXフォント（ファミリ名txr）でも用います。
+%
+%    \begin{macrocode}
 \def\ptmTeX{%
   \ifdim \fontdimen\@ne\font >\z@
     T\kern-.12em\lower.37ex\hbox{E}\kern-.02emX\@
@@ -130,6 +142,11 @@
   \else
     L\kern-.3em\jslg@uppersmall{A}\kern-.1em\ptmTeX
   \fi}
+%    \end{macrocode}
+%
+% New Century Schoolbookです（ファミリ名pnc）。
+%
+%    \begin{macrocode}
 \def\pncTeX{%
   \ifdim \fontdimen\@ne\font >\z@
     T\kern-.2em\lower.5ex\hbox{E}\kern-.08emX\@
@@ -142,6 +159,11 @@
   \else
     L\kern-.3em\jslg@uppersmall{A}\kern-.1em\pncTeX
   \fi}
+%    \end{macrocode}
+%
+% Palatinoです（ファミリ名ppl）。
+%
+%    \begin{macrocode}
 \def\pplTeX{%
   \ifdim \fontdimen\@ne\font >\z@
     T\kern-.17em\lower.32ex\hbox{E}\kern-.15emX\@
@@ -154,6 +176,11 @@
   \else
     L\kern-.3em\jslg@uppersmall{A}\kern-.15em\pplTeX
   \fi}
+%    \end{macrocode}
+%
+% URW Garamondです（ファミリ名ugm）。
+%
+%    \begin{macrocode}
 \def\ugmTeX{%
   \ifdim \fontdimen\@ne\font >\z@
     T\kern-.1em\lower.32ex\hbox{E}\kern-.06emX\@
@@ -166,6 +193,13 @@
   \else
     L\kern-.3em\jslg@uppersmall{A}\kern-.13em\ugmTeX
   \fi}
+%    \end{macrocode}
+%
+% 以上の定義を，ファミリによって使い分けます。
+%
+% [2003-06-12] Palatinoも加えました（要調整）。
+%
+%    \begin{macrocode}
 \DeclareRobustCommand{\TeX}{%
   \def\@tempa{cmr}%
   \ifx\f@family\@tempa\cmrTeX
@@ -191,7 +225,6 @@
       \fi
     \fi
   \fi}
-
 \DeclareRobustCommand{\LaTeX}{%
   \def\@tempa{cmr}%
   \ifx\f@family\@tempa\cmrLaTeX

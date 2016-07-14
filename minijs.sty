@@ -1,9 +1,11 @@
 % minimal jsarticle-like fonts
 % (last modified: 2016-07-14 texjporg)
 %
+% "fake" jsarticle
+\expandafter\def\csname ver@jsarticle.cls\endcsname{minijs}
+%
 % min/goth -> jis/jisg (for pLaTeX only)
 \ifx\ucs\@undefined
-\expandafter\def\csname ver@jsarticle.cls\endcsname{minijs}
 \expandafter\let\csname JY1/mc/m/n/10\endcsname\relax
 \expandafter\let\csname JY1/gt/m/n/10\endcsname\relax
 \expandafter\let\csname JT1/mc/m/n/10\endcsname\relax

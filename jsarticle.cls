@@ -38,6 +38,7 @@
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
   [2016/07/14 okumura, texjporg]
+\def\jsc@clsname{jsarticle}
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -221,6 +222,23 @@
   \setlength\@tempdima  {\paperheight}
   \setlength\paperheight{\paperwidth}
   \setlength\paperwidth {\@tempdima}
+\fi
+\ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
+  \if@jsc@uplatex\else
+    \ClassError\jsc@clsname
+      {The engine in use is not pLaTeX}
+      {You must use pLaTeX, or add 'uplatex' to the class option list.%
+       \MessageBreak\@ehc}
+    \@jsc@uplatextrue
+  \fi
+\else
+  \if@jsc@uplatex
+    \ClassError\jsc@clsname
+      {The engine in use is not upLaTeX}
+      {You must use upLaTeX, or remove 'uplatex' from the class option list.%
+       \MessageBreak\@ehc}
+    \@jsc@uplatexfalse
+  \fi
 \fi
 \newdimen\stockwidth \newdimen\stockheight
 \setlength{\stockwidth}{\paperwidth}

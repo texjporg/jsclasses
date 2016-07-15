@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5795}
+% \CheckSum{5792}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1032,13 +1032,11 @@
 \def\DLMfontsw@oldstyle#1#2{#1\relax\@fontswitch\relax{#2}}
 \def\DLMfontsw@oldlfont#1#2{#1\relax#2\relax}
 \if@enablejfam
-  \if@compatibility\else
-    \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
-    \DeclareSymbolFontAlphabet{\mathmc}{mincho}
-    \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
-    \jfam\symmincho
-    \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
-  \fi
+  \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
+  \DeclareSymbolFontAlphabet{\mathmc}{mincho}
+  \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
+  \jfam\symmincho
+  \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
   \AtBeginDocument{%
     \reDeclareMathAlphabet{\mathrm}{\@mathrm}{\@mathmc}
     \reDeclareMathAlphabet{\mathbf}{\@mathbf}{\@mathgt}}

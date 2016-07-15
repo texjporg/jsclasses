@@ -442,13 +442,11 @@
 \def\DLMfontsw@oldstyle#1#2{#1\relax\@fontswitch\relax{#2}}
 \def\DLMfontsw@oldlfont#1#2{#1\relax#2\relax}
 \if@enablejfam
-  \if@compatibility\else
-    \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
-    \DeclareSymbolFontAlphabet{\mathmc}{mincho}
-    \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
-    \jfam\symmincho
-    \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
-  \fi
+  \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
+  \DeclareSymbolFontAlphabet{\mathmc}{mincho}
+  \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
+  \jfam\symmincho
+  \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
   \AtBeginDocument{%
     \reDeclareMathAlphabet{\mathrm}{\@mathrm}{\@mathmc}
     \reDeclareMathAlphabet{\mathbf}{\@mathbf}{\@mathgt}}

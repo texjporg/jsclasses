@@ -7,7 +7,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{387}
+% \CheckSum{531}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -101,7 +101,8 @@
 % これらは \texttt{ltlogos.dtx} で定義されていますが，
 % TimesやHelveticaでも見栄えがするように若干変更しました。
 %
-% Computer Modern Romanです（ファミリ名cmr）。
+% Computer Modern Romanです（ファミリ名\texttt{cmr}）。
+% 元の定義に最も近いので，特別に定義しない場合に用います。
 %
 %    \begin{macrocode}
 \def\cmrTeX{%
@@ -118,16 +119,16 @@
   \fi}
 %    \end{macrocode}
 %
-% Helveticaなどのサンセリフ体です。
-% 特別に定義しない場合に用います。
+% Computer Modern Sans Serif（ファミリ名\texttt{cmss}）や
+% Helvetica（ファミリ名\texttt{phv}）などのサンセリフ体です。
 %
 %    \begin{macrocode}
 \def\sfTeX{T\kern-.1em\lower.4ex\hbox{E}\kern-.07emX\@}
 \def\sfLaTeX{L\kern-.25em\jslg@uppersmall{A}\kern-.08em\sfTeX}
 %    \end{macrocode}
 %
-% Timesです（ファミリ名ptm）。
-% TXフォント（ファミリ名txr）でも用います。
+% Timesです（ファミリ名\texttt{ptm}）。
+% TXフォント（ファミリ名\texttt{txr}）でも用います。
 %
 %    \begin{macrocode}
 \def\ptmTeX{%
@@ -144,7 +145,7 @@
   \fi}
 %    \end{macrocode}
 %
-% New Century Schoolbookです（ファミリ名pnc）。
+% New Century Schoolbookです（ファミリ名\texttt{pnc}）。
 %
 %    \begin{macrocode}
 \def\pncTeX{%
@@ -161,7 +162,8 @@
   \fi}
 %    \end{macrocode}
 %
-% Palatinoです（ファミリ名ppl）。
+% Palatinoです（ファミリ名\texttt{ppl}）。
+% PXフォント（ファミリ名\texttt{pxr}）でも用います。
 %
 %    \begin{macrocode}
 \def\pplTeX{%
@@ -178,7 +180,7 @@
   \fi}
 %    \end{macrocode}
 %
-% URW Garamondです（ファミリ名ugm）。
+% URW Garamondです（ファミリ名\texttt{ugm}）。
 %
 %    \begin{macrocode}
 \def\ugmTeX{%
@@ -201,13 +203,25 @@
 %
 %    \begin{macrocode}
 \DeclareRobustCommand{\TeX}{%
-  \def\@tempa{cmr}%
-  \ifx\f@family\@tempa\cmrTeX
+  \def\@tempa{cmss}%
+  \ifx\f@family\@tempa\sfTeX
+  \else
+  \def\@tempa{phv}%
+  \ifx\f@family\@tempa\sfTeX
+  \else
+  \def\@tempa{qhv}%
+  \ifx\f@family\@tempa\sfTeX
   \else
     \def\@tempa{ptm}%
     \ifx\f@family\@tempa\ptmTeX
     \else
+    \def\@tempa{qtm}%
+    \ifx\f@family\@tempa\ptmTeX
+    \else
       \def\@tempa{txr}%
+      \ifx\f@family\@tempa\ptmTeX
+      \else
+      \def\@tempa{ntxtlf}%
       \ifx\f@family\@tempa\ptmTeX
       \else
         \def\@tempa{pnc}%
@@ -216,23 +230,51 @@
           \def\@tempa{ppl}%
           \ifx\f@family\@tempa\pplTeX
           \else
-            \def\@tempa{ugm}%
-            \ifx\f@family\@tempa\ugmTeX
-            \else\sfTeX
-            \fi
-          \fi
+          \def\@tempa{qpl}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+          \def\@tempa{pplx}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+          \def\@tempa{pplj}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+            \def\@tempa{pxr}%
+            \ifx\f@family\@tempa\pplTeX
+            \else
+            \def\@tempa{zpltlf}%
+            \ifx\f@family\@tempa\pplTeX
+            \else
+              \def\@tempa{ugm}%
+              \ifx\f@family\@tempa\ugmTeX
+              \else\cmrTeX
+              \fi
+            \fi\fi
+          \fi\fi\fi\fi
         \fi
-      \fi
-    \fi
-  \fi}
+      \fi\fi
+    \fi\fi
+  \fi\fi\fi}
 \DeclareRobustCommand{\LaTeX}{%
-  \def\@tempa{cmr}%
-  \ifx\f@family\@tempa\cmrLaTeX
+  \def\@tempa{cmss}%
+  \ifx\f@family\@tempa\sfLaTeX
+  \else
+  \def\@tempa{phv}%
+  \ifx\f@family\@tempa\sfLaTeX
+  \else
+  \def\@tempa{qhv}%
+  \ifx\f@family\@tempa\sfLaTeX
   \else
     \def\@tempa{ptm}%
     \ifx\f@family\@tempa\ptmLaTeX
     \else
+    \def\@tempa{qtm}%
+    \ifx\f@family\@tempa\ptmLaTeX
+    \else
       \def\@tempa{txr}%
+      \ifx\f@family\@tempa\ptmLaTeX
+      \else
+      \def\@tempa{ntxtlf}%
       \ifx\f@family\@tempa\ptmLaTeX
       \else
         \def\@tempa{pnc}%
@@ -241,15 +283,31 @@
           \def\@tempa{ppl}%
           \ifx\f@family\@tempa\pplLaTeX
           \else
-            \def\@tempa{ugm}%
-            \ifx\f@family\@tempa\ugmLaTeX
-            \else\sfLaTeX
-            \fi
-          \fi
+          \def\@tempa{qpl}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+          \def\@tempa{pplx}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+          \def\@tempa{pplj}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+            \def\@tempa{pxr}%
+            \ifx\f@family\@tempa\pplLaTeX
+            \else
+            \def\@tempa{zpltlf}%
+            \ifx\f@family\@tempa\pplLaTeX
+            \else
+              \def\@tempa{ugm}%
+              \ifx\f@family\@tempa\ugmLaTeX
+              \else\cmrLaTeX
+              \fi
+            \fi\fi
+          \fi\fi\fi\fi
         \fi
-      \fi
-    \fi
-  \fi}
+      \fi\fi
+    \fi\fi
+  \fi\fi\fi}
 %    \end{macrocode}
 %
 % \end{macro}

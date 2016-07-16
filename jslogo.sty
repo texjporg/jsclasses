@@ -107,13 +107,25 @@
     L\kern-.3em\jslg@uppersmall{A}\kern-.13em\ugmTeX
   \fi}
 \DeclareRobustCommand{\TeX}{%
-  \def\@tempa{cmr}%
-  \ifx\f@family\@tempa\cmrTeX
+  \def\@tempa{cmss}%
+  \ifx\f@family\@tempa\sfTeX
+  \else
+  \def\@tempa{phv}%
+  \ifx\f@family\@tempa\sfTeX
+  \else
+  \def\@tempa{qhv}%
+  \ifx\f@family\@tempa\sfTeX
   \else
     \def\@tempa{ptm}%
     \ifx\f@family\@tempa\ptmTeX
     \else
+    \def\@tempa{qtm}%
+    \ifx\f@family\@tempa\ptmTeX
+    \else
       \def\@tempa{txr}%
+      \ifx\f@family\@tempa\ptmTeX
+      \else
+      \def\@tempa{ntxtlf}%
       \ifx\f@family\@tempa\ptmTeX
       \else
         \def\@tempa{pnc}%
@@ -122,23 +134,51 @@
           \def\@tempa{ppl}%
           \ifx\f@family\@tempa\pplTeX
           \else
-            \def\@tempa{ugm}%
-            \ifx\f@family\@tempa\ugmTeX
-            \else\sfTeX
-            \fi
-          \fi
+          \def\@tempa{qpl}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+          \def\@tempa{pplx}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+          \def\@tempa{pplj}%
+          \ifx\f@family\@tempa\pplTeX
+          \else
+            \def\@tempa{pxr}%
+            \ifx\f@family\@tempa\pplTeX
+            \else
+            \def\@tempa{zpltlf}%
+            \ifx\f@family\@tempa\pplTeX
+            \else
+              \def\@tempa{ugm}%
+              \ifx\f@family\@tempa\ugmTeX
+              \else\cmrTeX
+              \fi
+            \fi\fi
+          \fi\fi\fi\fi
         \fi
-      \fi
-    \fi
-  \fi}
+      \fi\fi
+    \fi\fi
+  \fi\fi\fi}
 \DeclareRobustCommand{\LaTeX}{%
-  \def\@tempa{cmr}%
-  \ifx\f@family\@tempa\cmrLaTeX
+  \def\@tempa{cmss}%
+  \ifx\f@family\@tempa\sfLaTeX
+  \else
+  \def\@tempa{phv}%
+  \ifx\f@family\@tempa\sfLaTeX
+  \else
+  \def\@tempa{qhv}%
+  \ifx\f@family\@tempa\sfLaTeX
   \else
     \def\@tempa{ptm}%
     \ifx\f@family\@tempa\ptmLaTeX
     \else
+    \def\@tempa{qtm}%
+    \ifx\f@family\@tempa\ptmLaTeX
+    \else
       \def\@tempa{txr}%
+      \ifx\f@family\@tempa\ptmLaTeX
+      \else
+      \def\@tempa{ntxtlf}%
       \ifx\f@family\@tempa\ptmLaTeX
       \else
         \def\@tempa{pnc}%
@@ -147,15 +187,31 @@
           \def\@tempa{ppl}%
           \ifx\f@family\@tempa\pplLaTeX
           \else
-            \def\@tempa{ugm}%
-            \ifx\f@family\@tempa\ugmLaTeX
-            \else\sfLaTeX
-            \fi
-          \fi
+          \def\@tempa{qpl}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+          \def\@tempa{pplx}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+          \def\@tempa{pplj}%
+          \ifx\f@family\@tempa\pplLaTeX
+          \else
+            \def\@tempa{pxr}%
+            \ifx\f@family\@tempa\pplLaTeX
+            \else
+            \def\@tempa{zpltlf}%
+            \ifx\f@family\@tempa\pplLaTeX
+            \else
+              \def\@tempa{ugm}%
+              \ifx\f@family\@tempa\ugmLaTeX
+              \else\cmrLaTeX
+              \fi
+            \fi\fi
+          \fi\fi\fi\fi
         \fi
-      \fi
-    \fi
-  \fi}
+      \fi\fi
+    \fi\fi
+  \fi\fi\fi}
 \DeclareRobustCommand{\LaTeXe}{$\mbox{%
   \if b\expandafter\@car\f@series\@nil\boldmath\fi
   \LaTeX\kern.15em2\raisebox{-.37ex}{$\textstyle\varepsilon$}}$}

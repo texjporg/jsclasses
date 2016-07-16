@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5424}
+% \CheckSum{5421}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -54,7 +54,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/07/14 okumura, texjporg]
+  [2016/07/15 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -298,33 +298,33 @@
 %
 %    \begin{macrocode}
 \newcommand{\@ptsize}{0}
-\newif\ifjs@mag\js@magtrue
-\def\js@magscale{1}
+\newif\ifjsc@mag\jsc@magtrue
+\def\jsc@magscale{1}
 \DeclareOption{slide}{%
-  \@slidetrue\def\js@magscale{3.583}
+  \@slidetrue\def\jsc@magscale{3.583}
   \renewcommand{\@ptsize}{26}
   \@landscapetrue\@titlepagetrue}
-\DeclareOption{8pt}{\def\js@magscale{0.83}\renewcommand{\@ptsize}{-2}}
-\DeclareOption{9pt}{\def\js@magscale{0.913}\renewcommand{\@ptsize}{-1}}
-\DeclareOption{10pt}{\def\js@magscale{1}\renewcommand{\@ptsize}{0}}
-\DeclareOption{11pt}{\def\js@magscale{1.095}\renewcommand{\@ptsize}{1}}
-\DeclareOption{12pt}{\def\js@magscale{1.200}\renewcommand{\@ptsize}{2}}
-\DeclareOption{14pt}{\def\js@magscale{1.440}\renewcommand{\@ptsize}{4}}
-\DeclareOption{17pt}{\def\js@magscale{1.728}\renewcommand{\@ptsize}{7}}
-\DeclareOption{20pt}{\def\js@magscale{2}\renewcommand{\@ptsize}{10}}
-\DeclareOption{21pt}{\def\js@magscale{2.074}\renewcommand{\@ptsize}{11}}
-\DeclareOption{25pt}{\def\js@magscale{2.488}\renewcommand{\@ptsize}{15}}
-\DeclareOption{30pt}{\def\js@magscale{2.986}\renewcommand{\@ptsize}{20}}
-\DeclareOption{36pt}{\def\js@magscale{3.583}\renewcommand{\@ptsize}{26}}
-\DeclareOption{43pt}{\def\js@magscale{4.300}\renewcommand{\@ptsize}{33}}
-\DeclareOption{12Q}{\def\js@magscale{0.923}\renewcommand{\@ptsize}{1200}}
-\DeclareOption{14Q}{\def\js@magscale{1.077}\renewcommand{\@ptsize}{1400}}
-\DeclareOption{10ptj}{\def\js@magscale{1.085}\renewcommand{\@ptsize}{1001}}
-\DeclareOption{10.5ptj}{\def\js@magscale{1.139}\renewcommand{\@ptsize}{1051}}
-\DeclareOption{11ptj}{\def\js@magscale{1.194}\renewcommand{\@ptsize}{1101}}
-\DeclareOption{12ptj}{\def\js@magscale{1.302}\renewcommand{\@ptsize}{1201}}
-\DeclareOption{usemag}{\js@magtrue}
-\DeclareOption{nomag}{\js@magfalse}
+\DeclareOption{8pt}{\def\jsc@magscale{0.83}\renewcommand{\@ptsize}{-2}}
+\DeclareOption{9pt}{\def\jsc@magscale{0.913}\renewcommand{\@ptsize}{-1}}
+\DeclareOption{10pt}{\def\jsc@magscale{1}\renewcommand{\@ptsize}{0}}
+\DeclareOption{11pt}{\def\jsc@magscale{1.095}\renewcommand{\@ptsize}{1}}
+\DeclareOption{12pt}{\def\jsc@magscale{1.200}\renewcommand{\@ptsize}{2}}
+\DeclareOption{14pt}{\def\jsc@magscale{1.440}\renewcommand{\@ptsize}{4}}
+\DeclareOption{17pt}{\def\jsc@magscale{1.728}\renewcommand{\@ptsize}{7}}
+\DeclareOption{20pt}{\def\jsc@magscale{2}\renewcommand{\@ptsize}{10}}
+\DeclareOption{21pt}{\def\jsc@magscale{2.074}\renewcommand{\@ptsize}{11}}
+\DeclareOption{25pt}{\def\jsc@magscale{2.488}\renewcommand{\@ptsize}{15}}
+\DeclareOption{30pt}{\def\jsc@magscale{2.986}\renewcommand{\@ptsize}{20}}
+\DeclareOption{36pt}{\def\jsc@magscale{3.583}\renewcommand{\@ptsize}{26}}
+\DeclareOption{43pt}{\def\jsc@magscale{4.300}\renewcommand{\@ptsize}{33}}
+\DeclareOption{12Q}{\def\jsc@magscale{0.923}\renewcommand{\@ptsize}{1200}}
+\DeclareOption{14Q}{\def\jsc@magscale{1.077}\renewcommand{\@ptsize}{1400}}
+\DeclareOption{10ptj}{\def\jsc@magscale{1.085}\renewcommand{\@ptsize}{1001}}
+\DeclareOption{10.5ptj}{\def\jsc@magscale{1.139}\renewcommand{\@ptsize}{1051}}
+\DeclareOption{11ptj}{\def\jsc@magscale{1.194}\renewcommand{\@ptsize}{1101}}
+\DeclareOption{12ptj}{\def\jsc@magscale{1.302}\renewcommand{\@ptsize}{1201}}
+\DeclareOption{usemag}{\jsc@magtrue}
+\DeclareOption{nomag}{\jsc@magfalse}
 %    \end{macrocode}
 %
 % \paragraph{トンボオプション}
@@ -658,16 +658,16 @@
 % \item |geometry| 側でオプション |mag| は使えません。
 % \end{itemize}
 %
-% [2016-07-08] |\js@mpt| および |\js@mmm| に，それぞれ1ptおよび1mmを拡大させた値を格納します。
+% [2016-07-08] |\jsc@mpt| および |\jsc@mmm| に，それぞれ1ptおよび1mmを拡大させた値を格納します。
 % 以降のレイアウト指定ではこちらを使います。
 %
 %    \begin{macrocode}
-\newdimen\js@mpt
-\newdimen\js@mmm
+\newdimen\jsc@mpt
+\newdimen\jsc@mmm
 \def\inv@mag{1}
-\ifjs@mag
-  \js@mpt=1\p@
-  \js@mmm=1mm
+\ifjsc@mag
+  \jsc@mpt=1\p@
+  \jsc@mmm=1mm
   \ifnum\@ptsize=-2
     \mag 833
     \def\inv@mag{1.20048}
@@ -743,8 +743,8 @@
     \def\inv@mag{0.768049}
   \fi
 \else
-  \js@mpt=\js@magscale\p@
-  \js@mmm=\js@magscale mm
+  \jsc@mpt=\jsc@magscale\p@
+  \jsc@mmm=\jsc@magscale mm
   \def\inv@mag{1}
   \ifnum\@ptsize=-2
     \def\n@baseline{15}%
@@ -754,15 +754,15 @@
   \fi  
 \fi
 %<*kiyou>
-\def\js@magscale{0.9769230}
-\ifjs@mag
+\def\jsc@magscale{0.9769230}
+\ifjsc@mag
   \mag 977
   \def\inv@mag{1.02354}
-  \js@mpt=1\p@
-  \js@mmm=1mm
+  \jsc@mpt=1\p@
+  \jsc@mmm=1mm
 \else 
-  \js@mpt=\js@magscale\p@
-  \js@mmm=\js@magscale mm
+  \jsc@mpt=\jsc@magscale\p@
+  \jsc@mmm=\jsc@magscale mm
   \def\inv@mag{1}
 \fi
 %</kiyou>
@@ -1032,13 +1032,11 @@
 \def\DLMfontsw@oldstyle#1#2{#1\relax\@fontswitch\relax{#2}}
 \def\DLMfontsw@oldlfont#1#2{#1\relax#2\relax}
 \if@enablejfam
-  \if@compatibility\else
-    \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
-    \DeclareSymbolFontAlphabet{\mathmc}{mincho}
-    \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
-    \jfam\symmincho
-    \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
-  \fi
+  \DeclareSymbolFont{mincho}{\jsc@JYn}{mc}{m}{n}
+  \DeclareSymbolFontAlphabet{\mathmc}{mincho}
+  \SetSymbolFont{mincho}{bold}{\jsc@JYn}{gt}{m}{n}
+  \jfam\symmincho
+  \DeclareMathAlphabet{\mathgt}{\jsc@JYn}{gt}{m}{n}
   \AtBeginDocument{%
     \reDeclareMathAlphabet{\mathrm}{\@mathrm}{\@mathmc}
     \reDeclareMathAlphabet{\mathbf}{\@mathbf}{\@mathgt}}
@@ -1318,12 +1316,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\js@setfontsize}
-% クラスファイルの内部では，拡大率も考慮した |\js@setfontsize| を
+% \begin{macro}{\jsc@setfontsize}
+% クラスファイルの内部では，拡大率も考慮した |\jsc@setfontsize| を
 % |\@setfontsize| の変わりに用いることにします。
 %    \begin{macrocode}
-\def\js@setfontsize#1#2#3{%
-  \@setfontsize#1{#2\js@mpt}{#3\js@mpt}}
+\def\jsc@setfontsize#1#2#3{%
+  \@setfontsize#1{#2\jsc@mpt}{#3\jsc@mpt}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1391,9 +1389,9 @@
 %    \begin{macrocode}
 \renewcommand{\normalsize}{%
   \ifnarrowbaselines
-    \js@setfontsize\normalsize\@xpt\@xiipt
+    \jsc@setfontsize\normalsize\@xpt\@xiipt
   \else
-    \js@setfontsize\normalsize\@xpt{\n@baseline}%
+    \jsc@setfontsize\normalsize\@xpt{\n@baseline}%
   \fi
 %    \end{macrocode}
 %
@@ -1407,9 +1405,9 @@
 % いましたが，結局，微調節してみることにしました。
 %
 %    \begin{macrocode}
-  \abovedisplayskip 11\js@mpt \@plus3\js@mpt \@minus4\js@mpt
-  \abovedisplayshortskip \z@ \@plus3\js@mpt
-  \belowdisplayskip 9\js@mpt \@plus3\js@mpt \@minus4\js@mpt
+  \abovedisplayskip 11\jsc@mpt \@plus3\jsc@mpt \@minus4\jsc@mpt
+  \abovedisplayshortskip \z@ \@plus3\jsc@mpt
+  \belowdisplayskip 9\jsc@mpt \@plus3\jsc@mpt \@minus4\jsc@mpt
   \belowdisplayshortskip \belowdisplayskip
 %    \end{macrocode}
 %
@@ -1466,14 +1464,14 @@
 %    \begin{macrocode}
 \newcommand{\small}{%
   \ifnarrowbaselines
-%<!kiyou>    \js@setfontsize\small\@ixpt{11}%
-%<kiyou>    \js@setfontsize\small{8.8888}{11}%
+%<!kiyou>    \jsc@setfontsize\small\@ixpt{11}%
+%<kiyou>    \jsc@setfontsize\small{8.8888}{11}%
   \else
-%<!kiyou>    \js@setfontsize\small\@ixpt{13}%
-%<kiyou>    \js@setfontsize\small{8.8888}{13.2418}%
+%<!kiyou>    \jsc@setfontsize\small\@ixpt{13}%
+%<kiyou>    \jsc@setfontsize\small{8.8888}{13.2418}%
   \fi
-  \abovedisplayskip 9\js@mpt \@plus3\js@mpt \@minus4\js@mpt
-  \abovedisplayshortskip  \z@ \@plus3\js@mpt
+  \abovedisplayskip 9\jsc@mpt \@plus3\jsc@mpt \@minus4\jsc@mpt
+  \abovedisplayshortskip  \z@ \@plus3\jsc@mpt
   \belowdisplayskip \abovedisplayskip
   \belowdisplayshortskip \belowdisplayskip
   \def\@listi{\leftmargin\leftmargini
@@ -1492,14 +1490,14 @@
 %    \begin{macrocode}
 \newcommand{\footnotesize}{%
   \ifnarrowbaselines
-%<!kiyou>    \js@setfontsize\footnotesize\@viiipt{9.5}%
-%<kiyou>    \js@setfontsize\footnotesize{8.8888}{11}%
+%<!kiyou>    \jsc@setfontsize\footnotesize\@viiipt{9.5}%
+%<kiyou>    \jsc@setfontsize\footnotesize{8.8888}{11}%
   \else
-%<!kiyou>    \js@setfontsize\footnotesize\@viiipt{11}%
-%<kiyou>    \js@setfontsize\footnotesize{8.8888}{13.2418}%
+%<!kiyou>    \jsc@setfontsize\footnotesize\@viiipt{11}%
+%<kiyou>    \jsc@setfontsize\footnotesize{8.8888}{13.2418}%
   \fi
-  \abovedisplayskip 6\js@mpt \@plus2\js@mpt \@minus3\js@mpt
-  \abovedisplayshortskip  \z@ \@plus2\js@mpt
+  \abovedisplayskip 6\jsc@mpt \@plus2\jsc@mpt \@minus3\jsc@mpt
+  \abovedisplayshortskip  \z@ \@plus2\jsc@mpt
   \belowdisplayskip \abovedisplayskip
   \belowdisplayshortskip \belowdisplayskip
   \def\@listi{\leftmargin\leftmargini
@@ -1528,21 +1526,21 @@
 % [2004-11-03] |\HUGE| を追加。
 %
 %    \begin{macrocode}
-\newcommand{\scriptsize}{\js@setfontsize\scriptsize\@viipt\@viiipt}
-\newcommand{\tiny}{\js@setfontsize\tiny\@vpt\@vipt}
+\newcommand{\scriptsize}{\jsc@setfontsize\scriptsize\@viipt\@viiipt}
+\newcommand{\tiny}{\jsc@setfontsize\tiny\@vpt\@vipt}
 \if@twocolumn
-%<!kiyou>  \newcommand{\large}{\js@setfontsize\large\@xiipt{\n@baseline}}
-%<kiyou>  \newcommand{\large}{\js@setfontsize\large{11.111}{\n@baseline}}
+%<!kiyou>  \newcommand{\large}{\jsc@setfontsize\large\@xiipt{\n@baseline}}
+%<kiyou>  \newcommand{\large}{\jsc@setfontsize\large{11.111}{\n@baseline}}
 \else
-%<!kiyou>  \newcommand{\large}{\js@setfontsize\large\@xiipt{17}}
-%<kiyou>  \newcommand{\large}{\js@setfontsize\large{11.111}{17}}
+%<!kiyou>  \newcommand{\large}{\jsc@setfontsize\large\@xiipt{17}}
+%<kiyou>  \newcommand{\large}{\jsc@setfontsize\large{11.111}{17}}
 \fi
-%<!kiyou>\newcommand{\Large}{\js@setfontsize\Large\@xivpt{21}}
-%<kiyou>\newcommand{\Large}{\js@setfontsize\Large{12.222}{21}}
-\newcommand{\LARGE}{\js@setfontsize\LARGE\@xviipt{25}}
-\newcommand{\huge}{\js@setfontsize\huge\@xxpt{28}}
-\newcommand{\Huge}{\js@setfontsize\Huge\@xxvpt{33}}
-\newcommand{\HUGE}{\js@setfontsize\HUGE{30}{40}}
+%<!kiyou>\newcommand{\Large}{\jsc@setfontsize\Large\@xivpt{21}}
+%<kiyou>\newcommand{\Large}{\jsc@setfontsize\Large{12.222}{21}}
+\newcommand{\LARGE}{\jsc@setfontsize\LARGE\@xviipt{25}}
+\newcommand{\huge}{\jsc@setfontsize\huge\@xxpt{28}}
+\newcommand{\Huge}{\jsc@setfontsize\Huge\@xxvpt{33}}
+\newcommand{\HUGE}{\jsc@setfontsize\HUGE{30}{40}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1598,7 +1596,7 @@
 %    \begin{macrocode}
 %<!kiyou>\setlength\columnsep{2zw}
 %<kiyou>\setlength\columnsep{28truebp}
-\setlength\columnseprule{0\js@mpt}
+\setlength\columnseprule{0\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1616,10 +1614,10 @@
 % \texttt{normal...} の付いた方は保存用です。
 %
 %    \begin{macrocode}
-\setlength\lineskip{1\js@mpt}
-\setlength\normallineskip{1\js@mpt}
-\setlength\lineskiplimit{1\js@mpt}
-\setlength\normallineskiplimit{1\js@mpt}
+\setlength\lineskip{1\jsc@mpt}
+\setlength\normallineskip{1\jsc@mpt}
+\setlength\lineskiplimit{1\jsc@mpt}
+\setlength\normallineskiplimit{1\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1650,7 +1648,7 @@
 % |\parindent| は段落の先頭の字下げ幅です。
 %
 %    \begin{macrocode}
-\setlength\parskip{0\js@mpt}
+\setlength\parskip{0\jsc@mpt}
 \if@slide
   \setlength\parindent{0zw}
 \else
@@ -1717,9 +1715,9 @@
 % ことにしました。
 %
 %    \begin{macrocode}
-\setlength\topskip{10\js@mpt}
+\setlength\topskip{10\jsc@mpt}
 \if@slide
-  \setlength\headheight{0\js@mpt}
+  \setlength\headheight{0\jsc@mpt}
 \else
   \setlength\headheight{2\topskip}
 \fi
@@ -1747,7 +1745,7 @@
   \fi
 \fi
 %</article|kiyou>
-%<jspf>\setlength\footskip{9\js@mmm}
+%<jspf>\setlength\footskip{9\jsc@mmm}
 %<*book>
 \if@report
   \setlength\footskip{0.03367\paperheight}
@@ -1771,7 +1769,7 @@
 %    \begin{macrocode}
 %<*article>
 \if@slide
-  \setlength\headsep{0\js@mpt}
+  \setlength\headsep{0\jsc@mpt}
 \else
   \setlength\headsep{\footskip}
   \addtolength\headsep{-\topskip}
@@ -1782,16 +1780,16 @@
   \setlength\headsep{\footskip}
   \addtolength\headsep{-\topskip}
 \else
-  \setlength\headsep{6\js@mmm}
+  \setlength\headsep{6\jsc@mmm}
 \fi
 %</book>
 %<*jspf>
-\setlength\headsep{9\js@mmm}
+\setlength\headsep{9\jsc@mmm}
 \addtolength\headsep{-\topskip}
 %</jspf>
 %<*kiyou>
-\setlength\headheight{0\js@mpt}
-\setlength\headsep{0\js@mpt}
+\setlength\headheight{0\jsc@mpt}
+\setlength\headsep{0\jsc@mpt}
 %</kiyou>
 %    \end{macrocode}
 % \end{macro}
@@ -1851,7 +1849,7 @@
   \setlength\fullwidth{0.76\paperwidth}
 \else
   \setlength\fullwidth{\paperwidth}
-  \addtolength\fullwidth{-36\js@mmm}
+  \addtolength\fullwidth{-36\jsc@mmm}
 \fi
 \if@twocolumn \@tempdima=2zw \else \@tempdima=1zw \fi
 \divide\fullwidth\@tempdima \multiply\fullwidth\@tempdima
@@ -1866,7 +1864,7 @@
 %</book>
 %<*jspf>
 \setlength\fullwidth{50zw}
-\addtolength\fullwidth{8\js@mmm}
+\addtolength\fullwidth{8\jsc@mmm}
 \setlength\textwidth{\fullwidth}
 %</jspf>
 %<*kiyou>
@@ -1916,8 +1914,8 @@
 %<jspf>\setlength{\textheight}{51\baselineskip}
 %<kiyou>\setlength{\textheight}{47\baselineskip}
 \addtolength{\textheight}{\topskip}
-\addtolength{\textheight}{0.1\js@mpt}
-%<jspf>\setlength{\mathindent}{10\js@mmm}
+\addtolength{\textheight}{0.1\jsc@mpt}
+%<jspf>\setlength{\mathindent}{10\jsc@mmm}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1974,7 +1972,7 @@
 \addtolength\marginparwidth{-\oddsidemargin}
 \addtolength\marginparwidth{-\inv@mag in}
 \addtolength\marginparwidth{-\textwidth}
-\addtolength\marginparwidth{-10\js@mmm}
+\addtolength\marginparwidth{-10\jsc@mmm}
 \addtolength\marginparwidth{-\marginparsep}
 \@tempdima=1zw
 \divide\marginparwidth\@tempdima
@@ -2031,7 +2029,7 @@
 % 和文の行送りを考えてもうちょっと大きくします。
 %
 %    \begin{macrocode}
-\setlength{\skip\footins}{16\js@mpt \@plus 5\js@mpt \@minus 2\js@mpt}
+\setlength{\skip\footins}{16\jsc@mpt \@plus 5\jsc@mpt \@minus 2\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2157,9 +2155,9 @@
 % |\intextsep| は本文の途中に出力されるフロートと本文との距離です。
 %
 %    \begin{macrocode}
-\setlength\floatsep    {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
-\setlength\textfloatsep{20\js@mpt \@plus 2\js@mpt \@minus 4\js@mpt}
-\setlength\intextsep   {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
+\setlength\floatsep    {12\jsc@mpt \@plus 2\jsc@mpt \@minus 2\jsc@mpt}
+\setlength\textfloatsep{20\jsc@mpt \@plus 2\jsc@mpt \@minus 4\jsc@mpt}
+\setlength\intextsep   {12\jsc@mpt \@plus 2\jsc@mpt \@minus 2\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2171,8 +2169,8 @@
 % 二段組のときの段抜きのフロートについての値です。
 %
 %    \begin{macrocode}
-\setlength\dblfloatsep    {12\js@mpt \@plus 2\js@mpt \@minus 2\js@mpt}
-\setlength\dbltextfloatsep{20\js@mpt \@plus 2\js@mpt \@minus 4\js@mpt}
+\setlength\dblfloatsep    {12\jsc@mpt \@plus 2\jsc@mpt \@minus 2\jsc@mpt}
+\setlength\dbltextfloatsep{20\jsc@mpt \@plus 2\jsc@mpt \@minus 4\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2187,9 +2185,9 @@
 % |\@fpsep| はフロート間に入ります。
 %
 %    \begin{macrocode}
-\setlength\@fptop{0\js@mpt \@plus 1fil}
-\setlength\@fpsep{8\js@mpt \@plus 2fil}
-\setlength\@fpbot{0\js@mpt \@plus 1fil}
+\setlength\@fptop{0\jsc@mpt \@plus 1fil}
+\setlength\@fpsep{8\jsc@mpt \@plus 2fil}
+\setlength\@fpbot{0\jsc@mpt \@plus 1fil}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2202,9 +2200,9 @@
 % 段抜きフロートについての値です。
 %
 %    \begin{macrocode}
-\setlength\@dblfptop{0\js@mpt \@plus 1fil}
-\setlength\@dblfpsep{8\js@mpt \@plus 2fil}
-\setlength\@dblfpbot{0\js@mpt \@plus 1fil}
+\setlength\@dblfptop{0\jsc@mpt \@plus 1fil}
+\setlength\@dblfpsep{8\jsc@mpt \@plus 2fil}
+\setlength\@dblfpbot{0\jsc@mpt \@plus 1fil}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2508,16 +2506,16 @@
         \begin{center}
           \mbox{} \\[1zw]
           \large
-          {\maybeblue\hrule height0\js@mpt depth2\js@mpt\relax}\par
+          {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
           \smallskip
           \@title
           \smallskip
-          {\maybeblue\hrule height0\js@mpt depth2\js@mpt\relax}\par
+          {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
           \vfill
           {\small \@author}%
         \end{center}
       \else
-      \vskip 60\js@mpt
+      \vskip 60\jsc@mpt
       \begin{center}%
         {\LARGE \@title \par}%
         \vskip 3em%
@@ -2665,7 +2663,7 @@
   \centerline{\box\@abstractbox}
   \ifx\@keywords\@undefined\else
     \vskip 1.5em
-    \centerline{\parbox{157\js@mmm}{\textsf{Keywords:}\\ \small\@keywords}}
+    \centerline{\parbox{157\jsc@mmm}{\textsf{Keywords:}\\ \small\@keywords}}
   \fi
   \vskip 1.5em}
 %</jspf>
@@ -2820,7 +2818,7 @@
     \@afterheading
   \fi
   \if@slide
-    {\vskip-6\js@mpt\maybeblue\hrule height0\js@mpt depth1\js@mpt\vskip7\js@mpt\relax}%
+    {\vskip-6\jsc@mpt\maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt\vskip7\jsc@mpt\relax}%
   \fi
   \par  % 2000-12-18
   \ignorespaces}
@@ -3143,7 +3141,7 @@
     \normalfont
     \ifnum \c@secnumdepth >-2\relax
       \huge\headfont \prepartname\thepart\postpartname
-      \par\vskip20\js@mpt
+      \par\vskip20\jsc@mpt
     \fi
     \Huge \headfont #2\par}%
   \@endpart}
@@ -3241,8 +3239,8 @@
     \addcontentsline{toc}{chapter}{#1}%
   \fi
   \chaptermark{#1}%
-  \addtocontents{lof}{\protect\addvspace{10\js@mpt}}%
-  \addtocontents{lot}{\protect\addvspace{10\js@mpt}}%
+  \addtocontents{lof}{\protect\addvspace{10\jsc@mpt}}%
+  \addtocontents{lot}{\protect\addvspace{10\jsc@mpt}}%
   \if@twocolumn
     \@topnewpage[\@makechapterhead{#2}]%
   \else
@@ -3765,9 +3763,9 @@
 \newbox\@abstractbox
 \newenvironment{abstract}{%
   \global\setbox\@abstractbox\hbox\bgroup
-  \begin{minipage}[b]{157\js@mmm}{\sffamily Abstract}\par
+  \begin{minipage}[b]{157\jsc@mmm}{\sffamily Abstract}\par
     \small
-    \if@english \parindent6\js@mmm \else \parindent1zw \fi}%
+    \if@english \parindent6\jsc@mmm \else \parindent1zw \fi}%
   {\end{minipage}\egroup}
 %</jspf>
 %    \end{macrocode}
@@ -3785,7 +3783,7 @@
 %\newbox\@keywordsbox
 %\newenvironment{keywords}{%
 %  \global\setbox\@keywordsbox\hbox\bgroup
-%  \begin{minipage}[b]{1570\js@mmm}{\sffamily Keywords:}\par
+%  \begin{minipage}[b]{1570\jsc@mmm}{\sffamily Keywords:}\par
 %    \small\parindent0zw}%
 %  {\end{minipage}\egroup}
 %</jspf>
@@ -3923,7 +3921,7 @@
 % |array| 環境の列間には |\arraycolsep| の2倍の幅の空きが入ります。
 %
 %    \begin{macrocode}
-\setlength\arraycolsep{5\js@mpt}
+\setlength\arraycolsep{5\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3932,7 +3930,7 @@
 % |tabular| 環境の列間には |\tabcolsep| の2倍の幅の空きが入ります。
 %
 %    \begin{macrocode}
-\setlength\tabcolsep{6\js@mpt}
+\setlength\tabcolsep{6\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3941,7 +3939,7 @@
 % |array|，|tabular| 環境内の罫線の幅です。
 %
 %    \begin{macrocode}
-\setlength\arrayrulewidth{.4\js@mpt}
+\setlength\arrayrulewidth{.4\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3950,7 +3948,7 @@
 % |array|，|tabular| 環境での二重罫線間のアキです。
 %
 %    \begin{macrocode}
-\setlength\doublerulesep{2\js@mpt}
+\setlength\doublerulesep{2\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3989,8 +3987,8 @@
 % |\fbox|，|\framebox| の罫線の幅です。
 %
 %    \begin{macrocode}
-\setlength\fboxsep{3\js@mpt}
-\setlength\fboxrule{.4\js@mpt}
+\setlength\fboxsep{3\jsc@mpt}
+\setlength\fboxrule{.4\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -4199,8 +4197,8 @@
 %    \begin{macrocode}
 \newlength\abovecaptionskip
 \newlength\belowcaptionskip
-\setlength\abovecaptionskip{5\js@mpt} % 元: 10\p@
-\setlength\belowcaptionskip{5\js@mpt} % 元: 0\p@
+\setlength\abovecaptionskip{5\jsc@mpt} % 元: 10\p@
+\setlength\belowcaptionskip{5\jsc@mpt} % 元: 0\p@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -4214,8 +4212,8 @@
 %    \begin{macrocode}
 %<*!jspf>
 % \long\def\@makecaption#1#2{{\small
-%   \advance\leftskip 10\js@mmm
-%   \advance\rightskip 10\js@mmm
+%   \advance\leftskip 10\jsc@mmm
+%   \advance\rightskip 10\jsc@mmm
 %   \vskip\abovecaptionskip
 %   \sbox\@tempboxa{#1\hskip1zw\relax #2}%
 %   \ifdim \wd\@tempboxa >\hsize
@@ -4245,9 +4243,9 @@
         \itemsep    \z@
         \itemindent \z@
         \labelsep   \z@
-        \labelwidth 11\js@mmm
+        \labelwidth 11\jsc@mmm
         \listparindent\z@
-        \leftmargin 11\js@mmm}\item\relax #2\endlist}
+        \leftmargin 11\jsc@mmm}\item\relax #2\endlist}
   \else
     \global \@minipagefalse
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
@@ -4403,18 +4401,18 @@
 %
 % 目次を生成します。
 %
-% \begin{macro}{\js@tocl@width}
+% \begin{macro}{\jsc@tocl@width}
 %
 % [2013-12-30] |\prechaptername| などから見積もった目次のラベルの長さです。(by ts)
 %
 %    \begin{macrocode}
-\newdimen\js@tocl@width
+\newdimen\jsc@tocl@width
 \newcommand{\tableofcontents}{%
 %<*book>
-  \settowidth\js@tocl@width{\headfont\prechaptername\postchaptername}%
+  \settowidth\jsc@tocl@width{\headfont\prechaptername\postchaptername}%
   \settowidth\@tempdima{\headfont\appendixname}%
-  \ifdim\js@tocl@width<\@tempdima \setlength\js@tocl@width{\@tempdima}\fi
-  \ifdim\js@tocl@width<2zw \divide\js@tocl@width by 2 \advance\js@tocl@width 1zw\fi
+  \ifdim\jsc@tocl@width<\@tempdima \setlength\jsc@tocl@width{\@tempdima}\fi
+  \ifdim\jsc@tocl@width<2zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1zw\fi
   \if@twocolumn
     \@restonecoltrue\onecolumn
   \else
@@ -4424,10 +4422,10 @@
   \@mkboth{\contentsname}{}%
 %</book>
 %<*!book>
-  \settowidth\js@tocl@width{\headfont\presectionname\postsectionname}%
+  \settowidth\jsc@tocl@width{\headfont\presectionname\postsectionname}%
   \settowidth\@tempdima{\headfont\appendixname}%
-  \ifdim\js@tocl@width<\@tempdima\relax\setlength\js@tocl@width{\@tempdima}\fi
-  \ifdim\js@tocl@width<2zw \divide\js@tocl@width by 2 \advance\js@tocl@width 1zw\fi
+  \ifdim\jsc@tocl@width<\@tempdima\relax\setlength\jsc@tocl@width{\@tempdima}\fi
+  \ifdim\jsc@tocl@width<2zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1zw\fi
   \section*{\contentsname}%
   \@mkboth{\contentsname}{\contentsname}%
 %</!book>
@@ -4446,7 +4444,7 @@
   \ifnum \c@tocdepth >-2\relax
 %<!book>    \addpenalty\@secpenalty
 %<book>    \addpenalty{-\@highpenalty}%
-    \addvspace{2.25em \@plus\js@mpt}%
+    \addvspace{2.25em \@plus\jsc@mpt}%
     \begingroup
       \parindent \z@
 %     \@pnumwidth should be \@tocrmarg
@@ -4469,7 +4467,7 @@
 %
 % 章の目次です。|\@lnumwidth| を4.683zwに増やしました。
 %
-% [2013-12-30] |\@lnumwidth| を |\js@tocl@width| から
+% [2013-12-30] |\@lnumwidth| を |\jsc@tocl@width| から
 % 決めるようにしてみました。(by ts)
 %
 %    \begin{macrocode}
@@ -4477,7 +4475,7 @@
 \newcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \addvspace{1.0em \@plus\js@mpt}
+    \addvspace{1.0em \@plus\jsc@mpt}
 %   \vskip 1.0em \@plus\p@   % book.clsでは↑がこうなっている
     \begingroup
       \parindent\z@
@@ -4486,7 +4484,7 @@
       \parfillskip-\rightskip
       \leavevmode\headfont
       % \if@english\setlength\@lnumwidth{5.5em}\else\setlength\@lnumwidth{4.683zw}\fi
-      \setlength\@lnumwidth{\js@tocl@width}\advance\@lnumwidth 2.683zw
+      \setlength\@lnumwidth{\jsc@tocl@width}\advance\@lnumwidth 2.683zw
       \advance\leftskip\@lnumwidth \hskip-\leftskip
       #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss#2}\par
       \penalty\@highpenalty
@@ -4505,7 +4503,7 @@
 \newcommand*{\l@section}[2]{%
   \ifnum \c@tocdepth >\z@
     \addpenalty{\@secpenalty}%
-    \addvspace{1.0em \@plus\js@mpt}%
+    \addvspace{1.0em \@plus\jsc@mpt}%
     \begingroup
       \parindent\z@
 %     \rightskip\@pnumwidth
@@ -4513,7 +4511,7 @@
       \parfillskip-\rightskip
       \leavevmode\headfont
       %\setlength\@lnumwidth{4zw}% 元1.5em [2003-03-02]
-      \setlength\@lnumwidth{\js@tocl@width}\advance\@lnumwidth 2zw
+      \setlength\@lnumwidth{\jsc@tocl@width}\advance\@lnumwidth 2zw
       \advance\leftskip\@lnumwidth \hskip-\leftskip
       #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss#2}\par
     \endgroup
@@ -4527,7 +4525,7 @@
 %<book> % \newcommand*{\l@section}{\@dottedtocline{1}{1zw}{3.683zw}}
 %    \end{macrocode}
 %
-% [2013-12-30] 上のインデントは |\js@tocl@width| から決めるように
+% [2013-12-30] 上のインデントは |\jsc@tocl@width| から決めるように
 % しました。(by ts)
 %
 % \end{macro}
@@ -4540,7 +4538,7 @@
 % さらに下位レベルの目次項目の体裁です。
 % あまり使ったことがありませんので，要修正かもしれません。
 %
-% [2013-12-30] ここも  |\js@tocl@width| から決めるように
+% [2013-12-30] ここも  |\jsc@tocl@width| から決めるように
 % してみました。(by ts)
 %
 %    \begin{macrocode}
@@ -4556,16 +4554,16 @@
 % \newcommand*{\l@subparagraph} {\@dottedtocline{5}{4zw}{3zw}}
 %
 \newcommand*{\l@subsection}{%
-          \@tempdima\js@tocl@width \advance\@tempdima -1zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima -1zw
           \@dottedtocline{2}{\@tempdima}{3zw}}
 \newcommand*{\l@subsubsection}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 0zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 0zw
           \@dottedtocline{3}{\@tempdima}{4zw}}
 \newcommand*{\l@paragraph}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 1zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 1zw
           \@dottedtocline{4}{\@tempdima}{5zw}}
 \newcommand*{\l@subparagraph}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 2zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 2zw
           \@dottedtocline{5}{\@tempdima}{6zw}}
 %</!book>
 %<*book>
@@ -4574,19 +4572,19 @@
 % \newcommand*{\l@paragraph}    {\@dottedtocline{4}{10em}{5em}}
 % \newcommand*{\l@subparagraph} {\@dottedtocline{5}{12em}{6em}}
 \newcommand*{\l@section}{%
-          \@tempdima\js@tocl@width \advance\@tempdima -1zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima -1zw
           \@dottedtocline{1}{\@tempdima}{3.683zw}}
 \newcommand*{\l@subsection}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 2.683zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 2.683zw
           \@dottedtocline{2}{\@tempdima}{3.5zw}}
 \newcommand*{\l@subsubsection}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 6.183zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 6.183zw
           \@dottedtocline{3}{\@tempdima}{4.5zw}}
 \newcommand*{\l@paragraph}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 10.683zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 10.683zw
           \@dottedtocline{4}{\@tempdima}{5.5zw}}
 \newcommand*{\l@subparagraph}{%
-          \@tempdima\js@tocl@width \advance\@tempdima 16.183zw
+          \@tempdima\jsc@tocl@width \advance\@tempdima 16.183zw
           \@dottedtocline{5}{\@tempdima}{6.5zw}}
 %</book>
 %    \end{macrocode}
@@ -4619,7 +4617,7 @@
 %
 %    \begin{macrocode}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
-  \vskip \z@ \@plus.2\js@mpt
+  \vskip \z@ \@plus.2\jsc@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
     \parindent #2\relax\@afterindenttrue
    \interlinepenalty\@M
@@ -4857,7 +4855,7 @@
 %<!book>    \@mkboth{\indexname}{\indexname}%
     \plainifnotempty % \thispagestyle{plain}
     \parindent\z@
-    \parskip\z@ \@plus .3\js@mpt\relax
+    \parskip\z@ \@plus .3\jsc@mpt\relax
     \let\item\@idxitem
     \raggedright
     \footnotesize\narrowbaselines
@@ -4892,7 +4890,7 @@
 % 索引で先頭文字ごとのブロックの間に入るスペースです。
 %
 %    \begin{macrocode}
-\newcommand{\indexspace}{\par \vskip 10\js@mpt \@plus5\js@mpt \@minus3\js@mpt\relax}
+\newcommand{\indexspace}{\par \vskip 10\jsc@mpt \@plus5\jsc@mpt \@minus3\jsc@mpt\relax}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4980,9 +4978,9 @@
 %
 %    \begin{macrocode}
 \renewcommand{\footnoterule}{%
-  \kern-3\js@mpt
-  \hrule width .4\columnwidth height 0.4\js@mpt
-  \kern 2.6\js@mpt}
+  \kern-3\jsc@mpt
+  \hrule width .4\columnwidth height 0.4\jsc@mpt
+  \kern 2.6\jsc@mpt}
 %    \end{macrocode}
 % \end{macro}
 %

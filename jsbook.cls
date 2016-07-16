@@ -233,17 +233,19 @@
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
-      {The engine in use is not pLaTeX}
-      {You must use pLaTeX, or add 'uplatex' to the class option list.%
-       \MessageBreak\@ehc}
+      {You are running upLaTeX.\MessageBreak
+       Please use pLaTeX instead, or add 'uplatex' to\MessageBreak
+       the class option list}
+      {\@ehc}
     \@jsc@uplatextrue
   \fi
 \else
   \if@jsc@uplatex
     \ClassError\jsc@clsname
-      {The engine in use is not upLaTeX}
-      {You must use upLaTeX, or remove 'uplatex' from the class option list.%
-       \MessageBreak\@ehc}
+      {You are running pLaTeX.\MessageBreak
+       Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
+       the class option list}
+      {\@ehc}
     \@jsc@uplatexfalse
   \fi
 \fi

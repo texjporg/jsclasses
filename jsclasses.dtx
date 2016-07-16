@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5828}
+% \CheckSum{5830}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -620,17 +620,19 @@
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
-      {The engine in use is not pLaTeX}
-      {You must use pLaTeX, or add 'uplatex' to the class option list.%
-       \MessageBreak\@ehc}
+      {You are running upLaTeX.\MessageBreak
+       Please use pLaTeX instead, or add 'uplatex' to\MessageBreak
+       the class option list}
+      {\@ehc}
     \@jsc@uplatextrue
   \fi
 \else
   \if@jsc@uplatex
     \ClassError\jsc@clsname
-      {The engine in use is not upLaTeX}
-      {You must use upLaTeX, or remove 'uplatex' from the class option list.%
-       \MessageBreak\@ehc}
+      {You are running pLaTeX.\MessageBreak
+       Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
+       the class option list}
+      {\@ehc}
     \@jsc@uplatexfalse
   \fi
 \fi

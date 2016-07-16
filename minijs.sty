@@ -1,7 +1,7 @@
 % minimal jsarticle-like fonts
 %
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{minijs}[2016/07/15 okumura, texjporg]
+\ProvidesPackage{minijs}[2016/07/16 okumura, texjporg]
 %
 % if jsclasses loaded, abort loading this package
 \ifx\@jsc@uplatextrue\@undefined\else
@@ -14,10 +14,12 @@
 %
 % min/goth -> jis/jisg (for pLaTeX only)
 \ifx\ucs\@undefined
-\expandafter\let\csname JY1/mc/m/n/10\endcsname\relax
-\expandafter\let\csname JY1/gt/m/n/10\endcsname\relax
-\expandafter\let\csname JT1/mc/m/n/10\endcsname\relax
-\expandafter\let\csname JT1/gt/m/n/10\endcsname\relax
+\@for\@tempa:=5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88\do{%
+  \expandafter\let\csname JY1/mc/m/n/\@tempa\endcsname\relax
+  \expandafter\let\csname JY1/gt/m/n/\@tempa\endcsname\relax
+  \expandafter\let\csname JT1/mc/m/n/\@tempa\endcsname\relax
+  \expandafter\let\csname JT1/gt/m/n/\@tempa\endcsname\relax
+}
 \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] jis}{}
 \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] jisg}{}
 \DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.961] tmin10}{}

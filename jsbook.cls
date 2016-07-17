@@ -38,6 +38,7 @@
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
   [2016/07/15 okumura, texjporg]
+\def\jsc@clsname{jsbook}
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@openright
@@ -228,6 +229,25 @@
   \setlength\@tempdima  {\paperheight}
   \setlength\paperheight{\paperwidth}
   \setlength\paperwidth {\@tempdima}
+\fi
+\ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
+  \if@jsc@uplatex\else
+    \ClassError\jsc@clsname
+      {You are running upLaTeX.\MessageBreak
+       Please use pLaTeX instead, or add 'uplatex' to\MessageBreak
+       the class option list}
+      {\@ehc}
+    \@jsc@uplatextrue
+  \fi
+\else
+  \if@jsc@uplatex
+    \ClassError\jsc@clsname
+      {You are running pLaTeX.\MessageBreak
+       Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
+       the class option list}
+      {\@ehc}
+    \@jsc@uplatexfalse
+  \fi
 \fi
 \newdimen\stockwidth \newdimen\stockheight
 \setlength{\stockwidth}{\paperwidth}

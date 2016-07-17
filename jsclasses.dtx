@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5421}
+% \CheckSum{5456}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -132,6 +132,18 @@
 % \StopEventually{}
 %
 % 以下では実際のコードに即して説明します。
+%
+% \begin{macro}{\jsc@clsname}
+%
+% 文書クラスの名前です。エラーメッセージ表示などで使われます。
+%
+%    \begin{macrocode}
+%<article>\def\jsc@clsname{jsarticle}
+%<book>\def\jsc@clsname{jsbook}
+%<jspf>\def\jsc@clsname{jspf}
+%<kiyou>\def\jsc@clsname{kiyou}
+%    \end{macrocode}
+% \end{macro}
 %
 % \section{オプション}
 %
@@ -595,6 +607,34 @@
   \setlength\@tempdima  {\paperheight}
   \setlength\paperheight{\paperwidth}
   \setlength\paperwidth {\@tempdima}
+\fi
+%    \end{macrocode}
+%
+% \paragraph{使用エンジンの検査}
+%
+% ユーザが |uplatex| オプションの有無により指定したエンジンが，実際に
+% 使われているものと一致しているかを検査し，一致しない場合はエラー
+% メッセージを表示します。
+%
+%    \begin{macrocode}
+\ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
+  \if@jsc@uplatex\else
+    \ClassError\jsc@clsname
+      {You are running upLaTeX.\MessageBreak
+       Please use pLaTeX instead, or add 'uplatex' to\MessageBreak
+       the class option list}
+      {\@ehc}
+    \@jsc@uplatextrue
+  \fi
+\else
+  \if@jsc@uplatex
+    \ClassError\jsc@clsname
+      {You are running pLaTeX.\MessageBreak
+       Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
+       the class option list}
+      {\@ehc}
+    \@jsc@uplatexfalse
+  \fi
 \fi
 %    \end{macrocode}
 %

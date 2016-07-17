@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2016/07/15 okumura, texjporg]
+  [2016/07/18 okumura, texjporg]
 \def\jsc@clsname{jsbook}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -1684,20 +1684,29 @@
   \llap{\@makefnmark\hskip0.3zw}#1}
 \def\@inhibitglue{%
   \futurelet\@let@token\@@inhibitglue}
+\begingroup
+\let\GDEF=\gdef
+\let\CATCODE=\catcode
+\let\ENDGROUP=\endgroup
+\CATCODE`k=12
+\CATCODE`a=12
+\CATCODE`n=12
+\CATCODE`j=12
+\CATCODE`i=12
+\CATCODE`c=12
+\CATCODE`h=12
+\CATCODE`r=12
+\CATCODE`t=12
+\CATCODE`e=12
+\GDEF\KANJI@CHARACTER{kanji character }
+\ENDGROUP
 \def\@@inhibitglue{%
-  \ifx\@let@token「
-    \inhibitglue
-  \else
-    \ifx\@let@token（
+  \expandafter\expandafter\expandafter\jsc@inhibitglue\expandafter\meaning\expandafter\@let@token\KANJI@CHARACTER\relax\jsc@end}
+\expandafter\def\expandafter\jsc@inhibitglue\expandafter#\expandafter1\KANJI@CHARACTER#2#3\jsc@end{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty
+    \ifnum\the\inhibitxspcode`#2=2\relax
       \inhibitglue
-    \else
-      \ifx\@let@token『
-        \inhibitglue
-      \else
-        \ifx\@let@token［
-          \inhibitglue
-        \fi
-      \fi
     \fi
   \fi}
 \let\everyparhook=\@inhibitglue

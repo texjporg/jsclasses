@@ -1,4 +1,5 @@
-all: jsarticle.cls okumacro.sty jsverb.sty morisawa.sty jsclasses.pdf okumacro.pdf jsverb.pdf morisawa.pdf
+all: jsarticle.cls okumacro.sty jsverb.sty morisawa.sty jslogo.sty \
+	jsclasses.pdf okumacro.pdf jsverb.pdf morisawa.pdf jslogo.pdf
 
 jsarticle.cls: jsclasses.dtx
 	platex --kanji=jis jsclasses.ins
@@ -12,6 +13,9 @@ jsverb.sty: jsverb.dtx
 morisawa.sty: morisawa.dtx
 	platex --kanji=jis morisawa.ins
 
+jslogo.sty: jslogo.dtx
+	platex --kanji=jis jslogo.ins
+
 jsclasses.pdf: jsclasses.dtx
 	ptex2pdf -l -ot --kanji=jis jsclasses.dtx
 
@@ -23,3 +27,6 @@ jsverb.pdf: jsverb.dtx
 
 morisawa.pdf: morisawa.dtx
 	ptex2pdf -l -ot --kanji=jis morisawa.dtx
+
+jslogo.pdf: jslogo.dtx
+	ptex2pdf -l -ot --kanji=jis jslogo.dtx

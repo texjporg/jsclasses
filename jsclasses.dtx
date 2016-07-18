@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5491}
+% \CheckSum{5502}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1956,6 +1956,24 @@
 \addtolength{\textheight}{\topskip}
 \addtolength{\textheight}{0.1\jsc@mpt}
 %<jspf>\setlength{\mathindent}{10\jsc@mmm}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\flushbottom}
+%
+% [2016-07-18] |\textheight| に念のため0.1ポイント余裕を持たせて
+% いるのと同様に，|\flushbottom| にも余裕を持たせます。
+% 元の\LaTeXe での完全な |\flushbottom| の定義は
+%\begin{verbatim}
+%  \def\flushbottom{%
+%    \let\@textbottom\relax \let\@texttop\relax}
+%\end{verbatim}
+% ですが，次のようにします。
+%
+%    \begin{macrocode}
+\def\flushbottom{%
+  \def\@textbottom{\vskip \z@ \@plus.1\jsc@mpt}%
+  \let\@texttop\relax}
 %    \end{macrocode}
 % \end{macro}
 %

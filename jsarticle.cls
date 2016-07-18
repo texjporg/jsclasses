@@ -102,7 +102,7 @@
   \@slidetrue\def\jsc@magscale{3.583}
   \renewcommand{\@ptsize}{26}
   \@landscapetrue\@titlepagetrue}
-\DeclareOption{8pt}{\def\jsc@magscale{0.83}\renewcommand{\@ptsize}{-2}}
+\DeclareOption{8pt}{\def\jsc@magscale{0.833}\renewcommand{\@ptsize}{-2}}
 \DeclareOption{9pt}{\def\jsc@magscale{0.913}\renewcommand{\@ptsize}{-1}}
 \DeclareOption{10pt}{\def\jsc@magscale{1}\renewcommand{\@ptsize}{0}}
 \DeclareOption{11pt}{\def\jsc@magscale{1.095}\renewcommand{\@ptsize}{1}}
@@ -763,6 +763,9 @@
 \multiply\textheight\baselineskip
 \addtolength{\textheight}{\topskip}
 \addtolength{\textheight}{0.1\jsc@mpt}
+\def\flushbottom{%
+  \def\@textbottom{\vskip \z@ \@plus.1\jsc@mpt}%
+  \let\@texttop\relax}
 \setlength\marginparsep{\columnsep}
 \setlength\marginparpush{\baselineskip}
 \setlength{\oddsidemargin}{\paperwidth}

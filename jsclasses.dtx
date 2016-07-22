@@ -3414,6 +3414,10 @@
 % \end{macro}
 %
 % \begin{macro}{\subsubsection}
+%
+% [2016-07-22] \texttt{slide}オプション指定時に |\subsubsection| の文字列
+% と罫線が重なる問題に対処しました(forum:1982)。
+%
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%

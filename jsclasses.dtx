@@ -3422,7 +3422,7 @@
 \else
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
     {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {\z@}%
+    {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \fi
 %    \end{macrocode}

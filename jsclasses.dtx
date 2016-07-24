@@ -308,9 +308,12 @@
 % [2016-07-08] |\mag| を使わずに各種寸法をスケールさせるためのオプション \texttt{nomag} を新設しました。
 % \texttt{usemag} オプションの指定で従来通りの動作となります。デフォルトは \texttt{usemag} です。
 %
+% [2016-07-24] オプティカルサイズを調整するためにNFSSへパッチを当てるオプション \texttt{nomag*} を新設しました。
+%
 %    \begin{macrocode}
 \newcommand{\@ptsize}{0}
 \newif\ifjsc@mag\jsc@magtrue
+\newif\ifjsc@mag@xreal\jsc@mag@xrealfalse
 \def\jsc@magscale{1}
 \DeclareOption{slide}{%
   \@slidetrue\def\jsc@magscale{3.583}
@@ -335,8 +338,9 @@
 \DeclareOption{10.5ptj}{\def\jsc@magscale{1.139}\renewcommand{\@ptsize}{1051}}
 \DeclareOption{11ptj}{\def\jsc@magscale{1.194}\renewcommand{\@ptsize}{1101}}
 \DeclareOption{12ptj}{\def\jsc@magscale{1.302}\renewcommand{\@ptsize}{1201}}
-\DeclareOption{usemag}{\jsc@magtrue}
-\DeclareOption{nomag}{\jsc@magfalse}
+\DeclareOption{usemag}{\jsc@magtrue\jsc@mag@xrealfalse}
+\DeclareOption{nomag}{\jsc@magfalse\jsc@mag@xrealfalse}
+\DeclareOption{nomag*}{\jsc@magfalse\jsc@mag@xrealtrue}
 %    \end{macrocode}
 %
 % \paragraph{トンボオプション}
@@ -806,6 +810,64 @@
   \def\inv@mag{1}
 \fi
 %</kiyou>
+\ifjsc@mag@xreal
+  \RequirePackage{type1cm}
+  \mathchardef\jsc@csta=259
+  \def\jsc@invscale#1#2{%
+    \begingroup \@tempdima=#1\relax \@tempdimb#2\p@\relax
+      \@tempcnta\@tempdima \multiply\@tempcnta\@cclvi
+      \divide\@tempcnta\@tempdimb \multiply\@tempcnta\@cclvi
+      \@tempcntb\p@ \divide\@tempcntb\@tempdimb
+      \advance\@tempcnta-\@tempcntb \advance\@tempcnta-\tw@
+      \@tempdimb\@tempcnta\@ne
+      \advance\@tempcnta\@tempcntb \advance\@tempcnta\@tempcntb
+      \advance\@tempcnta\jsc@csta \@tempdimc\@tempcnta\@ne
+      \@whiledim\@tempdimb<\@tempdimc\do{%
+        \@tempcntb\@tempdimb \advance\@tempcntb\@tempdimc
+        \advance\@tempcntb\@ne \divide\@tempcntb\tw@
+        \ifdim #2\@tempcntb>\@tempdima
+          \advance\@tempcntb\m@ne \@tempdimc=\@tempcntb\@ne
+        \else \@tempdimb=\@tempcntb\@ne \fi}%
+      \xdef\jsc@gtmpa{\the\@tempdimb}%
+    \endgroup #1=\jsc@gtmpa\relax}
+  \expandafter\let\csname OT1/cmr/m/n/10\endcsname\relax
+  \expandafter\let\csname OMX/cmex/m/n/10\endcsname\relax
+  \let\jsc@get@external@font\get@external@font
+  \def\get@external@font{%
+    \jsc@preadjust@extract@font
+    \jsc@get@external@font}
+  \def\jsc@fstrunc#1{%
+    \edef\jsc@tmpa{\strip@pt#1}%
+    \expandafter\jsc@fstrunc@a\jsc@tmpa.****\@nil}
+  \def\jsc@fstrunc@a#1.#2#3#4#5#6\@nil{%
+    \if#5*\else
+      \edef\jsc@tmpa{#1%
+      \ifnum#2#3>\z@ .#2\ifnum#3>\z@ #3\fi\fi}%
+    \fi}
+  \def\jsc@preadjust@extract@font{%
+    \let\jsc@req@size\f@size
+    \dimen@\f@size\p@ \jsc@invscale\dimen@\jsc@magscale
+    \advance\dimen@.005pt\relax \jsc@fstrunc\dimen@
+    \let\jsc@ref@size\jsc@tmpa
+    \let\f@size\jsc@ref@size}
+  \def\execute@size@function#1{%
+    \let\jsc@cref@size\f@size
+    \let\f@size\jsc@req@size
+    \csname s@fct@#1\endcsname}
+  \let\jsc@DeclareErrorFont\DeclareErrorFont
+  \def\DeclareErrorFont#1#2#3#4#5{%
+    \@tempdimc#5\p@ \@tempdimc\jsc@magscale\@tempdimc
+    \edef\jsc@tmpa{{#1}{#2}{#3}{#4}{\strip@pt\@tempdimc}}
+    \expandafter\jsc@DeclareErrorFont\jsc@tmpa}
+  \def\gen@sfcnt{%
+    \edef\mandatory@arg{\mandatory@arg\jsc@cref@size}%
+    \empty@sfcnt}
+  \def\genb@sfcnt{%
+    \edef\mandatory@arg{%
+      \mandatory@arg\expandafter\genb@x\jsc@cref@size..\@@}%
+    \empty@sfcnt}
+  \DeclareErrorFont{OT1}{cmr}{m}{n}{10}
+\fi
 %    \end{macrocode}
 %
 % [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて

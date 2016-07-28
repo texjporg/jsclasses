@@ -3401,7 +3401,7 @@
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
@@ -3421,7 +3421,7 @@
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
@@ -3439,13 +3439,13 @@
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-    {\z@}{-1zw}% 改行せず 1zw のアキ
+    {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
 %<!jspf>    {\normalfont\normalsize\headfont ■}}
 \else
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {0.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {-1zw}% 改行せず 1zw のアキ
+    {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
 %<!jspf>    {\normalfont\normalsize\headfont ■}}
 \fi
@@ -3457,9 +3457,15 @@
 %    見出しの後ろで改行されません。
 %
 %    \begin{macrocode}
-\newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
-   {\z@}{-1zw}%
-   {\normalfont\normalsize\headfont}}
+\if@twocolumn
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .4\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\else
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %

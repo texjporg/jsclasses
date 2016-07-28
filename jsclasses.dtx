@@ -2876,7 +2876,9 @@
     \@afterheading
   \fi
   \if@slide
-    {\vskip-6\jsc@mpt\maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt\vskip7\jsc@mpt\relax}%
+    {\vskip\if@twocolumn-5\jsc@mpt\else-6\jsc@mpt\fi
+     \maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt
+     \vskip\if@twocolumn 4\jsc@mpt\else 7\jsc@mpt\fi\relax}%
   \fi
   \par  % 2000-12-18
   \ignorespaces}

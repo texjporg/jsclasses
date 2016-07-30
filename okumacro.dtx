@@ -70,6 +70,11 @@
 %
 % 以下が実際のマクロ集です。
 %
+% [2016-07-30] 従来は，ascmac→okumacroの順に読み込んだ場合にエラーが出て
+% いましたが，新しい仕様では，ascmacとokumacroの両方を読み込む場合には
+% 「後に読み込んだほう」が勝ちます。
+% 具体的には |\keytop|，|\return|，screen環境，shadebox環境があります。
+%
 %    \begin{macrocode}
 %<*okumacro>
 %    \end{macrocode}
@@ -390,12 +395,12 @@
 % [2016-07-30] |\keytop| はp\LaTeX のascmacパッケージ(tascmac.sty)でも
 % 定義されていますが，ascmacの定義では周囲と同じファミリのままになっていて，
 % okumacroでは中の文字をサンセリフ体に変更しています。
+% 両方のパッケージを読み込む場合は，後に読み込んだほうの定義が勝ちます。
+% okumacroが勝つ場合には常にサンセリフ体に変更するキートップ記号を出力しますし，
+% ascmacが勝つ場合は周囲と同じファミリになります。
 %
-% そこで，新たに |\okukeytop| という命令を追加します。これはascmacと干渉せず，
+% また，新たに |\okukeytop| という命令を追加します。これはascmacと干渉せず，
 % 常にサンセリフ体に変更するキートップ記号を出力できます。
-% 一方 |\keytop| は，ascmacを使用しない場合は |\okukeytop| と同じになります
-% が，ascmacを使用する場合はファミリが周囲と同じになります。
-% これはascmacとokumacroの読み込み順に依りません。
 %
 %    \begin{macrocode}
 \newcommand{\okukeytop}[1]{{\leavevmode\kern1pt
@@ -422,6 +427,8 @@
   \end{picture}\kern1pt}}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
   \newcommand{\keytop}{\okukeytop}
+\else
+  \renewcommand{\keytop}{\okukeytop}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -434,12 +441,12 @@
 % 定義されていますが，okumacroがリターンのキートップ記号を出力するのに対し，
 % ascmacではリターンの矢印文字{\font\ASCGRP=ascgrp \ASCGRP\char"20}だけ
 % を出す命令になっています。
+% 両方のパッケージを読み込む場合は，後に読み込んだほうの定義が勝ちます。
+% okumacroが勝つ場合には\okureturn を出力しますし，
+% ascmacが勝つ場合は{\font\ASCGRP=ascgrp \ASCGRP\char"20}を出力します。
 %
-% そこで，新たに |\okureturn| という命令を追加します。これはascmacと干渉せず，
+% また，新たに |\okureturn| という命令を追加します。これはascmacと干渉せず，
 % 常にリターンのキートップ記号\okureturn を出力できます。
-% 一方 |\return| は，ascmacを使用しない場合は |\okureturn| と同じになります
-% が，ascmacを使用する場合は{\font\ASCGRP=ascgrp \ASCGRP\char"20}を出力
-% します。これはascmacとokumacroの読み込み順に依りません。
 %
 %    \begin{macrocode}
 \def\RETMARK{{\unitlength=1pt
@@ -455,6 +462,8 @@
 \newcommand{\okureturn}{\okukeytop{\RETMARK}}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
   \newcommand{\return}{\okureturn}
+\else
+  \renewcommand{\return}{\okureturn}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -758,13 +767,13 @@
 % [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)の
 % screen環境は，オプション引数の数値で角の丸みの大きさを整数値(0--8)で指定し
 % ますが，okumacroパッケージでは横の倍率を指定するという違いがあります。
+% 両方のパッケージを読み込む場合は，後に読み込んだほうの定義が勝ちます。
+% screen環境は，okumacroが勝つ場合には横の倍率を指定できる
+% スクリーン風の環境になりますし，ascmacが勝つ場合は角の丸みを指定できる
+% スクリーン風の環境になります。
 %
-% そこで，新たにokuscreen環境を追加します。これはascmacと干渉せず，常に横の
-% 倍率を指定できるスクリーン風の環境になります。一方screen環境は，ascmacを
-% 使用しない場合はokuscreen環境と同じになりますが，ascmacを使用する場合は
-% ascmacの機能を優先し，角の丸みを指定できるスクリーン風の環境になります。
-% これはascmacとokumacroの読み込み順に依りません。なお，オプション引数を
-% 一切使用しない場合は，どちらも大差ありません。
+% また，新たにokuscreen環境を追加します。これはascmacと干渉せず，常に横の
+% 倍率を指定できるスクリーン風の環境になります。
 %
 %    \begin{macrocode}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
@@ -791,9 +800,7 @@
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}
-\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
-  \let\screen\okuscreen \let\endscreen\endokuscreen
-\fi
+\let\screen\okuscreen \let\endscreen\endokuscreen
 %    \end{macrocode}
 % \end{environment}
 %
@@ -891,9 +898,11 @@
 % 影付きの箱です。|ascmac.sty| から取りました。
 %
 % [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)と
-% 衝突しないように，okumacroのshadebox環境はokushadeboxに改名しました。
-% ただし，ascmacを使用しない場合にも利用できるように，tascmac.styが読み込ま
-% れていない場合はshadebox環境も定義しておきます。
+% 衝突しないように，新しい仕様では，ascmacとokumacroの両方を読み込む場合には
+% 「後に読み込んだほう」が勝ちます。
+%
+% また，新たにokushadebox環境を追加します。これはascmacと干渉せず，常に
+% okumacro流の定義になります。
 %
 %    \begin{macrocode}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
@@ -912,9 +921,7 @@
   \hbox{\hbox to \shaderule{\copy0\hss}\kern \z@
   \vrule\@width\wd0\@height\z@\@depth\shaderule\hskip-\shaderule
   \vrule\@width\shaderule\@height\dimen0}}
-\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
-  \let\shadebox\okushadebox \let\endshadebox\endokushadebox
-\fi
+\let\shadebox\okushadebox \let\endshadebox\endokushadebox
 %    \end{macrocode}
 % \end{environment}
 %

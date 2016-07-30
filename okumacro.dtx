@@ -388,11 +388,17 @@
 % これを使ってキートップ記号を作ります。
 %
 % [2016-07-30] |\keytop| はp\LaTeX のascmacパッケージ(tascmac.sty)でも
-% 定義されていますので，tascmac.styが読み込み済みの場合は定義しないことにします。
+% 定義されていますが，ascmacの定義では周囲と同じファミリのままになっていて，
+% okumacroでは中の文字をサンセリフ体に変更しています。
+%
+% そこで，新たに |\okukeytop| という命令を追加します。これはascmacと干渉せず，
+% 常にサンセリフ体に変更するキートップ記号を出力できます。
+% 一方 |\keytop| は，ascmacを使用しない場合は |\okukeytop| と同じになります
+% が，ascmacを使用する場合はファミリが周囲と同じになります。
+% これはascmacとokumacroの読み込み順に依りません。
 %
 %    \begin{macrocode}
-\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
-\newcommand{\keytop}[1]{{\leavevmode\kern1pt
+\newcommand{\okukeytop}[1]{{\leavevmode\kern1pt
   \setbox1=\hbox{\normalfont\sffamily [}%
   \dimen1=\ht1
   \removept{\dimen1}{\tempC}%
@@ -414,6 +420,8 @@
     \put(\tempB,\tempC){\oval(\tempA,4)[t]}
     \put(\tempB,0){\makebox(0,0)[b]{\box0}}
   \end{picture}\kern1pt}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newcommand{\keytop}{\okukeytop}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -423,10 +431,17 @@
 % リターンキーの記号です。
 %
 % [2016-07-30] |\return| はp\LaTeX のascmacパッケージ(tascmac.sty)でも
-% 定義されていますので，tascmac.styが読み込み済みの場合は定義しないことにします。
+% 定義されていますが，okumacroがリターンのキートップ記号を出力するのに対し，
+% ascmacではリターンの矢印文字{\font\ASCGRP=ascgrp \ASCGRP\char"20}だけ
+% を出す命令になっています。
+%
+% そこで，新たに |\okureturn| という命令を追加します。これはascmacと干渉せず，
+% 常にリターンのキートップ記号\okureturn を出力できます。
+% 一方 |\return| は，ascmacを使用しない場合は |\okureturn| と同じになります
+% が，ascmacを使用する場合は{\font\ASCGRP=ascgrp \ASCGRP\char"20}を出力
+% します。これはascmacとokumacroの読み込み順に依りません。
 %
 %    \begin{macrocode}
-\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
 \def\RETMARK{{\unitlength=1pt
   \setbox0=\hbox{\normalfont\ttfamily [}%
   \dimen0=\ht0
@@ -437,7 +452,9 @@
     \put(\tempA,1){\line(0,1){\tempB}}
     \put(\tempA,1){\vector(-1,0){\tempA}}
   \end{picture}}}
-\newcommand{\return}{\keytop{\RETMARK}}
+\newcommand{\okureturn}{\okukeytop{\RETMARK}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newcommand{\return}{\okureturn}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -738,17 +755,23 @@
 % ただ，screen環境の最初に |[| が来る場合は誤動作しますので，|\relax|
 % か |{}| を入れて誤魔化してください。
 %
-% [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)と
-% 衝突しないように，tascmac.styが読み込み済みの場合は定義しないことにします。
-% ascmacパッケージのscreen環境は，オプション引数の数値で角の丸みの大きさを
-% 整数値(0--8)で指定しますが，okumacroパッケージのscreen環境は横の倍率を
-% 指定するという違いがあります。
+% [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)の
+% screen環境は，オプション引数の数値で角の丸みの大きさを整数値(0--8)で指定し
+% ますが，okumacroパッケージでは横の倍率を指定するという違いがあります。
+%
+% そこで，新たにokuscreen環境を追加します。これはascmacと干渉せず，常に横の
+% 倍率を指定できるスクリーン風の環境になります。一方screen環境は，ascmacを
+% 使用しない場合はokuscreen環境と同じになりますが，ascmacを使用する場合は
+% ascmacの機能を優先し，角の丸みを指定できるスクリーン風の環境になります。
+% これはascmacとokumacroの読み込み順に依りません。なお，オプション引数を
+% 一切使用しない場合は，どちらも大差ありません。
 %
 %    \begin{macrocode}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
-\newdimen\@scw
-\newbox\scb@x
-\newenvironment{screen}[1][1]%
+  \newdimen\@scw
+  \newbox\scb@x
+\fi
+\newenvironment{okuscreen}[1][1]%
  {\def\screensc@le{#1}\@scw=\linewidth \advance \@scw by -20pt
   \setbox\scb@x=\hbox\bgroup\begin{minipage}[b]{\@scw}}%
      % または \setbox\scb@x=\vbox\bgroup\advance \linewidth by -20pt \relax
@@ -768,6 +791,8 @@
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \let\screen\okuscreen \let\endscreen\endokuscreen
 \fi
 %    \end{macrocode}
 % \end{environment}
@@ -866,15 +891,18 @@
 % 影付きの箱です。|ascmac.sty| から取りました。
 %
 % [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)と
-% 衝突しないように，tascmac.styが読み込み済みの場合は定義しないことにします。
+% 衝突しないように，okumacroのshadebox環境はokushadeboxに改名しました。
+% ただし，ascmacを使用しない場合にも利用できるように，tascmac.styが読み込ま
+% れていない場合はshadebox環境も定義しておきます。
 %
 %    \begin{macrocode}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
-\newdimen\shaderule \shaderule 5\p@
-\def\shadebox{\dimen0\linewidth \advance\dimen0-20\p@ 
+  \newdimen\shaderule \shaderule 5\p@
+\fi
+\def\okushadebox{\dimen0\linewidth \advance\dimen0-20\p@ 
   \advance\dimen0-2\fboxrule \advance\dimen0-\shaderule
   \setbox\@tempboxa=\hbox\bgroup\minipage{\dimen0}}
-\def\endshadebox{\endminipage\egroup\dimen0=10\p@ \advance\dimen0-\fboxrule
+\def\endokushadebox{\endminipage\egroup\dimen0=10\p@ \advance\dimen0-\fboxrule
   \setbox\@tempboxa=\hbox{\kern\dimen0\unhbox\@tempboxa\kern\dimen0}%
   \setbox0=\vbox{\hrule\@height \fboxrule
   \hbox{\vrule\@width \fboxrule \hskip-\fboxrule
@@ -884,6 +912,8 @@
   \hbox{\hbox to \shaderule{\copy0\hss}\kern \z@
   \vrule\@width\wd0\@height\z@\@depth\shaderule\hskip-\shaderule
   \vrule\@width\shaderule\@height\dimen0}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \let\shadebox\okushadebox \let\endshadebox\endokushadebox
 \fi
 %    \end{macrocode}
 % \end{environment}

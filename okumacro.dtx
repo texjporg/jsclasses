@@ -387,7 +387,11 @@
 %
 % これを使ってキートップ記号を作ります。
 %
+% [2016-07-30] |\keytop| はp\LaTeX のascmacパッケージ(tascmac.sty)でも
+% 定義されていますので，tascmac.styが読み込み済みの場合は定義しないことにします。
+%
 %    \begin{macrocode}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
 \newcommand{\keytop}[1]{{\leavevmode\kern1pt
   \setbox1=\hbox{\normalfont\sffamily [}%
   \dimen1=\ht1
@@ -410,6 +414,7 @@
     \put(\tempB,\tempC){\oval(\tempA,4)[t]}
     \put(\tempB,0){\makebox(0,0)[b]{\box0}}
   \end{picture}\kern1pt}}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %
@@ -417,7 +422,11 @@
 %
 % リターンキーの記号です。
 %
+% [2016-07-30] |\return| はp\LaTeX のascmacパッケージ(tascmac.sty)でも
+% 定義されていますので，tascmac.styが読み込み済みの場合は定義しないことにします。
+%
 %    \begin{macrocode}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
 \def\RETMARK{{\unitlength=1pt
   \setbox0=\hbox{\normalfont\ttfamily [}%
   \dimen0=\ht0
@@ -429,6 +438,7 @@
     \put(\tempA,1){\vector(-1,0){\tempA}}
   \end{picture}}}
 \newcommand{\return}{\keytop{\RETMARK}}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %
@@ -728,7 +738,14 @@
 % ただ，screen環境の最初に |[| が来る場合は誤動作しますので，|\relax|
 % か |{}| を入れて誤魔化してください。
 %
+% [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)と
+% 衝突しないように，tascmac.styが読み込み済みの場合は定義しないことにします。
+% ascmacパッケージのscreen環境は，オプション引数の数値で角の丸みの大きさを
+% 整数値(0--8)で指定しますが，okumacroパッケージのscreen環境は横の倍率を
+% 指定するという違いがあります。
+%
 %    \begin{macrocode}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
 \newdimen\@scw
 \newbox\scb@x
 \newenvironment{screen}[1][1]%
@@ -751,6 +768,7 @@
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}
+\fi
 %    \end{macrocode}
 % \end{environment}
 %
@@ -847,7 +865,11 @@
 %
 % 影付きの箱です。|ascmac.sty| から取りました。
 %
+% [2016-07-30] 元になっているp\LaTeX のascmacパッケージ(tascmac.sty)と
+% 衝突しないように，tascmac.styが読み込み済みの場合は定義しないことにします。
+%
 %    \begin{macrocode}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
 \newdimen\shaderule \shaderule 5\p@
 \def\shadebox{\dimen0\linewidth \advance\dimen0-20\p@ 
   \advance\dimen0-2\fboxrule \advance\dimen0-\shaderule
@@ -862,6 +884,7 @@
   \hbox{\hbox to \shaderule{\copy0\hss}\kern \z@
   \vrule\@width\wd0\@height\z@\@depth\shaderule\hskip-\shaderule
   \vrule\@width\shaderule\@height\dimen0}}
+\fi
 %    \end{macrocode}
 % \end{environment}
 %

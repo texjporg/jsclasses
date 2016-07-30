@@ -156,6 +156,9 @@
 %
 % \kenten{圏点}を振るコマンドです。
 %
+% [2016-07-30] ルビと圏点の高さを合わせるつもりでしたが，間違って
+% 上シフト量を0.63zwとしていましたので，正しい値0.75zwに直しました。
+%
 %    \begin{macrocode}
 \def\kenten#1{%
   \ifvmode\leavevmode\else\hskip\kanjiskip\fi
@@ -164,7 +167,7 @@
   \@kenten#1\end}
 \def\@kenten#1{%
   \ifx#1\end \let\next=\relax \else
-    \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \raise.75zw\copy1\nobreak #1\hskip\kanjiskip\relax
     \let\next=\@kenten
   \fi\next}
 %    \end{macrocode}

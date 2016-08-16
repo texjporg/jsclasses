@@ -58,7 +58,7 @@
   \@kenten#1\end}
 \def\@kenten#1{%
   \ifx#1\end \let\next=\relax \else
-    \raise.63zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \raise.75zw\copy1\nobreak #1\hskip\kanjiskip\relax
     \let\next=\@kenten
   \fi\next}
 \newcommand{\kintou}[2]{%
@@ -128,7 +128,7 @@
 \newcommand{\removept}[2]{%
   \edef#2{\expandafter\@removePT\the#1}}
 {\catcode`p=12 \catcode`t=12 \gdef\@removePT#1pt{#1}}
-\newcommand{\keytop}[1]{{\leavevmode\kern1pt
+\newcommand{\okukeytop}[1]{{\leavevmode\kern1pt
   \setbox1=\hbox{\normalfont\sffamily [}%
   \dimen1=\ht1
   \removept{\dimen1}{\tempC}%
@@ -150,6 +150,11 @@
     \put(\tempB,\tempC){\oval(\tempA,4)[t]}
     \put(\tempB,0){\makebox(0,0)[b]{\box0}}
   \end{picture}\kern1pt}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newcommand{\keytop}{\okukeytop}
+\else
+  \renewcommand{\keytop}{\okukeytop}
+\fi
 \def\RETMARK{{\unitlength=1pt
   \setbox0=\hbox{\normalfont\ttfamily [}%
   \dimen0=\ht0
@@ -160,7 +165,12 @@
     \put(\tempA,1){\line(0,1){\tempB}}
     \put(\tempA,1){\vector(-1,0){\tempA}}
   \end{picture}}}
-\newcommand{\return}{\keytop{\RETMARK}}
+\newcommand{\okureturn}{\okukeytop{\RETMARK}}
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newcommand{\return}{\okureturn}
+\else
+  \renewcommand{\return}{\okureturn}
+\fi
 \newcommand{\upkey}{\raisebox{-2pt}{%
   \setlength{\unitlength}{1pt}%
   \thinlines
@@ -277,9 +287,11 @@
   \end{trivlist}}
 \newcommand{\SHUTTEN}[1]{%
   \par\nobreak\removelastskip\rightline{\small#1}\medbreak}
-\newdimen\@scw
-\newbox\scb@x
-\newenvironment{screen}[1][1]%
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newdimen\@scw
+  \newbox\scb@x
+\fi
+\newenvironment{okuscreen}[1][1]%
  {\def\screensc@le{#1}\@scw=\linewidth \advance \@scw by -20pt
   \setbox\scb@x=\hbox\bgroup\begin{minipage}[b]{\@scw}}%
      % または \setbox\scb@x=\vbox\bgroup\advance \linewidth by -20pt \relax
@@ -299,6 +311,7 @@
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}
+\let\screen\okuscreen \let\endscreen\endokuscreen
 \newdimen\EXAMPLEWIDTH
 \newenvironment{EXAMPLE}{\begin{flushleft}\EXAMPLEWIDTH=\linewidth
   }{\end{flushleft}}
@@ -337,11 +350,13 @@
       \fi
     \fi
   \fi}
-\newdimen\shaderule \shaderule 5\p@
-\def\shadebox{\dimen0\linewidth \advance\dimen0-20\p@
+\expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
+  \newdimen\shaderule \shaderule 5\p@
+\fi
+\def\okushadebox{\dimen0\linewidth \advance\dimen0-20\p@
   \advance\dimen0-2\fboxrule \advance\dimen0-\shaderule
   \setbox\@tempboxa=\hbox\bgroup\minipage{\dimen0}}
-\def\endshadebox{\endminipage\egroup\dimen0=10\p@ \advance\dimen0-\fboxrule
+\def\endokushadebox{\endminipage\egroup\dimen0=10\p@ \advance\dimen0-\fboxrule
   \setbox\@tempboxa=\hbox{\kern\dimen0\unhbox\@tempboxa\kern\dimen0}%
   \setbox0=\vbox{\hrule\@height \fboxrule
   \hbox{\vrule\@width \fboxrule \hskip-\fboxrule
@@ -351,6 +366,7 @@
   \hbox{\hbox to \shaderule{\copy0\hss}\kern \z@
   \vrule\@width\wd0\@height\z@\@depth\shaderule\hskip-\shaderule
   \vrule\@width\shaderule\@height\dimen0}}
+\let\shadebox\okushadebox \let\endshadebox\endokushadebox
 \def\sankoumark{{\small ★}}
 \newenvironment{sankou}{\vspace{3pt}%
   \begin{list}{}{%

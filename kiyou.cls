@@ -97,6 +97,7 @@
 \@slidefalse
 \newcommand{\@ptsize}{0}
 \newif\ifjsc@mag\jsc@magtrue
+\newif\ifjsc@mag@xreal\jsc@mag@xrealfalse
 \def\jsc@magscale{1}
 \DeclareOption{slide}{%
   \@slidetrue\def\jsc@magscale{3.583}
@@ -121,8 +122,9 @@
 \DeclareOption{10.5ptj}{\def\jsc@magscale{1.139}\renewcommand{\@ptsize}{1051}}
 \DeclareOption{11ptj}{\def\jsc@magscale{1.194}\renewcommand{\@ptsize}{1101}}
 \DeclareOption{12ptj}{\def\jsc@magscale{1.302}\renewcommand{\@ptsize}{1201}}
-\DeclareOption{usemag}{\jsc@magtrue}
-\DeclareOption{nomag}{\jsc@magfalse}
+\DeclareOption{usemag}{\jsc@magtrue\jsc@mag@xrealfalse}
+\DeclareOption{nomag}{\jsc@magfalse\jsc@mag@xrealfalse}
+\DeclareOption{nomag*}{\jsc@magfalse\jsc@mag@xrealtrue}
 \hour\time \divide\hour by 60\relax
 \@tempcnta\hour \multiply\@tempcnta 60\relax
 \minute\time \advance\minute-\@tempcnta
@@ -213,6 +215,9 @@
 \newif\if@english
 \@englishfalse
 \DeclareOption{english}{\@englishtrue}
+\newif\if@jslogo \@jslogotrue
+\DeclareOption{jslogo}{\@jslogotrue}
+\DeclareOption{nojslogo}{\@jslogofalse}
 \ExecuteOptions{a4paper,twoside,twocolumn,notitlepage,final}
 \ProcessOptions
 \if@slide
@@ -354,6 +359,64 @@
   \jsc@mpt=\jsc@magscale\p@
   \jsc@mmm=\jsc@magscale mm
   \def\inv@mag{1}
+\fi
+\ifjsc@mag@xreal
+  \RequirePackage{type1cm}
+  \mathchardef\jsc@csta=259
+  \def\jsc@invscale#1#2{%
+    \begingroup \@tempdima=#1\relax \@tempdimb#2\p@\relax
+      \@tempcnta\@tempdima \multiply\@tempcnta\@cclvi
+      \divide\@tempcnta\@tempdimb \multiply\@tempcnta\@cclvi
+      \@tempcntb\p@ \divide\@tempcntb\@tempdimb
+      \advance\@tempcnta-\@tempcntb \advance\@tempcnta-\tw@
+      \@tempdimb\@tempcnta\@ne
+      \advance\@tempcnta\@tempcntb \advance\@tempcnta\@tempcntb
+      \advance\@tempcnta\jsc@csta \@tempdimc\@tempcnta\@ne
+      \@whiledim\@tempdimb<\@tempdimc\do{%
+        \@tempcntb\@tempdimb \advance\@tempcntb\@tempdimc
+        \advance\@tempcntb\@ne \divide\@tempcntb\tw@
+        \ifdim #2\@tempcntb>\@tempdima
+          \advance\@tempcntb\m@ne \@tempdimc=\@tempcntb\@ne
+        \else \@tempdimb=\@tempcntb\@ne \fi}%
+      \xdef\jsc@gtmpa{\the\@tempdimb}%
+    \endgroup #1=\jsc@gtmpa\relax}
+  \expandafter\let\csname OT1/cmr/m/n/10\endcsname\relax
+  \expandafter\let\csname OMX/cmex/m/n/10\endcsname\relax
+  \let\jsc@get@external@font\get@external@font
+  \def\get@external@font{%
+    \jsc@preadjust@extract@font
+    \jsc@get@external@font}
+  \def\jsc@fstrunc#1{%
+    \edef\jsc@tmpa{\strip@pt#1}%
+    \expandafter\jsc@fstrunc@a\jsc@tmpa.****\@nil}
+  \def\jsc@fstrunc@a#1.#2#3#4#5#6\@nil{%
+    \if#5*\else
+      \edef\jsc@tmpa{#1%
+      \ifnum#2#3>\z@ .#2\ifnum#3>\z@ #3\fi\fi}%
+    \fi}
+  \def\jsc@preadjust@extract@font{%
+    \let\jsc@req@size\f@size
+    \dimen@\f@size\p@ \jsc@invscale\dimen@\jsc@magscale
+    \advance\dimen@.005pt\relax \jsc@fstrunc\dimen@
+    \let\jsc@ref@size\jsc@tmpa
+    \let\f@size\jsc@ref@size}
+  \def\execute@size@function#1{%
+    \let\jsc@cref@size\f@size
+    \let\f@size\jsc@req@size
+    \csname s@fct@#1\endcsname}
+  \let\jsc@DeclareErrorFont\DeclareErrorFont
+  \def\DeclareErrorFont#1#2#3#4#5{%
+    \@tempdimc#5\p@ \@tempdimc\jsc@magscale\@tempdimc
+    \edef\jsc@tmpa{{#1}{#2}{#3}{#4}{\strip@pt\@tempdimc}}
+    \expandafter\jsc@DeclareErrorFont\jsc@tmpa}
+  \def\gen@sfcnt{%
+    \edef\mandatory@arg{\mandatory@arg\jsc@cref@size}%
+    \empty@sfcnt}
+  \def\genb@sfcnt{%
+    \edef\mandatory@arg{%
+      \mandatory@arg\expandafter\genb@x\jsc@cref@size..\@@}%
+    \empty@sfcnt}
+  \DeclareErrorFont{OT1}{cmr}{m}{n}{10}
 \fi
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
@@ -1072,7 +1135,9 @@
     \@afterheading
   \fi
   \if@slide
-    {\vskip-6\jsc@mpt\maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt\vskip7\jsc@mpt\relax}%
+    {\vskip\if@twocolumn-5\jsc@mpt\else-6\jsc@mpt\fi
+     \maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt
+     \vskip\if@twocolumn 4\jsc@mpt\else 7\jsc@mpt\fi\relax}%
   \fi
   \par  % 2000-12-18
   \ignorespaces}
@@ -1157,7 +1222,7 @@
 \fi
 \if@twocolumn
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
@@ -1167,27 +1232,33 @@
 \fi
 \if@twocolumn
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
     {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {\z@}%
+    {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \fi
 \if@twocolumn
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-    {\z@}{-1zw}% 改行せず 1zw のアキ
+    {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
     {\normalfont\normalsize\headfont ■}}
 \else
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {0.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {-1zw}% 改行せず 1zw のアキ
+    {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
     {\normalfont\normalsize\headfont ■}}
 \fi
-\newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
-   {\z@}{-1zw}%
-   {\normalfont\normalsize\headfont}}
+\if@twocolumn
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .4\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\else
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\fi
 \if@slide
   \setlength\leftmargini{1zw}
 \else
@@ -1713,9 +1784,20 @@
     \unskip \reserved@e {\reserved@f#1}\nobreak \hfil \break \null
     \inhibitglue \ignorespaces
   \fi}
-\RequirePackage{jslogo}
-\def\小{\jslg@small}
-\def\上小{\jslg@uppersmall}
+\if@jslogo
+  \IfFileExists{jslogo.sty}{%
+    \RequirePackage{jslogo}%
+    \def\小{\jslg@small}%
+    \def\上小{\jslg@uppersmall}%
+  }{%
+    \ClassWarningNoLine{\jsc@clsname}{%
+      The redefinitions of LaTeX-related logos has\MessageBreak
+      been moved to jslogo.sty since 2016, but\MessageBreak
+      jslogo.sty not found. Current release of\MessageBreak
+      'jsclasses' includes it, so please check\MessageBreak
+      the installation}%
+  }
+\fi
 \let\ltx@ifnextchar\@ifnextchar
 \def\ProvidesFile#1{%
   \begingroup

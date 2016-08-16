@@ -100,6 +100,8 @@
 %
 % [2016-08-16] 縦組に対応。
 %
+% [2016-08-16] 「前に \kanjiskip が入らない」「前後の欧文文字との間に \xkanjiskip が入らない」「後ろの禁則処理が効かない」問題を解決するために和文ゴースト処理を追加。
+%
 %    \begin{macrocode}
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
@@ -107,8 +109,10 @@
 \else
   \vrule \@height0.88zw \@depth0.12zw \@width\z@
 \fi}
+\chardef\okumacro@zsp=\jis"2121\relax
 \newcommand{\ruby}[3][0zw]{%
-  \leavevmode
+  \okumacro@zsp
+  \kern-1zw\relax
   \dimen3=\f@size\p@
   \setbox1=\hbox{#2}%
   \setbox3=\hbox{\rubyfamily\fontsize{0.5\dimen3}{0pt}\selectfont #3}%
@@ -133,7 +137,8 @@
         \fi
       }%
       \nointerlineskip
-      \hbox to \dimen1{\kanjistrut\hfil\unhbox1\hfil}}}\hskip\kanjiskip\relax}
+      \hbox to \dimen1{\kanjistrut\hfil\unhbox1\hfil}}}%
+      \kern-1zw\relax\okumacro@zsp}
 %    \end{macrocode}
 % \end{macro}
 %

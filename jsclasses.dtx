@@ -2911,6 +2911,9 @@
 % 二つ挿入した |\everyparhook| のうち後者が |\paragraph| 類の後で2回実行され，
 % それ以降は前者が実行されます。
 %
+% [2016-07-28] \texttt{slide}オプションと\texttt{twocolumn}オプションを
+% 同時に指定した場合の罫線の位置を微調整しました。
+%
 %    \begin{macrocode}
 \def\@xsect#1{%
 % 見出しの後ろの空きを \@tempskipa にセット
@@ -2938,7 +2941,9 @@
     \@afterheading
   \fi
   \if@slide
-    {\vskip-6\jsc@mpt\maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt\vskip7\jsc@mpt\relax}%
+    {\vskip\if@twocolumn-5\jsc@mpt\else-6\jsc@mpt\fi
+     \maybeblue\hrule height0\jsc@mpt depth1\jsc@mpt
+     \vskip\if@twocolumn 4\jsc@mpt\else 7\jsc@mpt\fi\relax}%
   \fi
   \par  % 2000-12-18
   \ignorespaces}
@@ -3463,7 +3468,7 @@
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
@@ -3476,15 +3481,19 @@
 % \end{macro}
 %
 % \begin{macro}{\subsubsection}
+%
+% [2016-07-22] \texttt{slide}オプション指定時に |\subsubsection| の文字列
+% と罫線が重なる問題に対処しました(forum:1982)。
+%
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
-    {\z@}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \else
   \newcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
     {\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {\z@}%
+    {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \fi
 %    \end{macrocode}
@@ -3497,13 +3506,13 @@
 %    \begin{macrocode}
 \if@twocolumn
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-    {\z@}{-1zw}% 改行せず 1zw のアキ
+    {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
 %<!jspf>    {\normalfont\normalsize\headfont ■}}
 \else
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {0.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-    {-1zw}% 改行せず 1zw のアキ
+    {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
 %<!jspf>    {\normalfont\normalsize\headfont ■}}
 \fi
@@ -3515,9 +3524,15 @@
 %    見出しの後ろで改行されません。
 %
 %    \begin{macrocode}
-\newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
-   {\z@}{-1zw}%
-   {\normalfont\normalsize\headfont}}
+\if@twocolumn
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .4\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\else
+  \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%
+    {\z@}{\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}%
+    {\normalfont\normalsize\headfont}}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %

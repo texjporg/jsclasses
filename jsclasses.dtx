@@ -587,6 +587,18 @@
 %</book>
 %    \end{macrocode}
 %
+% \paragraph{jslogoパッケージの読み込み}
+%
+% \LaTeX 関連のロゴを再定義する\texttt{jslogo}パッケージを
+% 読み込まないオプション\texttt{nojslogo}を新設しました。
+% \texttt{jslogo}オプションの指定で従来どおりの動作となります。
+% デフォルトは\texttt{jslogo}で，すなわちパッケージを読み込みます。
+%    \begin{macrocode}
+\newif\if@jslogo \@jslogotrue
+\DeclareOption{jslogo}{\@jslogotrue}
+\DeclareOption{nojslogo}{\@jslogofalse}
+%    \end{macrocode}
+%
 % \paragraph{オプションの実行}
 %
 % デフォルトのオプションを実行し，|dvi| ファイルの先頭にdvipsのpapersize
@@ -5358,16 +5370,28 @@
 %
 % [2016-07-14] ロゴの定義は\texttt{jslogo}パッケージに移転しました。
 % 後方互換のため，\texttt{jsclasses}ではデフォルトでこれを読み込みます。
-%
-% 文字を小さめに出したり上寄りに小さめに出したりする命令を，
-% \texttt{jslogo}では名称変更してありますので，コピーします。
+% \texttt{nojslogo}オプションが指定されている場合は読み込みません。
 %
 % \begin{macro}{\小}
 % \begin{macro}{\上小}
+%
+% 文字を小さめに出したり上寄りに小さめに出したりする命令を，
+% \texttt{jslogo.sty}では名称変更してありますので，コピーします。
 %    \begin{macrocode}
-\RequirePackage{jslogo}
-\def\小{\jslg@small}
-\def\上小{\jslg@uppersmall}
+\if@jslogo
+  \IfFileExists{jslogo.sty}{%
+    \RequirePackage{jslogo}%
+    \def\小{\jslg@small}%
+    \def\上小{\jslg@uppersmall}%
+  }{%
+    \ClassWarningNoLine{\jsc@clsname}{%
+      The redefinitions of LaTeX-related logos has\MessageBreak
+      been moved to jslogo.sty since 2016, but\MessageBreak
+      jslogo.sty not found. Current release of\MessageBreak
+      'jsclasses' includes it, so please check\MessageBreak
+      the installation}%
+  }
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

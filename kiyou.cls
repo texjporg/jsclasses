@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2016/07/18 okumura, texjporg]
+  [2016/08/17 okumura, texjporg]
 \def\jsc@clsname{kiyou}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -794,11 +794,11 @@
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-\setlength\topskip{10\jsc@mpt}
+\setlength\topskip{1.38zw}%% 2016-08-17
 \if@slide
   \setlength\headheight{0\jsc@mpt}
 \else
-  \setlength\headheight{2\topskip}
+  \setlength\headheight{20\jsc@mpt}%% 2016-08-17
 \fi
 \if@slide
   \setlength\footskip{0pt}
@@ -850,7 +850,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-\topskip}
+  \addtolength\topmargin{-0.5\headheight}%% 2016-08-17
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

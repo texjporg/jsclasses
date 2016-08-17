@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5774}
+% \CheckSum{5773}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -54,7 +54,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/07/18 okumura, texjporg]
+  [2016/08/17 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1828,12 +1828,16 @@
 % 計算では |\headheight| ではなく |\topskip| を使う
 % ことにしました。
 %
+% [2016-08-17] 圏点やルビが一行目に来た場合に下がるのを防ぐた
+% め，|\topskip| を10ptから1.38zwに増やしました。
+% |\headheight| は従来と同じ20ptのままとします。
+%
 %    \begin{macrocode}
-\setlength\topskip{10\jsc@mpt}
+\setlength\topskip{1.38zw}%% 2016-08-17
 \if@slide
   \setlength\headheight{0\jsc@mpt}
 \else
-  \setlength\headheight{2\topskip}
+  \setlength\headheight{20\jsc@mpt}%% 2016-08-17
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -2120,13 +2124,16 @@
 % [2003-06-26] |\headheight| を |\topskip| に直しました。
 % 以前はこの二つは値が同じであったので，変化はないはずです。
 %
+% [2016-08-17] |\topskip| を10ptから1.38zwに直しましたが，
+% |\topmargin| は従来の値から変わらないように調節しました。
+%
 %    \begin{macrocode}
 \setlength\topmargin{\paperheight}
 \addtolength\topmargin{-\textheight}
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-\topskip}
+  \addtolength\topmargin{-0.5\headheight}%% 2016-08-17
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

@@ -145,6 +145,21 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\ifjsc@needsp@tch}
+%
+% [2016-08-22] 従来\texttt{jsclasses}では，\pLaTeX や\LaTeX の
+% 不都合な点に対して，クラスファイル内で独自に対策を施していま
+% した。しかし，2016年以降，コミュニティ版\pLaTeX が次第に対策
+% コードをカーネル内に取り込むようになりました。そこで，新しい
+% \pLaTeX カーネルと衝突しないように，日付が古い場合だけパッチ
+% をあてる場合があります。この処理に使用するフラグを定義します。
+%
+%    \begin{macrocode}
+\newif\ifjsc@needsp@tch
+\jsc@needsp@tchfalse
+%    \end{macrocode}
+% \end{macro}
+%
 % \section{オプション}
 %
 % これらのクラスは |\documentclass{jsarticle}|
@@ -5098,11 +5113,16 @@
 % [2013-05-14] plcore.ltx に倣った形に書き直しました（Thanks: 北川さん）。
 %
 % [2016-07-11] コミュニティ版p\LaTeX の変更に追随しました（Thanks: 角藤さん）。
+% p\LaTeX の日付が2016/04/17より新しい場合は，このパッチが不要なのであてません。
 %
 %    \begin{macrocode}
+\@ifl@t@r\pfmtversion{2016/04/17}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch
 \renewcommand\@makefnmark{%
   \ifydir \hbox{}\hbox{\@textsuperscript{\normalfont\@thefnmark}}\hbox{}%
   \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %

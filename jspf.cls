@@ -37,8 +37,10 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/08/17 okumura, texjporg]
+  [2016/08/25 okumura, texjporg]
 \def\jsc@clsname{jspf}
+\newif\ifjsc@needsp@tch
+\jsc@needsp@tchfalse
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@enablejfam \@enablejfamtrue
@@ -1519,13 +1521,21 @@
 \newcommand{\indexspace}{\par \vskip 10\jsc@mpt \@plus5\jsc@mpt \@minus3\jsc@mpt\relax}
 \newcommand\seename{\if@english see\else →\fi}
 \newcommand\alsoname{\if@english see also\else →\fi}
-\let\footnotes@ve=\footnote
-\def\footnote{\inhibitglue\footnotes@ve}
-\let\footnotemarks@ve=\footnotemark
-\def\footnotemark{\inhibitglue\footnotemarks@ve}
+\@ifl@t@r\pfmtversion{2016/09/03}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch
+  \let\footnotes@ve=\footnote
+  \def\footnote{\inhibitglue\footnotes@ve}
+  \let\footnotemarks@ve=\footnotemark
+  \def\footnotemark{\inhibitglue\footnotemarks@ve}
+\fi
+\@ifl@t@r\pfmtversion{2016/04/17}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch
 \renewcommand\@makefnmark{%
   \ifydir \hbox{}\hbox{\@textsuperscript{\normalfont\@thefnmark}}\hbox{}%
   \else\hbox{\yoko\@textsuperscript{\normalfont\@thefnmark}}\fi}
+\fi
 \def\thefootnote{\ifnum\c@footnote>\z@\leavevmode\lower.5ex\hbox{*}\@arabic\c@footnote\fi}
 \renewcommand{\footnoterule}{%
   \kern-3\jsc@mpt
@@ -1549,7 +1559,13 @@
                                 \else \let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
-\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup}
+\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup\null
+  \ifx\pltx@foot@penalty\@undefined\else
+    \ifnum\pltx@foot@penalty=\z@\else
+      \penalty\pltx@foot@penalty
+      \pltx@foot@penalty\z@
+    \fi
+  \fi}
 \newcommand\@makefntext[1]{%
   \advance\leftskip 3zw
   \parindent 1zw

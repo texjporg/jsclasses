@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5773}
+% \CheckSum{5803}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -54,7 +54,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/08/17 okumura, texjporg]
+  [2016/08/25 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -5083,15 +5083,19 @@
 % \begin{macro}{\footnote}
 % \begin{macro}{\footnotemark}
 %
-% 和文の句読点・閉じかっこ類の直後で用いた際に
-% 余分なアキが入るのを防ぐため，
+% 和文の句読点・閉じかっこ類の直後で用いた際に余分なアキが入るのを防ぐため，
 % |\inhibitglue| を入れることにします。
+% p\LaTeX の日付が2016/09/03より新しい場合は，このパッチが不要なのであてません。
 %
 %    \begin{macrocode}
-\let\footnotes@ve=\footnote
-\def\footnote{\inhibitglue\footnotes@ve}
-\let\footnotemarks@ve=\footnotemark
-\def\footnotemark{\inhibitglue\footnotemarks@ve}
+\@ifl@t@r\pfmtversion{2016/09/03}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch
+  \let\footnotes@ve=\footnote
+  \def\footnote{\inhibitglue\footnotes@ve}
+  \let\footnotemarks@ve=\footnotemark
+  \def\footnotemark{\inhibitglue\footnotemarks@ve}
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -5173,6 +5177,10 @@
 % Jeremy Gibbons, \textit{\TeX\ and TUG NEWS},
 %  Vol.~2, No.~4 (1993), p.~9）
 %
+% [2016-08-25] コミュニティ版\pLaTeX の「閉じ括弧類の直後に
+% |\footnotetext| が続く場合に改行が起きることがある問題に対処」
+% と同等のコードを追加しました。
+%
 %    \begin{macrocode}
 \long\def\@footnotetext{%
   \insert\footins\bgroup
@@ -5192,7 +5200,13 @@
                                 \else \let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
-\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup}
+\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup\null
+  \ifx\pltx@foot@penalty\@undefined\else
+    \ifnum\pltx@foot@penalty=\z@\else
+      \penalty\pltx@foot@penalty
+      \pltx@foot@penalty\z@
+    \fi
+  \fi}
 %    \end{macrocode}
 % \end{macro}
 %

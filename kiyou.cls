@@ -479,8 +479,10 @@
 \DeclareRobustCommand\ttfamily
         {\not@math@alphabet\ttfamily\mathtt
          \romanfamily\ttdefault\kanjifamily\gtdefault\selectfont}
-\def\textmc#1{\relax\ifmmode\hbox\fi{\mcfamily #1}}
-\def\textgt#1{\relax\ifmmode\hbox\fi{\gtfamily #1}}
+\DeclareRobustCommand\textmc[1]{%
+    \relax\ifmmode \expandafter\nfss@text \fi{\mcfamily #1}}
+\DeclareRobustCommand\textgt[1]{%
+    \relax\ifmmode \expandafter\nfss@text \fi{\gtfamily #1}}
 \def\reDeclareMathAlphabet#1#2#3{%
   \edef\@tempa{\expandafter\@gobble\string#2}%
   \edef\@tempb{\expandafter\@gobble\string#3}%

@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5810}
+% \CheckSum{5812}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1087,9 +1087,17 @@
 % 欧文・和文間のグルーが入らないという副作用もありますので，
 % 単純な定義に直します。
 %
+% [2016-08-26] 和欧文間の |\xkanjiskip| が入らない問題は，
+% plfonts.dtx v1.3i (2000/07/13)
+% の時点で修正されていました。逆に，\texttt{amsmath}パッケージを
+% 読み込んだ場合に，数式内の添字で文字サイズが変化するようになる
+% はずのところが，変わらなくなっていましたので，修正しました。
+%
 %    \begin{macrocode}
-\def\textmc#1{\relax\ifmmode\hbox\fi{\mcfamily #1}}
-\def\textgt#1{\relax\ifmmode\hbox\fi{\gtfamily #1}}
+\DeclareRobustCommand\textmc[1]{%
+    \relax\ifmmode \expandafter\nfss@text \fi{\mcfamily #1}}
+\DeclareRobustCommand\textgt[1]{%
+    \relax\ifmmode \expandafter\nfss@text \fi{\gtfamily #1}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

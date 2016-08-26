@@ -37,7 +37,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
-  [2016/08/25 okumura, texjporg]
+  [2016/08/26 okumura, texjporg]
 \def\jsc@clsname{jsarticle}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -785,11 +785,11 @@
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-\setlength\topskip{1.38zw}%% 2016-08-17
+\setlength\topskip{1.38zw}%% from 10\jsc@mpt (2016-08-17)
 \if@slide
   \setlength\headheight{0\jsc@mpt}
 \else
-  \setlength\headheight{20\jsc@mpt}%% 2016-08-17
+  \setlength\headheight{20\jsc@mpt}%% from 2\topskip (2016-08-17); from \topskip (2003-06-26)
 \fi
 \if@slide
   \setlength\footskip{0pt}
@@ -820,7 +820,7 @@
 \else
   \setlength{\textheight}{0.83\paperheight}
 \fi
-\addtolength{\textheight}{-\topskip}
+\addtolength{\textheight}{-0.5\headheight}%% from -\topskip (2016-08-26); from -\headheight (2003-06-26)
 \addtolength{\textheight}{-\headsep}
 \addtolength{\textheight}{-\footskip}
 \addtolength{\textheight}{-\topskip}
@@ -860,7 +860,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-0.5\headheight}%% 2016-08-17
+  \addtolength\topmargin{-0.5\headheight}%% from -\topskip (2016-08-17); from -\headheight (2003-06-26)
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

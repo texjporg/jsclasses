@@ -26,7 +26,7 @@
 %  Copyright 2016 Japanese TeX Development Community
 %
 % \fi
-% \CheckSum{5803}
+% \CheckSum{5810}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -54,7 +54,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/08/25 okumura, texjporg]
+  [2016/08/26 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1848,11 +1848,11 @@
 % |\headheight| は従来と同じ20ptのままとします。
 %
 %    \begin{macrocode}
-\setlength\topskip{1.38zw}%% 2016-08-17
+\setlength\topskip{1.38zw}%% from 10\jsc@mpt (2016-08-17)
 \if@slide
   \setlength\headheight{0\jsc@mpt}
 \else
-  \setlength\headheight{20\jsc@mpt}%% 2016-08-17
+  \setlength\headheight{20\jsc@mpt}%% from 2\topskip (2016-08-17); from \topskip (2003-06-26)
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -2030,6 +2030,9 @@
 % [2003-06-26] |\headheight| を |\topskip| に直しました。
 % 以前はこの二つは値が同じであったので，変化はないはずです。
 %
+% [2016-08-26] |\topskip| を10ptから1.38zwに増やしましたので，
+% その分 |\textheight| を増やします（2016-08-17での修正漏れ）。
+%
 %    \begin{macrocode}
 %<*article|book>
 \if@slide
@@ -2037,7 +2040,7 @@
 \else
   \setlength{\textheight}{0.83\paperheight}
 \fi
-\addtolength{\textheight}{-\topskip}
+\addtolength{\textheight}{-0.5\headheight}%% from -\topskip (2016-08-26); from -\headheight (2003-06-26)
 \addtolength{\textheight}{-\headsep}
 \addtolength{\textheight}{-\footskip}
 \addtolength{\textheight}{-\topskip}
@@ -2141,6 +2144,8 @@
 %
 % [2016-08-17] |\topskip| を10ptから1.38zwに直しましたが，
 % |\topmargin| は従来の値から変わらないように調節しました。
+% …のつもりでしたが，|\textheight| を増やし忘れていたので
+% 変わってしまっていました（2016-08-26修正済み）。
 %
 %    \begin{macrocode}
 \setlength\topmargin{\paperheight}
@@ -2148,7 +2153,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-0.5\headheight}%% 2016-08-17
+  \addtolength\topmargin{-0.5\headheight}%% from -\topskip (2016-08-17); from -\headheight (2003-06-26)
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

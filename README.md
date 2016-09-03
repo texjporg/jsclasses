@@ -17,7 +17,7 @@ by running platex on the .dtx files.
 
 ## Release Date
 
-2016-09-03
+$RELEASEDATE
 
 Haruhiko Okumura,
 Japanese TeX Development Community

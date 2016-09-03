@@ -14,3 +14,10 @@ We include the pre-generated cls/sty files in this package to ensure
 proper encoding. The files have to be in ISO-2022-JP encoding to work
 properly on Windows. These files can be generated in a Japanese locale
 by running platex on the .dtx files.
+
+## Release Date
+
+2016-09-03
+
+Haruhiko Okumura,
+Japanese TeX Development Community

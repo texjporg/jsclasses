@@ -38,7 +38,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/08/26 okumura, texjporg]
+  [2016/09/08 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -5178,6 +5178,8 @@
 % |\footnotetext| が続く場合に改行が起きることがある問題に対処」
 % と同等のコードを追加しました。
 %
+% [2016-09-08] コミュニティ版\pLaTeX のバグ修正に追随しました。
+%
 %    \begin{macrocode}
 \long\def\@footnotetext{%
   \insert\footins\bgroup
@@ -5197,7 +5199,8 @@
                                 \else \let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
-\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup\null
+\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup
+  \ifhmode\null\fi
   \ifx\pltx@foot@penalty\@undefined\else
     \ifnum\pltx@foot@penalty=\z@\else
       \penalty\pltx@foot@penalty

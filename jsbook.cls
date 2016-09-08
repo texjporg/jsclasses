@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2016/08/26 okumura, texjporg]
+  [2016/09/08 okumura, texjporg]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1747,7 +1747,8 @@
                                 \else \let\next\f@t\fi \next}
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
-\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup\null
+\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup
+  \ifhmode\null\fi
   \ifx\pltx@foot@penalty\@undefined\else
     \ifnum\pltx@foot@penalty=\z@\else
       \penalty\pltx@foot@penalty

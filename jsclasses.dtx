@@ -309,15 +309,20 @@
 %
 % [2016-07-24] オプティカルサイズを調整するためにNFSSへパッチを当てるオプション \texttt{nomag*} を新設しました。
 %
+% [2016-10-08] \texttt{slide} オプションは article 以外では使い物にならなかったので，
+% 簡単のため article のみで使えるオプションとしました。
+%
 %    \begin{macrocode}
 \newcommand{\@ptsize}{0}
 \newif\ifjsc@mag\jsc@magtrue
 \newif\ifjsc@mag@xreal\jsc@mag@xrealfalse
 \def\jsc@magscale{1}
+%<*article>
 \DeclareOption{slide}{%
   \@slidetrue\def\jsc@magscale{3.583}
   \renewcommand{\@ptsize}{26}
   \@landscapetrue\@titlepagetrue}
+%</article>
 \DeclareOption{8pt}{\def\jsc@magscale{0.833}\renewcommand{\@ptsize}{-2}}
 \DeclareOption{9pt}{\def\jsc@magscale{0.913}\renewcommand{\@ptsize}{-1}}
 \DeclareOption{10pt}{\def\jsc@magscale{1}\renewcommand{\@ptsize}{0}}
@@ -1891,10 +1896,16 @@
 % それ以外で25pt（約8.79mm）になっていました。
 % ここでは article は |\footskip| $-$ |\topskip| としました。
 %
+% [2016-10-08] article の \texttt{slide} のとき，
+% および book の非 \texttt{report} と kiyou のときに |\headsep| を
+% 減らしそこねていたのを修正しました（2016-08-17での修正漏れ）。
+%
 %    \begin{macrocode}
 %<*article>
 \if@slide
   \setlength\headsep{0\jsc@mpt}
+  \addtolength\headsep{-\topskip}%% added (2016-10-08)
+  \addtolength\headsep{10\jsc@mpt}%% added (2016-10-08)
 \else
   \setlength\headsep{\footskip}
   \addtolength\headsep{-\topskip}
@@ -1906,6 +1917,8 @@
   \addtolength\headsep{-\topskip}
 \else
   \setlength\headsep{6\jsc@mmm}
+  \addtolength\headsep{-\topskip}%% added (2016-10-08)
+  \addtolength\headsep{10\jsc@mpt}%% added (2016-10-08)
 \fi
 %</book>
 %<*jspf>
@@ -1915,6 +1928,8 @@
 %<*kiyou>
 \setlength\headheight{0\jsc@mpt}
 \setlength\headsep{0\jsc@mpt}
+\addtolength\headsep{-\topskip}%% added (2016-10-08)
+\addtolength\headsep{10\jsc@mpt}%% added (2016-10-08)
 %</kiyou>
 %    \end{macrocode}
 % \end{macro}
@@ -2025,6 +2040,9 @@
 % [2016-08-26] |\topskip| を10ptから1.38zwに増やしましたので，
 % その分 |\textheight| を増やします（2016-08-17での修正漏れ）。
 %
+% [2016-10-08] article の slide のときに |\headheight| はゼロ
+% なので，さらに修正しました（2016-08-17での修正漏れ）。
+%
 %    \begin{macrocode}
 %<*article|book>
 \if@slide
@@ -2032,7 +2050,7 @@
 \else
   \setlength{\textheight}{0.83\paperheight}
 \fi
-\addtolength{\textheight}{-0.5\headheight}%% from -\topskip (2016-08-26); from -\headheight (2003-06-26)
+\addtolength{\textheight}{-10\jsc@mpt}%% from -\topskip (2016-10-08); from -\headheight (2003-06-26)
 \addtolength{\textheight}{-\headsep}
 \addtolength{\textheight}{-\footskip}
 \addtolength{\textheight}{-\topskip}
@@ -2145,7 +2163,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-0.5\headheight}%% from -\topskip (2016-08-17); from -\headheight (2003-06-26)
+  \addtolength\topmargin{-10\jsc@mpt}%% from -\topskip (2016-10-08); from -\headheight (2003-06-26)
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

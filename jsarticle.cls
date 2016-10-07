@@ -788,6 +788,8 @@
 \fi
 \if@slide
   \setlength\headsep{0\jsc@mpt}
+  \addtolength\headsep{-\topskip}%% added (2016-10-08)
+  \addtolength\headsep{10\jsc@mpt}%% added (2016-10-08)
 \else
   \setlength\headsep{\footskip}
   \addtolength\headsep{-\topskip}
@@ -807,7 +809,7 @@
 \else
   \setlength{\textheight}{0.83\paperheight}
 \fi
-\addtolength{\textheight}{-0.5\headheight}%% from -\topskip (2016-08-26); from -\headheight (2003-06-26)
+\addtolength{\textheight}{-10\jsc@mpt}%% from -\topskip (2016-10-08); from -\headheight (2003-06-26)
 \addtolength{\textheight}{-\headsep}
 \addtolength{\textheight}{-\footskip}
 \addtolength{\textheight}{-\topskip}
@@ -847,7 +849,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-0.5\headheight}%% from -\topskip (2016-08-17); from -\headheight (2003-06-26)
+  \addtolength\topmargin{-10\jsc@mpt}%% from -\topskip (2016-10-08); from -\headheight (2003-06-26)
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

@@ -86,10 +86,6 @@
 \newif\ifjsc@mag\jsc@magtrue
 \newif\ifjsc@mag@xreal\jsc@mag@xrealfalse
 \def\jsc@magscale{1}
-\DeclareOption{slide}{%
-  \@slidetrue\def\jsc@magscale{3.583}
-  \renewcommand{\@ptsize}{26}
-  \@landscapetrue\@titlepagetrue}
 \DeclareOption{8pt}{\def\jsc@magscale{0.833}\renewcommand{\@ptsize}{-2}}
 \DeclareOption{9pt}{\def\jsc@magscale{0.913}\renewcommand{\@ptsize}{-1}}
 \DeclareOption{10pt}{\def\jsc@magscale{1}\renewcommand{\@ptsize}{0}}
@@ -822,7 +818,7 @@
 \if@slide
   \addtolength\topmargin{-\headheight}
 \else
-  \addtolength\topmargin{-0.5\headheight}%% from -\topskip (2016-08-17); from -\headheight (2003-06-26)
+  \addtolength\topmargin{-10\jsc@mpt}%% from -\topskip (2016-10-08); from -\headheight (2003-06-26)
 \fi
 \addtolength\topmargin{-\headsep}
 \addtolength\topmargin{-\footskip}

@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2016/09/08 okumura, texjporg]
+  [2016/10/08 okumura, texjporg]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse

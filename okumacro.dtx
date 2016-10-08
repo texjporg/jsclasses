@@ -11,7 +11,7 @@
 %  ていますので，私のものもそれに準じて（modified）BSDとすることにします。
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2016/08/16 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2016/10/08 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -46,6 +46,11 @@
 % 集めたものです。作っただけでテストもしていないものなども混じっている
 % 可能性があります。概して他の方にはあまり利用価値がないものです。
 %
+% [2016-07-30] 従来は，ascmac→okumacroの順に読み込んだ場合にエラーが出て
+% いましたが，新しい仕様では，ascmacとokumacroの両方を読み込む場合には
+% 「後に読み込んだほう」が勝ちます。
+% 具体的には |\keytop|，|\return|，screen環境，shadebox環境があります。
+%
 % \section{数値集}
 %
 % \begin{itemize}
@@ -68,11 +73,6 @@
 % \section{雑マクロ}
 %
 % 以下が実際のマクロ集です。
-%
-% [2016-07-30] 従来は，ascmac→okumacroの順に読み込んだ場合にエラーが出て
-% いましたが，新しい仕様では，ascmacとokumacroの両方を読み込む場合には
-% 「後に読み込んだほう」が勝ちます。
-% 具体的には |\keytop|，|\return|，screen環境，shadebox環境があります。
 %
 %    \begin{macrocode}
 %<*okumacro>
@@ -99,7 +99,9 @@
 %
 % [2016-08-16] 縦組に対応。
 %
-% [2016-08-16] 「前に |\kanjiskip| が入らない」「前後の欧文文字との間に |\xkanjiskip| が入らない」「後ろの禁則処理が効かない」問題を解決するために和文ゴースト処理を追加。
+% [2016-08-16] 「前に |\kanjiskip| が入らない」
+% 「前後の欧文文字との間に |\xkanjiskip| が入らない」
+% 「後ろの禁則処理が効かない」問題を解決するために和文ゴースト処理を追加。
 %
 %    \begin{macrocode}
 \providecommand{\rubyfamily}{}
@@ -782,6 +784,11 @@
 % スクリーン風の環境になりますし，ascmacが勝つ場合は角の丸みを指定できる
 % スクリーン風の環境になります。
 %
+% [2016-10-08] 画面出力例がコラム幅を超える場合の対処法として横倍率指定の
+% オプションを追加しましたが，同じ枠内に改行可能な文章も含まれる場合に
+% 枠の右端から離れた不自然な位置（横倍率を縮めない場合に端にあたっていた
+% 位置）で改行していました。これを修正しました。
+%
 % また，新たにokuscreen環境を追加します。これはascmacと干渉せず，常に横の
 % 倍率を指定できるスクリーン風の環境になります。
 %
@@ -792,6 +799,11 @@
 \fi
 \newenvironment{okuscreen}[1][1]%
  {\def\screensc@le{#1}\@scw=\linewidth \advance \@scw by -20pt
+  \dimen1=#1\p@\relax
+  \@tempcnta=\dimen1\relax
+  \@tempcntb=65536\relax
+  \divide\@scw by \@tempcnta
+  \multiply\@scw by \@tempcntb
   \setbox\scb@x=\hbox\bgroup\begin{minipage}[b]{\@scw}}%
      % または \setbox\scb@x=\vbox\bgroup\advance \linewidth by -20pt \relax
  {\end{minipage}\egroup
@@ -1118,5 +1130,6 @@
 %
 % ^^A \endinput の後に \CharacterTable を書いておけば，子ファイルには
 % ^^A 出力されません。チェックは *.dtx を処理したときにしてくれます。
+% ^^A [2016-09-03] →削除しました。
 %
 % \Finale

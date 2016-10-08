@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2016/08/16 okumura, texjporg]
+\ProvidesPackage{okumacro}[2016/10/08 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -300,6 +300,11 @@
 \fi
 \newenvironment{okuscreen}[1][1]%
  {\def\screensc@le{#1}\@scw=\linewidth \advance \@scw by -20pt
+  \dimen1=#1\p@\relax
+  \@tempcnta=\dimen1\relax
+  \@tempcntb=65536\relax
+  \divide\@scw by \@tempcnta
+  \multiply\@scw by \@tempcntb
   \setbox\scb@x=\hbox\bgroup\begin{minipage}[b]{\@scw}}%
      % または \setbox\scb@x=\vbox\bgroup\advance \linewidth by -20pt \relax
  {\end{minipage}\egroup

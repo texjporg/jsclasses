@@ -5153,6 +5153,11 @@
 % [2003-08-15] |\textasteriskcentered| ではフォントによって
 % 下がりすぎるので変更しました。
 %
+% [2016-10-08] TODO: 脚注番号が |newtxtext| や |newpxtext| の使用時に
+% おかしくなってしまいます。これらのパッケージは内部で |\thefootnote| を
+% 再定義していますので，気になる場合はパッケージを読み込むときに
+% \texttt{defaultsups} オプションを付けてください(qa:57284, qa:57287)。
+%
 %    \begin{macrocode}
 \def\thefootnote{\ifnum\c@footnote>\z@\leavevmode\lower.5ex\hbox{*}\@arabic\c@footnote\fi}
 %    \end{macrocode}

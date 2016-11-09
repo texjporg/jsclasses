@@ -540,8 +540,6 @@
 % というオプションを指定します。
 % また，\texttt{winjis} オプションで \texttt{winjis} メトリックが使えます。
 %
-% [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション \texttt{autodetect-engine} を新設しました。
-%
 %    \begin{macrocode}
 \newif\ifwinjis
 \winjisfalse
@@ -635,17 +633,20 @@
 \fi
 %    \end{macrocode}
 %
-% \paragraph{使用エンジンの検査}
+% \paragraph{使用エンジンの検査・自動判定}
 %
 % ユーザが |uplatex| オプションの有無により指定したエンジンが，実際に
 % 使われているものと一致しているかを検査し，一致しない場合はエラー
 % メッセージを表示します。
+%
+% [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション \texttt{autodetect-engine} を新設しました。
 %
 %    \begin{macrocode}
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
   \if@jsc@autodetect
     \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
     \@jsc@uplatextrue
+    \g@addto@macro\@classoptionslist{,uplatex}
   \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
@@ -656,16 +657,16 @@
     \@jsc@uplatextrue
   \fi
 \else
-  \if@jsc@autodetect
-    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
-    \@jsc@uplatexfalse
-  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak
        Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
        the class option list}
       {\@ehc}
+    \@jsc@uplatexfalse
+  \fi
+  \if@jsc@autodetect
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
     \@jsc@uplatexfalse
   \fi
 \fi

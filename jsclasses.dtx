@@ -288,6 +288,9 @@
 %
 % オプション \texttt{slide} を新設しました。
 %
+% [2016-10-08] \texttt{slide} オプションは article 以外では使い物にならなかったので，
+% 簡単のため article のみで使えるオプションとしました。
+%
 %    \begin{macrocode}
 \newif\if@slide
 \@slidefalse
@@ -308,11 +311,6 @@
 % \texttt{usemag} オプションの指定で従来通りの動作となります。デフォルトは \texttt{usemag} です。
 %
 % [2016-07-24] オプティカルサイズを調整するためにNFSSへパッチを当てるオプション \texttt{nomag*} を新設しました。
-%
-% [2016-10-08] \texttt{slide} オプションは article 以外では使い物にならなかったので，
-% 簡単のため article のみで使えるオプションとしました。
-%
-% [2016-11-09] pLaTeX / upLaTeX を自動判別するオプション \texttt{autodetect-engine} を新設しました。
 %
 %    \begin{macrocode}
 \newcommand{\@ptsize}{0}
@@ -541,6 +539,8 @@
 % 古い \texttt{min10}，\texttt{goth10} などを使いたいときは \texttt{mingoth}
 % というオプションを指定します。
 % また，\texttt{winjis} オプションで \texttt{winjis} メトリックが使えます。
+%
+% [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション \texttt{autodetect-engine} を新設しました。
 %
 %    \begin{macrocode}
 \newif\ifwinjis

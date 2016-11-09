@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2016/10/08 okumura, texjporg]
+  [2016/11/09 okumura, texjporg]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -185,10 +185,13 @@
 \jisfontfalse
 \newif\if@jsc@uplatex
 \@jsc@uplatexfalse
+\newif\if@jsc@autodetect
+\@jsc@autodetectfalse
 \DeclareOption{mingoth}{\mingothtrue}
 \DeclareOption{winjis}{\winjistrue}
 \DeclareOption{jis}{\jisfonttrue}
 \DeclareOption{uplatex}{\@jsc@uplatextrue\winjisfalse}
+\DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
 \def\jsc@pfx@{\if@jsc@uplatex u\else \fi}
@@ -212,6 +215,10 @@
   \setlength\paperwidth {\@tempdima}
 \fi
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
+  \if@jsc@autodetect
+    \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
+    \@jsc@uplatextrue
+  \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
       {You are running upLaTeX.\MessageBreak
@@ -221,6 +228,10 @@
     \@jsc@uplatextrue
   \fi
 \else
+  \if@jsc@autodetect
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
+    \@jsc@uplatexfalse
+  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak

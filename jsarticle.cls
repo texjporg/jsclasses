@@ -222,6 +222,7 @@
   \if@jsc@autodetect
     \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
     \@jsc@uplatextrue
+    \g@addto@macro\@classoptionslist{,uplatex}
   \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
@@ -232,16 +233,16 @@
     \@jsc@uplatextrue
   \fi
 \else
-  \if@jsc@autodetect
-    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
-    \@jsc@uplatexfalse
-  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak
        Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
        the class option list}
       {\@ehc}
+    \@jsc@uplatexfalse
+  \fi
+  \if@jsc@autodetect
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
     \@jsc@uplatexfalse
   \fi
 \fi

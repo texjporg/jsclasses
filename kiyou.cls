@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2016/11/09 okumura, texjporg]
+  [2016/11/11 okumura, texjporg]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse

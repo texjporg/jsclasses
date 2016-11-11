@@ -38,7 +38,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/11/09 okumura, texjporg]
+  [2016/11/11 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -639,7 +639,9 @@
 % 使われているものと一致しているかを検査し，一致しない場合はエラー
 % メッセージを表示します。
 %
-% [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション \texttt{autodetect-engine} を新設しました。
+% [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション |autodetect-engine| を新設しました。
+% up\LaTeX の場合は，グローバルオプションに |uplatex| を追加することで，
+% 自動判定に応じて |otf| パッケージにも |uplatex| オプションが渡るようにします。
 %
 %    \begin{macrocode}
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
@@ -656,6 +658,13 @@
       {\@ehc}
     \@jsc@uplatextrue
   \fi
+%    \end{macrocode}
+%
+% [2016-11-11] p\LaTeX の場合は，オプション |uplatex| が指定されていれば必ずエラーを出します。
+% |autodetect-engine| が有効になっていてもエラーを出しますが，これは |otf| パッケージに
+% |uplatex| オプションが渡ってしまうのを防ぐためです。
+%
+%    \begin{macrocode}
 \else
   \if@jsc@uplatex
     \ClassError\jsc@clsname

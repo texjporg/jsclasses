@@ -409,6 +409,9 @@
     \empty@sfcnt}
   \DeclareErrorFont{OT1}{cmr}{m}{n}{10}
 \fi
+\def\jsc@smallskip{\vspace\jsc@smallskipamount}
+\newskip\jsc@smallskipamount
+\jsc@smallskipamount=3\jsc@mpt plus 1\jsc@mpt minus 1\jsc@mpt
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
 \setlength\stockwidth{\inv@mag\stockwidth}%
@@ -981,9 +984,9 @@
           \mbox{} \\[1zw]
           \large
           {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
-          \smallskip
+          \jsc@smallskip
           \@title
-          \smallskip
+          \jsc@smallskip
           {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
           \vfill
           {\small \@author}%

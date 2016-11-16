@@ -909,6 +909,38 @@
 \fi
 %    \end{macrocode}
 %
+% [2016-11-16] latex.ltx (ltspace.dtx)で定義されている |\smallskip| の，
+% 単位 |pt| を |\jsc@mpt| に置き換えた |\jsc@smallskip| を定義します。
+% これは |\maketitle| で用いられます。
+% |\jsc@medskip| と |\jsc@bigskip| は必要ないのでコメントアウトしています。
+%
+% \begin{macro}{\jsc@smallskip}
+% \begin{macro}{\jsc@medskip}
+% \begin{macro}{\jsc@bigskip}
+%    \begin{macrocode}
+\def\jsc@smallskip{\vspace\jsc@smallskipamount}
+%\def\jsc@medskip{\vspace\jsc@medskipamount}
+%\def\jsc@bigskip{\vspace\jsc@bigskipamount}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\jsc@smallskipamount}
+% \begin{macro}{\jsc@medskipamount}
+% \begin{macro}{\jsc@bigskipamount}
+%    \begin{macrocode}
+\newskip\jsc@smallskipamount
+\jsc@smallskipamount=3\jsc@mpt plus 1\jsc@mpt minus 1\jsc@mpt
+%\newskip\jsc@medskipamount
+%\jsc@medskipamount =6\jsc@mpt plus 2\jsc@mpt minus 2\jsc@mpt
+%\newskip\jsc@bigskipamount
+%\jsc@bigskipamoun =12\jsc@mpt plus 4\jsc@mpt minus 4\jsc@mpt
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
 % [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
 % スケールします。
 %
@@ -2684,6 +2716,11 @@
 % 和文のものでは |\Large| になっていましたが，ここでは |\large|
 % にしました。
 %
+% [2016-11-16] 新設された \texttt{nomag} および \texttt{nomag*} オプション
+% の場合をデフォルト（\texttt{usemag} 相当）に合わせるため，|\smallskip| を
+% |\jsc@smallskip| に置き換えました。|\smallskip| のままでは
+% \texttt{nomag(*)} の場合にスケールしなくなり，レイアウトが変わってしまいます。
+%
 %    \begin{macrocode}
 %<*article|book|kiyou>
 \if@titlepage
@@ -2699,9 +2736,9 @@
           \mbox{} \\[1zw]
           \large
           {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
-          \smallskip
+          \jsc@smallskip
           \@title
-          \smallskip
+          \jsc@smallskip
           {\maybeblue\hrule height0\jsc@mpt depth2\jsc@mpt\relax}\par
           \vfill
           {\small \@author}%
@@ -3576,13 +3613,13 @@
 %    見出しの後ろで改行されません。
 %
 % [2016-11-16] 従来は |\paragraph| の最初に出るマークを「■」に固定して
-% いましたが、このマークを変更可能にするため |\jsParagraphMark| というマクロ
-% に切り出しました。これで、たとえば
+% いましたが，このマークを変更可能にするため |\jsParagraphMark| というマクロ
+% に切り出しました。これで，たとえば
 %\begin{verbatim}
 %  \renewcommand{\jsParagraphMark}{★}
 %\end{verbatim}
-% とすれば「★」に変更できますし、マークを空にすることも容易です。
-% なお、某学会クラスでは従来どおりマークは付きません。
+% とすれば「★」に変更できますし，マークを空にすることも容易です。
+% なお，某学会クラスでは従来どおりマークは付きません。
 %
 %    \begin{macrocode}
 %<!jspf>\newcommand{\jsParagraphMark}{■}

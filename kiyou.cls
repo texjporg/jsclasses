@@ -1239,15 +1239,16 @@
     {\if@slide .5\Cvs \@plus.3\Cdp \else \z@ \fi}%
     {\normalfont\normalsize\headfont}}
 \fi
+\newcommand{\jsParagraphMark}{■}
 \if@twocolumn
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
-    {\normalfont\normalsize\headfont ■}}
+    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \else
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {0.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
     {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
-    {\normalfont\normalsize\headfont ■}}
+    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \fi
 \if@twocolumn
   \newcommand{\subparagraph}{\@startsection{subparagraph}{5}{\z@}%

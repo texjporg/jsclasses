@@ -3575,18 +3575,28 @@
 %
 %    見出しの後ろで改行されません。
 %
+% [2016-11-16] 従来は |\paragraph| の最初に出るマークを「■」に固定して
+% いましたが、このマークを変更可能にするため |\jsParagraphMark| というマクロ
+% に切り出しました。これで、たとえば
+%\begin{verbatim}
+%  \renewcommand{\jsParagraphMark}{★}
+%\end{verbatim}
+% とすれば「★」に変更できますし、マークを空にすることも容易です。
+% なお、某学会クラスでは従来どおりマークは付きません。
+%
 %    \begin{macrocode}
+%<!jspf>\newcommand{\jsParagraphMark}{■}
 \if@twocolumn
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
-%<!jspf>    {\normalfont\normalsize\headfont ■}}
+%<!jspf>    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \else
   \newcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
     {0.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
     {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
 %<jspf>    {\normalfont\normalsize\headfont}}
-%<!jspf>    {\normalfont\normalsize\headfont ■}}
+%<!jspf>    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \fi
 %    \end{macrocode}
 % \end{macro}

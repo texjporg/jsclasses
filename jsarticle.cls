@@ -1888,6 +1888,17 @@
   \raggedright
   \xkanjiskip=0.1em\relax
 \fi
+\@ifpackageloaded{exppl2e}{\jsc@needsp@tchtrue}{\jsc@needsp@tchfalse}
+\ifjsc@needsp@tch\else
+  \expandafter\endinput
+\fi
+\def\@gnewline #1{%
+  \ifvmode
+    \@nolnerr
+  \else
+    \unskip \reserved@e {\reserved@f#1}\nobreak \hfil \break \hskip \z@
+    \ignorespaces
+  \fi}
 \endinput
 %%
 %% End of file `jsarticle.cls'.

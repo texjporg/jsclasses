@@ -5698,6 +5698,40 @@
 \fi
 %    \end{macrocode}
 %
+%
+% \section{実験的コード}
+%
+% [2016-11-29] コミュニティ版p\LaTeX で新設されたテスト用パッケージ
+% （\texttt{exppl2e}パッケージ）が文書クラスより先に読み込まれていた
+% 場合は，jsclassesもテスト版として動作します。
+% この処置は\file{jsarticle}と\file{jsbook}にのみ行い，\file{jspf}と
+% \file{kiyou}は除外しておきます。\texttt{exppl2e}パッケージ
+% が読みこまれていない場合は通常版として動作しますので，ここで終了します。
+%
+%    \begin{macrocode}
+%<*article|book>
+\@ifpackageloaded{exppl2e}{\jsc@needsp@tchtrue}{\jsc@needsp@tchfalse}
+\ifjsc@needsp@tch\else
+  \expandafter\endinput
+\fi
+%    \end{macrocode}
+%
+% 以下は実験的コードです。具体的には，2016/11/29の\texttt{exppl2e}パッケージ
+% で説明されている|\@gnewline|のパッチを入れてあります。
+%
+% \begin{macro}{\@gnewline}
+%    \begin{macrocode}
+\def\@gnewline #1{%
+  \ifvmode
+    \@nolnerr
+  \else
+    \unskip \reserved@e {\reserved@f#1}\nobreak \hfil \break \hskip \z@
+    \ignorespaces
+  \fi}
+%</article|book>
+%    \end{macrocode}
+% \end{macro}
+%
 % 以上です。
 %
 % \Finale

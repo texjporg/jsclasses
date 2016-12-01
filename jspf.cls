@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/11/19 okumura, texjporg]
+  [2016/11/29 okumura, texjporg]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1558,8 +1558,8 @@
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
 \def\@foot{\@finalstrut\strutbox\color@endgroup\egroup
-  \ifhmode\null\fi
   \ifx\pltx@foot@penalty\@undefined\else
+    \ifhmode\null\fi
     \ifnum\pltx@foot@penalty=\z@\else
       \penalty\pltx@foot@penalty
       \pltx@foot@penalty\z@

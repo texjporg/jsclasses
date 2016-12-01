@@ -38,7 +38,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/11/19 okumura, texjporg]
+  [2016/11/29 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -5273,6 +5273,13 @@
 %
 % [2016-09-08] コミュニティ版\pLaTeX のバグ修正に追随しました。
 %
+% [2016-11-29] 古い\pLaTeX で使用された場合を考慮してコードを改良。
+% ^^A 脚注直後に改行を可能にするために|\null|を入れる場合，
+% ^^A 同時にペナルティも考慮しなければ誤った改行が起きる可能性がある。
+% ^^A このため，|\ifhmode\null\fi|は
+% ^^A   |\ifx\pltx@foot@penalty\@undefined\else ... \fi|
+% ^^A 条件の内側に置いておくのが安全。
+%
 %    \begin{macrocode}
 \long\def\@footnotetext{%
   \insert\footins\bgroup
@@ -5293,8 +5300,8 @@
 \def\f@@t{\bgroup\aftergroup\@foot\let\next}
 \def\f@t#1{#1\@foot}
 \def\@foot{\@finalstrut\strutbox\color@endgroup\egroup
-  \ifhmode\null\fi
   \ifx\pltx@foot@penalty\@undefined\else
+    \ifhmode\null\fi
     \ifnum\pltx@foot@penalty=\z@\else
       \penalty\pltx@foot@penalty
       \pltx@foot@penalty\z@

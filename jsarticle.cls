@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
-  [2016/11/29 okumura, texjporg]
+  [2016/12/01 okumura, texjporg]
 \def\jsc@clsname{jsarticle}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1715,8 +1715,8 @@
 \def\@@inhibitglue{%
   \expandafter\expandafter\expandafter\jsc@inhibitglue\expandafter\meaning\expandafter\@let@token\KANJI@CHARACTER\relax\jsc@end}
 \expandafter\def\expandafter\jsc@inhibitglue\expandafter#\expandafter1\KANJI@CHARACTER#2#3\jsc@end{%
-  \def\@tempa{#1}%
-  \ifx\@tempa\@empty
+  \def\jsc@tempa{#1}%
+  \ifx\jsc@tempa\@empty
     \ifnum\the\inhibitxspcode`#2=2\relax
       \inhibitglue
     \fi

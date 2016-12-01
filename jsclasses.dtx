@@ -38,7 +38,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2016/11/29 okumura, texjporg]
+  [2016/12/01 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -5355,6 +5355,12 @@
 %
 % 段落頭のかぎかっこなどを見かけ1字半下げから全角1字下げに直します。
 %
+% [2016-07-18] |\inhibitglue| の発行対象を |\inhibitxspcode| が2に
+% 設定されているものすべてに拡大しました。
+%
+% [2016-12-01] すぐ上の変更で |\@tempa| を使っていたのがよくなかった
+% ので，プレフィックスを付けて |\jsc@tempa| にしました(forum:2085)。
+%
 %    \begin{macrocode}
 \def\@inhibitglue{%
   \futurelet\@let@token\@@inhibitglue}
@@ -5716,9 +5722,8 @@
 %
 % [2016-11-29] コミュニティ版p\LaTeX で新設されたテスト用パッケージ
 % （\texttt{exppl2e}パッケージ）が文書クラスより先に読み込まれていた
-% 場合は，jsclassesもテスト版として動作します。
-% この処置は\file{jsarticle}と\file{jsbook}にのみ行い，\file{jspf}と
-% \file{kiyou}は除外しておきます。\texttt{exppl2e}パッケージ
+% 場合は，jsclassesもテスト版として動作します。この処置はjsarticleと
+% jsbookにのみ行い，jspfとkiyouは除外しておきます。exppl2eパッケージ
 % が読みこまれていない場合は通常版として動作しますので，ここで終了します。
 %
 %    \begin{macrocode}

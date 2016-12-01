@@ -5370,8 +5370,8 @@
 \def\@@inhibitglue{%
   \expandafter\expandafter\expandafter\jsc@inhibitglue\expandafter\meaning\expandafter\@let@token\KANJI@CHARACTER\relax\jsc@end}
 \expandafter\def\expandafter\jsc@inhibitglue\expandafter#\expandafter1\KANJI@CHARACTER#2#3\jsc@end{%
-  \def\@tempa{#1}%
-  \ifx\@tempa\@empty
+  \def\jsc@tempa{#1}%
+  \ifx\jsc@tempa\@empty
     \ifnum\the\inhibitxspcode`#2=2\relax
       \inhibitglue
     \fi

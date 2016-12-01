@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2016/11/11 okumura, texjporg]
+  [2016/11/19 okumura, texjporg]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1602,7 +1602,7 @@
 \def\@doendpe{%
   \@endpetrue
   \def\par{%
-    \@restorepar\everypar{\everyparhook}\par\@endpefalse}%
+    \@restorepar\clubpenalty\@clubpenalty\everypar{\everyparhook}\par\@endpefalse}%
   \everypar{{\setbox\z@\lastbox}\everypar{\everyparhook}\@endpefalse\everyparhook}}
 \def\@item[#1]{%
   \if@noparitem
@@ -1700,18 +1700,6 @@
       the installation}%
   }
 \fi
-\let\ltx@ifnextchar\@ifnextchar
-\def\ProvidesFile#1{%
-  \begingroup
-    \catcode`\ 10 %
-    \ifnum \endlinechar<256 %
-      \ifnum \endlinechar>\m@ne
-        \catcode\endlinechar 10 %
-      \fi
-    \fi
-    \@makeother\/%
-    \@makeother\&%
-    \ltx@ifnextchar[{\@providesfile{#1}}{\@providesfile{#1}[]}}
 \newcommand{\prepartname}{\if@english Part~\else 第\fi}
 \newcommand{\postpartname}{\if@english\else 部\fi}
 \newcommand{\presectionname}{}%  第

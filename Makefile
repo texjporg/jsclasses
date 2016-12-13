@@ -1,6 +1,6 @@
 STRIPTARGET = jsarticle.cls okumacro.sty jsverb.sty okuverb.sty morisawa.sty jslogo.sty
 PDFTARGET = jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf
-DVOTARGET = jsclasses.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi jslogo.dvi
+DVITARGET = jsclasses.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi jslogo.dvi
 KANJI = --kanji=jis
 
 default: $(STRIPTARGET) $(DVITARGET)

@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2016/10/08 okumura, texjporg]
+\ProvidesPackage{okumacro}[2016/12/13 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -132,6 +132,18 @@
     \rule[0.8ex]{0.15ex}{0.7ex}}}
 \def\−−{―\kern-.5zw―\kern-.5zw―}
 \def\――{―\kern-.5zw―\kern-.5zw―}
+\ifx\ucs\@undefined\else
+  \begingroup
+    \kansujichar1="FF0D
+    \kansujichar2="2014
+    \expandafter\expandafter\expandafter\gdef
+    \expandafter\csname\expandafter\kansuji\expandafter1%
+    \expandafter\endcsname\kansuji1{―\kern-.5zw―\kern-.5zw―}
+    \expandafter\expandafter\expandafter\gdef
+    \expandafter\csname\expandafter\kansuji\expandafter2%
+    \expandafter\endcsname\kansuji2{―\kern-.5zw―\kern-.5zw―}
+  \endgroup
+\fi
 \newcommand{\removept}[2]{%
   \edef#2{\expandafter\@removePT\the#1}}
 {\catcode`p=12 \catcode`t=12 \gdef\@removePT#1pt{#1}}

@@ -1,38 +1,39 @@
-all: jsarticle.cls okumacro.sty jsverb.sty okuverb.sty morisawa.sty jslogo.sty \
-	jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf
+STRIPTARGET = jsarticle.cls okumacro.sty jsverb.sty okuverb.sty morisawa.sty jslogo.sty
+PDFTARGET = jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf
+DVOTARGET = jsclasses.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi jslogo.dvi
+KANJI = --kanji=jis
+
+default: $(STRIPTARGET) $(DVITARGET)
+strip: $(STRIPTARGET)
+all: $(STRIPTARGET) $(PDFTARGET)
 
 jsarticle.cls: jsclasses.dtx
-	platex --kanji=jis jsclasses.ins
-
-okumacro.sty: okumacro.dtx
-	platex --kanji=jis okumacro.ins
-
-jsverb.sty: jsverb.dtx
-	platex --kanji=jis jsverb.ins
-
-okuverb.sty: okuverb.dtx
-	platex --kanji=jis okuverb.ins
-
-morisawa.sty: morisawa.dtx
-	platex --kanji=jis morisawa.ins
+	platex $(KANJI) jsclasses.ins
 
 jslogo.sty: jslogo.dtx
-	platex --kanji=jis jslogo.ins
+	platex $(KANJI) jslogo.ins
 
-jsclasses.pdf: jsclasses.dtx
-	ptex2pdf -l -ot --kanji=jis jsclasses.dtx
+okumacro.sty: okumacro.dtx
+	platex $(KANJI) okumacro.ins
 
-okumacro.pdf: okumacro.dtx
-	ptex2pdf -l -ot --kanji=jis okumacro.dtx
+jsverb.sty: jsverb.dtx
+	platex $(KANJI) jsverb.ins
 
-jsverb.pdf: jsverb.dtx
-	ptex2pdf -l -ot --kanji=jis jsverb.dtx
+okuverb.sty: okuverb.dtx
+	platex $(KANJI) okuverb.ins
 
-okuverb.pdf: okuverb.dtx
-	ptex2pdf -l -ot --kanji=jis okuverb.dtx
+morisawa.sty: morisawa.dtx
+	platex $(KANJI) morisawa.ins
 
-morisawa.pdf: morisawa.dtx
-	ptex2pdf -l -ot --kanji=jis morisawa.dtx
+.SUFFIXES: .dtx .dvi .pdf
+.dtx.dvi:
+	platex $(KANJI) $<
+	platex $(KANJI) $<
+.dvi.pdf:
+	dvipdfmx $<
 
-jslogo.pdf: jslogo.dtx
-	ptex2pdf -l -ot --kanji=jis jslogo.dtx
+.PHONY: clean
+clean:
+	rm -f \
+	*.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
+	jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf

@@ -3415,13 +3415,20 @@
 % 両面印刷のときは白ページを追加します。
 % 二段組のときには，二段組に戻します。
 %
+% [2016-12-13] \texttt{openany} のときには白ページが追加されるのは変なので，
+% その場合は追加しないようにしました。このバグは\LaTeX では
+% classes.dtx v1.4b (2000/05/19)
+% で修正されています。
+%
 %    \begin{macrocode}
 %<*book>
 \def\@endpart{\vfil\newpage
   \if@twoside
+   \if@openright %% added (2016/12/13)
     \null
     \thispagestyle{empty}%
     \newpage
+   \fi %% added (2016/12/13)
   \fi
   \if@restonecol
     \twocolumn

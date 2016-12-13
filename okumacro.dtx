@@ -373,6 +373,23 @@
 \def\――{―\kern-.5zw―\kern-.5zw―}
 %    \end{macrocode}
 %
+% [2016-12-04] \pLaTeX で通るコードが \upLaTeX で通らなくなることを防ぐために，u\pLaTeX の場合にはU+FF0D，U+2014で定義したものも別途用意しました。
+%
+%    \begin{macrocode}
+\ifx\ucs\@undefined\else
+  \begingroup
+    \kansujichar1="FF0D
+    \kansujichar2="2014
+    \expandafter\expandafter\expandafter\gdef
+    \expandafter\csname\expandafter\kansuji\expandafter1%
+    \expandafter\endcsname\kansuji1{―\kern-.5zw―\kern-.5zw―}
+    \expandafter\expandafter\expandafter\gdef
+    \expandafter\csname\expandafter\kansuji\expandafter2%
+    \expandafter\endcsname\kansuji2{―\kern-.5zw―\kern-.5zw―}
+  \endgroup
+\fi
+%    \end{macrocode}
+%
 % \end{macro}
 % \end{macro}
 %

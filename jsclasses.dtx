@@ -700,16 +700,23 @@
 % [2016-07-11] memoirクラスのマニュアルによると，トンボを含めた用紙の寸法は
 % |\stockwidth|，|\stockheight|と呼ぶようですので，これを使うことにしました。
 %
+% [2017-01-11] トンボオプションが指定されているとき「だけ」|\stockwidth|，
+% |\stockheight|を定義するようにしました。
+%
 %    \begin{macrocode}
-\newdimen\stockwidth \newdimen\stockheight
-\setlength{\stockwidth}{\paperwidth}
-\setlength{\stockheight}{\paperheight}
 \iftombow
+  \newdimen\stockwidth \newdimen\stockheight
+  \setlength{\stockwidth}{\paperwidth}
+  \setlength{\stockheight}{\paperheight}
   \advance \stockwidth 2in
   \advance \stockheight 2in
 \fi
 \ifpapersize
-  \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
+  \iftombow
+    \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
+  \else
+    \AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}
+  \fi
 \fi
 %    \end{macrocode}
 %
@@ -944,11 +951,16 @@
 % [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
 % スケールします。
 %
+% [2017-01-11] トンボオプションが指定されているとき「だけ」|\stockwidth|，
+% |\stockheight|が定義されています。
+%
 %    \begin{macrocode}
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
-\setlength\stockwidth{\inv@mag\stockwidth}%
-\setlength\stockheight{\inv@mag\stockheight}%
+\iftombow
+  \setlength\stockwidth{\inv@mag\stockwidth}%
+  \setlength\stockheight{\inv@mag\stockheight}%
+\fi
 %    \end{macrocode}
 %
 % \paragraph{pagesizeスペシャルの出力}

@@ -14,9 +14,8 @@ In the above repository, we include the pre-generated cls/sty files to
 ensure proper encoding. The files have to be in ISO-2022-JP encoding to
 work properly on Windows. These files can be generated in a Japanese
 locale by running platex on the .ins files, for example
-~~~~
-platex -kanji=jis jsclasses.ins
-~~~~
+
+    platex -kanji=jis jsclasses.ins
 
 ## Release Date
 

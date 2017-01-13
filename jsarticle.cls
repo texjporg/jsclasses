@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
-  [2016/12/13 okumura, texjporg]
+  [2017/01/13 okumura, texjporg]
 \def\jsc@clsname{jsarticle}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -246,15 +246,19 @@
     \@jsc@uplatexfalse
   \fi
 \fi
-\newdimen\stockwidth \newdimen\stockheight
-\setlength{\stockwidth}{\paperwidth}
-\setlength{\stockheight}{\paperheight}
 \iftombow
+  \newdimen\stockwidth \newdimen\stockheight
+  \setlength{\stockwidth}{\paperwidth}
+  \setlength{\stockheight}{\paperheight}
   \advance \stockwidth 2in
   \advance \stockheight 2in
 \fi
 \ifpapersize
-  \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
+  \iftombow
+    \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
+  \else
+    \AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}
+  \fi
 \fi
 \if@slide\def\n@baseline{13}\else\def\n@baseline{16}\fi
 \newdimen\jsc@mpt
@@ -411,8 +415,10 @@
 \jsc@smallskipamount=3\jsc@mpt plus 1\jsc@mpt minus 1\jsc@mpt
 \setlength\paperwidth{\inv@mag\paperwidth}%
 \setlength\paperheight{\inv@mag\paperheight}%
-\setlength\stockwidth{\inv@mag\stockwidth}%
-\setlength\stockheight{\inv@mag\stockheight}%
+\iftombow
+  \setlength\stockwidth{\inv@mag\stockwidth}%
+  \setlength\stockheight{\inv@mag\stockheight}%
+\fi
 \ifwinjis
   \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] winjis}{}
   \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] winjisg}{}

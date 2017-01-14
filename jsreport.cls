@@ -920,11 +920,9 @@
   \let\@mkboth\markboth
   \def\chaptermark##1{\markboth{%
     \ifnum \c@secnumdepth >\m@ne
-      \if@mainmatter
         \if@omit@number\else
           \@chapapp\thechapter\@chappos\hskip1zw
         \fi
-      \fi
     \fi
     ##1}{}}%
   \def\sectionmark##1{\markright{%
@@ -1232,7 +1230,6 @@
     {\@omit@numbertrue\@schapter}}
 \def\@chapter[#1]#2{%
   \ifnum \c@secnumdepth >\m@ne
-    \if@mainmatter
       \refstepcounter{chapter}%
       \typeout{\@chapapp\thechapter\@chappos}%
       \addcontentsline{toc}{chapter}%
@@ -1240,7 +1237,6 @@
         % {\if@english\thechapter\else\@chapapp\thechapter\@chappos\fi}%
         {\@chapapp\thechapter\@chappos}%
         #1}%
-    \else\addcontentsline{toc}{chapter}{#1}\fi
   \else
     \addcontentsline{toc}{chapter}{#1}%
   \fi
@@ -1257,11 +1253,9 @@
   \vspace*{2\Cvs}% 欧文は50pt
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
-      \if@mainmatter
         \huge\headfont \@chapapp\thechapter\@chappos
         \par\nobreak
         \vskip \Cvs % 欧文は20pt
-      \fi
     \fi
     \interlinepenalty\@M
     \Huge \headfont #1\par\nobreak
@@ -1439,7 +1433,6 @@
 \def\@opargbegintheorem#1#2#3{\trivlist\labelsep=1zw
       \item[\hskip \labelsep{\headfont #1\ #2（#3）}]}
 \newenvironment{titlepage}{%
-    \cleardoublepage
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else

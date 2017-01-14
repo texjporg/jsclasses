@@ -2626,11 +2626,11 @@
   \let\@mkboth\markboth
   \def\chaptermark##1{\markboth{%
     \ifnum \c@secnumdepth >\m@ne
-      \if@mainmatter
+%<book>      \if@mainmatter
         \if@omit@number\else
           \@chapapp\thechapter\@chappos\hskip1zw
         \fi
-      \fi
+%<book>      \fi
     \fi
     ##1}{}}%
   \def\sectionmark##1{\markright{%
@@ -3499,7 +3499,7 @@
 %    \begin{macrocode}
 \def\@chapter[#1]#2{%
   \ifnum \c@secnumdepth >\m@ne
-    \if@mainmatter
+%<book>    \if@mainmatter
       \refstepcounter{chapter}%
       \typeout{\@chapapp\thechapter\@chappos}%
       \addcontentsline{toc}{chapter}%
@@ -3507,7 +3507,7 @@
         % {\if@english\thechapter\else\@chapapp\thechapter\@chappos\fi}%
         {\@chapapp\thechapter\@chappos}%
         #1}%
-    \else\addcontentsline{toc}{chapter}{#1}\fi
+%<book>    \else\addcontentsline{toc}{chapter}{#1}\fi
   \else
     \addcontentsline{toc}{chapter}{#1}%
   \fi
@@ -3533,11 +3533,11 @@
   \vspace*{2\Cvs}% 欧文は50pt
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
-      \if@mainmatter
+%<book>      \if@mainmatter
         \huge\headfont \@chapapp\thechapter\@chappos
         \par\nobreak
         \vskip \Cvs % 欧文は20pt
-      \fi
+%<book>      \fi
     \fi
     \interlinepenalty\@M
     \Huge \headfont #1\par\nobreak
@@ -4171,7 +4171,7 @@
 %
 %    \begin{macrocode}
 \newenvironment{titlepage}{%
-%<book|report>    \cleardoublepage
+%<book>    \cleardoublepage
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else

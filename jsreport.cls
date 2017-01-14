@@ -1906,7 +1906,7 @@
     \fi
   \fi}
 \hyphenation{ado-be post-script ghost-script phe-nom-e-no-log-i-cal man-u-script}
-\if@report \pagestyle{plain} \else \pagestyle{headings} \fi
+\pagestyle{plain}
 \pagenumbering{arabic}
 \if@twocolumn
   \twocolumn

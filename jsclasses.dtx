@@ -5746,8 +5746,9 @@
 % ページ設定の初期化です。
 %
 %    \begin{macrocode}
-%<article|kiyou>\if@slide \pagestyle{empty} \else \pagestyle{plain} \fi
-%<book|report>\if@report \pagestyle{plain} \else \pagestyle{headings} \fi
+%<article>\if@slide \pagestyle{empty} \else \pagestyle{plain} \fi
+%<book>\if@report \pagestyle{plain} \else \pagestyle{headings} \fi
+%<report|kiyou>\pagestyle{plain}
 %<jspf>\pagestyle{headings}
 \pagenumbering{arabic}
 \if@twocolumn

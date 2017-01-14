@@ -1858,7 +1858,7 @@
     \fi
   \fi}
 \hyphenation{ado-be post-script ghost-script phe-nom-e-no-log-i-cal man-u-script}
-\if@slide \pagestyle{empty} \else \pagestyle{plain} \fi
+\pagestyle{plain}
 \pagenumbering{arabic}
 \if@twocolumn
   \twocolumn

@@ -1048,6 +1048,7 @@
       {\large \@date}%
     \end{center}%
     \par\vskip 1.5em
+    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
   }
 \fi
 \def\@startsection#1#2#3#4#5#6{%
@@ -1403,14 +1404,54 @@
     \advance \labelwidth by -\labelsep
     \let \makelabel=\descriptionlabel}}{\endlist}
 \newcommand*\descriptionlabel[1]{\normalfont\headfont #1\hfil}
-%%% this needs to be changed!
-\newenvironment{abstract}{%
-  \begin{list}{}{%
-    \listparindent=1zw
-    \itemindent=\listparindent
-    \rightmargin=0pt
-    \leftmargin=5zw}\item[]}{\end{list}\vspace{\baselineskip}}
-%%%
+\newbox\@abstractbox
+\if@titlepage
+  \newenvironment{abstract}{%
+    \titlepage
+    \null\vfil
+    \@beginparpenalty\@lowpenalty
+    \begin{center}%
+      \headfont \abstractname
+      \@endparpenalty\@M
+    \end{center}}%
+  {\par\vfil\null\endtitlepage}
+\else
+  \newenvironment{abstract}{%
+    \if@twocolumn
+      \ifx\maketitle\relax
+        \section*{\abstractname}%
+      \else
+        \global\setbox\@abstractbox\hbox\bgroup
+        \begin{minipage}[b]{\textwidth}
+          \small\parindent1zw
+          \begin{center}%
+            {\headfont \abstractname\vspace{-.5em}\vspace{\z@}}%
+          \end{center}%
+          \list{}{%
+            \listparindent\parindent
+            \itemindent \listparindent
+            \rightmargin \leftmargin}%
+          \item\relax
+      \fi
+    \else
+      \small
+      \begin{center}%
+        {\headfont \abstractname\vspace{-.5em}\vspace{\z@}}%
+      \end{center}%
+      \list{}{%
+        \listparindent\parindent
+        \itemindent \listparindent
+        \rightmargin \leftmargin}%
+      \item\relax
+    \fi}{\if@twocolumn
+      \ifx\maketitle\relax
+      \else
+        \endlist\end{minipage}\egroup
+      \fi
+    \else
+      \endlist
+    \fi}
+\fi
 \newenvironment{verse}{%
   \let \\=\@centercr
   \list{}{%
@@ -1877,6 +1918,7 @@
 \newcommand{\figurename}{\if@english Fig.~\else 図\fi}
 \newcommand{\tablename}{\if@english Table~\else 表\fi}
 \newcommand{\appendixname}{\if@english \else 付録\fi}
+\newcommand{\abstractname}{\if@english Abstract\else 概要\fi}
 \newif\if西暦 \西暦true
 \def\西暦{\西暦true}
 \def\和暦{\西暦false}

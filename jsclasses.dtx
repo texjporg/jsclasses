@@ -2862,7 +2862,7 @@
       {\large \@date}%
     \end{center}%
     \par\vskip 1.5em
-%<article|kiyou>    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
+%<article|report|kiyou>    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
   }
 \fi
 %</article|book|report|kiyou>
@@ -4002,17 +4002,7 @@
     \rightmargin=0pt
     \leftmargin=5zw}\item[]}{\end{list}\vspace{\baselineskip}}
 %</book>
-%<*report>
-%%% this needs to be changed!
-\newenvironment{abstract}{%
-  \begin{list}{}{%
-    \listparindent=1zw
-    \itemindent=\listparindent
-    \rightmargin=0pt
-    \leftmargin=5zw}\item[]}{\end{list}\vspace{\baselineskip}}
-%%%
-%</report>
-%<*article|kiyou>
+%<*article|report|kiyou>
 \newbox\@abstractbox
 \if@titlepage
   \newenvironment{abstract}{%
@@ -4061,7 +4051,7 @@
       \endlist
     \fi}
 \fi
-%</article|kiyou>
+%</article|report|kiyou>
 %<*jspf>
 \newbox\@abstractbox
 \newenvironment{abstract}{%
@@ -5696,7 +5686,7 @@
 %    \begin{macrocode}
 % \newcommand{\appendixname}{\if@english Appendix~\else 付録\fi}
 \newcommand{\appendixname}{\if@english \else 付録\fi}
-%<!book&!report>\newcommand{\abstractname}{\if@english Abstract\else 概要\fi}
+%<!book>\newcommand{\abstractname}{\if@english Abstract\else 概要\fi}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

@@ -30,7 +30,7 @@
 % \iffalse
 %
 %    \begin{macrocode}
-%<article|book|report|jspf|kiyou>\NeedsTeXFormat{pLaTeX2e}
+\NeedsTeXFormat{pLaTeX2e}
 %<article>\ProvidesClass{jsarticle}
 %<book>\ProvidesClass{jsbook}
 %<report>\ProvidesClass{jsreport}
@@ -2606,7 +2606,7 @@
 %</article|kiyou>
 %    \end{macrocode}
 %
-% 次は book の場合です。
+% 次は book および report の場合です。
 % [2011-05-10] しっぽ愛好家さん [qa:6370] のパッチを取り込ませていただきました
 % （北見さん [qa:55896] のご指摘ありがとうございます）。
 %
@@ -2672,7 +2672,7 @@
   \let\@mkboth\@gobbletwo
 %<book|report>  \let\chaptermark\@gobble
   \let\sectionmark\@gobble
-%<article|jspf|kiyou>  \let\subsectionmark\@gobble
+%<!book&!report>  \let\subsectionmark\@gobble
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3137,7 +3137,7 @@
 % 番号を付けるかを決めるカウンタです。
 %
 %    \begin{macrocode}
-%<article|jspf|kiyou>\setcounter{secnumdepth}{3}
+%<!book&!report>\setcounter{secnumdepth}{3}
 %<book|report>\setcounter{secnumdepth}{2}
 %    \end{macrocode}
 % \end{macro}
@@ -3158,7 +3158,7 @@
 \newcounter{part}
 %<book|report>\newcounter{chapter}
 %<book|report>\newcounter{section}[chapter]
-%<article|jspf|kiyou>\newcounter{section}
+%<!book&!report>\newcounter{section}
 \newcounter{subsection}[section]
 \newcounter{subsubsection}[subsection]
 \newcounter{paragraph}[subsubsection]
@@ -3196,9 +3196,9 @@
 %
 %    \begin{macrocode}
 \renewcommand{\thepart}{\@Roman\c@part}
-%<article|jspf|kiyou>% \renewcommand{\thesection}{\@arabic\c@section}
-%<article|jspf|kiyou>\renewcommand{\thesection}{\presectionname\@arabic\c@section\postsectionname}
-%<article|jspf|kiyou>\renewcommand{\thesubsection}{\@arabic\c@section.\@arabic\c@subsection}
+%<!book&!report>% \renewcommand{\thesection}{\@arabic\c@section}
+%<!book&!report>\renewcommand{\thesection}{\presectionname\@arabic\c@section\postsectionname}
+%<!book&!report>\renewcommand{\thesubsection}{\@arabic\c@section.\@arabic\c@subsection}
 %<*book|report>
 \renewcommand{\thechapter}{\@arabic\c@chapter}
 \renewcommand{\thesection}{\thechapter.\@arabic\c@section}
@@ -3318,20 +3318,20 @@
 %   \def\CMDB    #1{....}     % \chapter*{...} の定義
 %\end{verbatim}
 %
-% まず |book| クラス以外です。
+% まず |book| と |report| のクラス以外です。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \newcommand\part{%
   \if@noskipsec \leavevmode \fi
   \par
   \addvspace{4ex}%
   \if@english \@afterindentfalse \else \@afterindenttrue \fi
   \secdef\@part\@spart}
-%</article|jspf|kiyou>
+%</!book&!report>
 %    \end{macrocode}
 %
-% |book| スタイルの場合は，少し複雑です。
+% |book| および |report| クラスの場合は，少し複雑です。
 %
 %    \begin{macrocode}
 %<*book|report>
@@ -3359,11 +3359,11 @@
 % 部の見出しを出力します。
 % |\bfseries| を |\headfont| に変えました。
 %
-% |book| クラス以外では |secnumdepth| が $-1$ より大きいとき
+% |book| および |report| クラス以外では |secnumdepth| が $-1$ より大きいとき
 % 部番号を付けます。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \def\@part[#1]#2{%
   \ifnum \c@secnumdepth >\m@ne
     \refstepcounter{part}%
@@ -3386,10 +3386,10 @@
   \nobreak
   \vskip 3ex
   \@afterheading}
-%</article|jspf|kiyou>
+%</!book&!report>
 %    \end{macrocode}
 %
-% |book| クラスでは |secnumdepth| が $-2$ より大きいとき部番号を付けます。
+% |book| および |report| クラスでは |secnumdepth| が $-2$ より大きいとき部番号を付けます。
 %
 %    \begin{macrocode}
 %<*book|report>
@@ -3420,7 +3420,7 @@
 % 番号を付けない部です。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \def\@spart#1{{%
     \parindent \z@ \raggedright
     \interlinepenalty \@M
@@ -3429,7 +3429,7 @@
   \nobreak
   \vskip 3ex
   \@afterheading}
-%</article|jspf|kiyou>
+%</!book&!report>
 %<*book|report>
 \def\@spart#1{{%
     \centering
@@ -4194,7 +4194,7 @@
 % 本文と付録を分離するコマンドです。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \newcommand{\appendix}{\par
   \setcounter{section}{0}%
   \setcounter{subsection}{0}%
@@ -4203,7 +4203,7 @@
 % \gdef\thesection{\@Alph\c@section}% [2003-03-02]
   \gdef\thesection{\presectionname\@Alph\c@section\postsectionname}%
   \gdef\thesubsection{\@Alph\c@section.\@arabic\c@subsection}}
-%</article|jspf|kiyou>
+%</!book&!report>
 %<*book|report>
 \newcommand{\appendix}{\par
   \setcounter{chapter}{0}%
@@ -4303,7 +4303,7 @@
 % 数式番号を出力するコマンドです。
 %
 %    \begin{macrocode}
-%<article|jspf|kiyou>\renewcommand \theequation {\@arabic\c@equation}
+%<!book&!report>\renewcommand \theequation {\@arabic\c@equation}
 %<*book|report>
 \@addtoreset{equation}{chapter}
 \renewcommand\theequation
@@ -4372,10 +4372,10 @@
 % 図番号を出力するコマンドです。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \newcounter{figure}
 \renewcommand \thefigure {\@arabic\c@figure}
-%</article|jspf|kiyou>
+%</!book&!report>
 %<*book|report>
 \newcounter{figure}[chapter]
 \renewcommand \thefigure
@@ -4431,10 +4431,10 @@
 % ここではオリジナルのままにしています。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \newcounter{table}
 \renewcommand\thetable{\@arabic\c@table}
-%</article|jspf|kiyou>
+%</!book&!report>
 %<*book|report>
 \newcounter{table}[chapter]
 \renewcommand \thetable
@@ -4690,7 +4690,7 @@
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
-%<article|jspf|kiyou>\setcounter{tocdepth}{2}
+%<!book&!report>\setcounter{tocdepth}{2}
 %<book|report>\setcounter{tocdepth}{1}
 %    \end{macrocode}
 % \end{macro}
@@ -4724,14 +4724,14 @@
   \chapter*{\contentsname}%
   \@mkboth{\contentsname}{}%
 %</book|report>
-%<*article|jspf|kiyou>
+%<*!book&!report>
   \settowidth\jsc@tocl@width{\headfont\presectionname\postsectionname}%
   \settowidth\@tempdima{\headfont\appendixname}%
   \ifdim\jsc@tocl@width<\@tempdima\relax\setlength\jsc@tocl@width{\@tempdima}\fi
   \ifdim\jsc@tocl@width<2zw \divide\jsc@tocl@width by 2 \advance\jsc@tocl@width 1zw\fi
   \section*{\contentsname}%
   \@mkboth{\contentsname}{\contentsname}%
-%</article|jspf|kiyou>
+%</!book&!report>
   \@starttoc{toc}%
 %<book|report>  \if@restonecol\twocolumn\fi
 }
@@ -4745,7 +4745,7 @@
 %    \begin{macrocode}
 \newcommand*{\l@part}[2]{%
   \ifnum \c@tocdepth >-2\relax
-%<article|jspf|kiyou>    \addpenalty\@secpenalty
+%<!book&!report>    \addpenalty\@secpenalty
 %<book|report>    \addpenalty{-\@highpenalty}%
     \addvspace{2.25em \@plus\jsc@mpt}%
     \begingroup
@@ -4802,7 +4802,7 @@
 % 節の目次です。
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 \newcommand*{\l@section}[2]{%
   \ifnum \c@tocdepth >\z@
     \addpenalty{\@secpenalty}%
@@ -4819,7 +4819,7 @@
       #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss#2}\par
     \endgroup
   \fi}
-%</article|jspf|kiyou>
+%</!book&!report>
 %    \end{macrocode}
 %
 % インデントと幅はそれぞれ1.5em，2.3emでしたが，
@@ -4845,7 +4845,7 @@
 % してみました。(by ts)
 %
 %    \begin{macrocode}
-%<*article|jspf|kiyou>
+%<*!book&!report>
 % \newcommand*{\l@subsection}   {\@dottedtocline{2}{1.5em}{2.3em}}
 % \newcommand*{\l@subsubsection}{\@dottedtocline{3}{3.8em}{3.2em}}
 % \newcommand*{\l@paragraph}    {\@dottedtocline{4}{7.0em}{4.1em}}
@@ -4868,7 +4868,7 @@
 \newcommand*{\l@subparagraph}{%
           \@tempdima\jsc@tocl@width \advance\@tempdima 2zw
           \@dottedtocline{5}{\@tempdima}{6zw}}
-%</article|jspf|kiyou>
+%</!book&!report>
 %<*book|report>
 % \newcommand*{\l@subsection}   {\@dottedtocline{2}{3.8em}{3.2em}}
 % \newcommand*{\l@subsubsection}{\@dottedtocline{3}{7.0em}{4.1em}}
@@ -4948,10 +4948,10 @@
   \chapter*{\listfigurename}%
   \@mkboth{\listfigurename}{}%
 %</book|report>
-%<*article|jspf|kiyou>
+%<*!book&!report>
   \section*{\listfigurename}%
   \@mkboth{\listfigurename}{\listfigurename}%
-%</article|jspf|kiyou>
+%</!book&!report>
   \@starttoc{lof}%
 %<book|report>  \if@restonecol\twocolumn\fi
 }
@@ -4979,10 +4979,10 @@
   \chapter*{\listtablename}%
   \@mkboth{\listtablename}{}%
 %</book|report>
-%<*article|jspf|kiyou>
+%<*!book&!report>
   \section*{\listtablename}%
   \@mkboth{\listtablename}{\listtablename}%
-%</article|jspf|kiyou>
+%</!book&!report>
   \@starttoc{lot}%
 %<book|report>  \if@restonecol\twocolumn\fi
 }
@@ -5136,8 +5136,8 @@
     \ifx\multicols\@undefined
 %<book|report>      \twocolumn[\@makeschapterhead{\indexname}%
 %<book|report>      \addcontentsline{toc}{chapter}{\indexname}]%
-%<article|jspf|kiyou>      \def\presectionname{}\def\postsectionname{}%
-%<article|jspf|kiyou>      \twocolumn[\section*{\indexname}]%
+%<!book&!report>      \def\presectionname{}\def\postsectionname{}%
+%<!book&!report>      \twocolumn[\section*{\indexname}]%
     \else
       \ifdim\textwidth<\fullwidth
         \setlength{\evensidemargin}{\oddsidemargin}
@@ -5145,17 +5145,17 @@
         \setlength{\linewidth}{\fullwidth}
 %<book|report>        \begin{multicols}{3}[\chapter*{\indexname}%
 %<book|report>        \addcontentsline{toc}{chapter}{\indexname}]%
-%<article|jspf|kiyou>        \def\presectionname{}\def\postsectionname{}%
-%<article|jspf|kiyou>        \begin{multicols}{3}[\section*{\indexname}]%
+%<!book&!report>        \def\presectionname{}\def\postsectionname{}%
+%<!book&!report>        \begin{multicols}{3}[\section*{\indexname}]%
       \else
 %<book|report>        \begin{multicols}{2}[\chapter*{\indexname}%
 %<book|report>        \addcontentsline{toc}{chapter}{\indexname}]%
-%<article|jspf|kiyou>        \def\presectionname{}\def\postsectionname{}%
-%<article|jspf|kiyou>        \begin{multicols}{2}[\section*{\indexname}]%
+%<!book&!report>        \def\presectionname{}\def\postsectionname{}%
+%<!book&!report>        \begin{multicols}{2}[\section*{\indexname}]%
       \fi
     \fi
 %<book|report>    \@mkboth{\indexname}{}%
-%<article|jspf|kiyou>    \@mkboth{\indexname}{\indexname}%
+%<!book&!report>    \@mkboth{\indexname}{\indexname}%
     \plainifnotempty % \thispagestyle{plain}
     \parindent\z@
     \parskip\z@ \@plus .3\jsc@mpt\relax
@@ -5696,7 +5696,7 @@
 %    \begin{macrocode}
 % \newcommand{\appendixname}{\if@english Appendix~\else 付録\fi}
 \newcommand{\appendixname}{\if@english \else 付録\fi}
-%<article|jspf|kiyou>\newcommand{\abstractname}{\if@english Abstract\else 概要\fi}
+%<!book&!report>\newcommand{\abstractname}{\if@english Abstract\else 概要\fi}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -5772,9 +5772,10 @@
 %
 % [2016-11-29] コミュニティ版p\LaTeX で新設されたテスト用パッケージ
 % （\texttt{exppl2e}パッケージ）が文書クラスより先に読み込まれていた
-% 場合は，jsclassesもテスト版として動作します。この処置はjsarticleと
-% jsbookにのみ行い，jspfとkiyouは除外しておきます。exppl2eパッケージ
-% が読みこまれていない場合は通常版として動作しますので，ここで終了します。
+% 場合は，jsclassesもテスト版として動作します。この処置は
+% jsarticle，jsbook，jsreportにのみ行い，jspfとkiyouは除外しておきます。
+% exppl2eパッケージが読みこまれていない場合は通常版として動作しますので，
+% ここで終了します。
 %
 %    \begin{macrocode}
 %<*article|book|report>

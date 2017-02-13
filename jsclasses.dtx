@@ -5400,6 +5400,10 @@
 % [2016-12-01] すぐ上の変更で |\@tempa| を使っていたのがよくなかった
 % ので，プレフィックスを付けて |\jsc@tempa| にしました(forum:2085)。
 %
+% [2017-02-13] |\jsc@tempa| は実はテンポラリではなく「この処理専用の
+% ユニーク制御綴」である必要があります。間違って別の箇所で使う危険性が
+% 高いので，専用の命令 |\js@ig@temp| に置き換えました(Issue \#54)。
+%
 %    \begin{macrocode}
 \def\@inhibitglue{%
   \futurelet\@let@token\@@inhibitglue}
@@ -5422,8 +5426,8 @@
 \def\@@inhibitglue{%
   \expandafter\expandafter\expandafter\jsc@inhibitglue\expandafter\meaning\expandafter\@let@token\KANJI@CHARACTER\relax\jsc@end}
 \expandafter\def\expandafter\jsc@inhibitglue\expandafter#\expandafter1\KANJI@CHARACTER#2#3\jsc@end{%
-  \def\jsc@tempa{#1}%
-  \ifx\jsc@tempa\@empty
+  \def\jsc@ig@temp{#1}%
+  \ifx\jsc@ig@temp\@empty
     \ifnum\the\inhibitxspcode`#2=2\relax
       \inhibitglue
     \fi

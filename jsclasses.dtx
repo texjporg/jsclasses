@@ -81,6 +81,11 @@
 % [2009-02-22] 田中琢爾氏によるup\LaTeX 対応パッチを取り込みました。
 %
 % ここでは次のドキュメントクラス（スタイルファイル）を作ります。
+%
+% [2017-02-13] forum:2121の議論を機に，jsreportクラスを新設しました。
+% 従来のjsbookの |report| オプションと比べると，|abstract| 環境の使い方
+% および挙動がアスキーのjreportに近づきました。
+%
 % \begin{quote}
 %   \begin{tabular}{lll}
 %     $\langle$\textsf{article}$\rangle$ & \texttt{jsarticle.cls}  & 論文・レポート用 \\
@@ -585,9 +590,12 @@
 \DeclareOption{english}{\@englishtrue}
 %    \end{macrocode}
 %
-% \paragraph{jsreport相当}
+% \paragraph{jsbookをjsreportもどきに}
 %
 % オプション \texttt{report} を新設しました。
+%
+% [2017-02-13] 従来は「jsreport相当」をjsbookの \texttt{report} オプションで提供して
+% いましたが，新しくjsreportクラスも作りました。どちらでもお好きな方を使ってください。
 %
 %    \begin{macrocode}
 %<*book>
@@ -5402,7 +5410,7 @@
 %
 % [2017-02-13] |\jsc@tempa| は実はテンポラリではなく「この処理専用の
 % ユニーク制御綴」である必要があります。間違って別の箇所で使う危険性が
-% 高いので，専用の命令 |\js@ig@temp| に置き換えました(Issue \#54)。
+% 高いので，専用の命令 |\jsc@ig@temp| に置き換えました(Issue \#54)。
 %
 %    \begin{macrocode}
 \def\@inhibitglue{%

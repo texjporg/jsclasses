@@ -211,6 +211,13 @@
   \ifx\f@family\cmr\kern-.08em\else\kern-.15em\fi\TeX}
 \DeclareRobustCommand{\SliTeX}{%
   S\kern-.06emL\kern-.18em\jslg@uppersmall{I}\kern -.03em\TeX}
+\providecommand*\pdfstringdefPreHook{}
+\g@addto@macro\pdfstringdefPreHook{%
+  \def\pTeX{p\TeX}%
+  \def\AmS{AMS}%
+  \def\SliTeX{Sli\TeX}%
+  \def\BibTeX{Bib\TeX}%
+}
 \endinput
 %%
 %% End of file `jslogo.sty'.

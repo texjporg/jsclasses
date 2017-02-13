@@ -374,6 +374,35 @@
 % \end{macro}
 %
 %
+% \section{PDF文字列中でロゴが使われた場合への対策}
+%
+% 以上でロゴの定義は終わりですが，|hyperref|を読み込んだ状態で |jslogo| の命令を
+% PDF文字列として解釈される箇所（例 |\section| など）で使うと警告が出てしまいます。
+%\begin{verbatim}
+%  Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+%  (hyperref)                \kern -0.50003pt
+%  (hyperref)                removed on input line 5.
+%\end{verbatim}
+% そこで，この警告が出ないように対策します(Issue \#51)。
+%
+% まず，|\pdfstringdefPreHook| を（なければ）用意します。
+%    \begin{macrocode}
+\providecommand*\pdfstringdefPreHook{}
+%    \end{macrocode}
+%
+% そして，警告が出てしまうロゴに対するPDF文字列中での定義を追加します。
+%    \begin{macrocode}
+\g@addto@macro\pdfstringdefPreHook{%
+  \def\pTeX{p\TeX}%
+  \def\AmS{AMS}%
+  \def\SliTeX{Sli\TeX}%
+  \def\BibTeX{Bib\TeX}%
+}
+%    \end{macrocode}
+%
+% |hyperref| 読込時に |\pdfstringdefPreHook| が定義済ならそれはそのまま保持され，
+% 警告が出なくなります。
+%
 % 以上です。
 %
 % \Finale

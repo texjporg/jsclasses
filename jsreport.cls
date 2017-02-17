@@ -29,6 +29,7 @@
 \newif\if@restonecol
 \newif\if@titlepage
 \newif\if@openright
+\newif\if@openleft
 \newif\if@enablejfam \@enablejfamtrue
 \DeclareOption{a3paper}{%
   \setlength\paperheight {420mm}%
@@ -134,8 +135,9 @@
 \DeclareOption{twocolumn}{\@twocolumntrue}
 \DeclareOption{titlepage}{\@titlepagetrue}
 \DeclareOption{notitlepage}{\@titlepagefalse}
-\DeclareOption{openright}{\@openrighttrue}
-\DeclareOption{openany}{\@openrightfalse}
+\DeclareOption{openright}{\@openrighttrue\@openleftfalse}
+\DeclareOption{openleft}{\@openlefttrue\@openrightfalse}
+\DeclareOption{openany}{\@openrightfalse\@openleftfalse}
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
@@ -889,6 +891,45 @@
 \setlength\@dblfptop{0\jsc@mpt \@plus 1fil}
 \setlength\@dblfpsep{8\jsc@mpt \@plus 2fil}
 \setlength\@dblfpbot{0\jsc@mpt \@plus 1fil}
+\def\pltx@cleartorightpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \iftdir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \else
+    \ifydir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \fi\fi}
+\def\pltx@cleartoleftpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \ifydir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \else
+    \iftdir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \fi\fi}
+\def\pltx@cleartooddpage{\clearpage\if@twoside
+  \ifodd\c@page\else
+    \hbox{}\thispagestyle{empty}\newpage
+    \if@twocolumn\hbox{}\newpage\fi
+  \fi\fi}
+\def\pltx@cleartoevenpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \hbox{}\thispagestyle{empty}\newpage
+    \if@twocolumn\hbox{}\newpage\fi
+  \fi\fi}
+\if@openleft
+  \let\cleardoublepage\pltx@cleartoleftpage
+\else\if@openright
+  \let\cleardoublepage\pltx@cleartorightpage
+\fi\fi
 \def\ps@plainfoot{%
   \let\@mkboth\@gobbletwo
   \let\@oddhead\@empty
@@ -1480,7 +1521,7 @@
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \setcounter{page}\@ne
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

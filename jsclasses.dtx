@@ -181,11 +181,20 @@
 %
 % \begin{macro}{\if@openright}
 %
-% |\chapter|，|\part| を奇数ページ起こしにするかどうかです。
-% 書籍では真が標準です。
+% |\chapter|，|\part| を右ページ起こしにするかどうかです。
+% 横組の書籍では真が標準で，要するに片起こし，奇数ページ起こしになります。
 %
 %    \begin{macrocode}
 %<book|report>\newif\if@openright
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\if@openleft}
+%
+% [????-??-??] |\chapter|，|\part| を左ページ起こしにするかどうかです。
+%
+%    \begin{macrocode}
+%<book|report>\newif\if@openleft
 %    \end{macrocode}
 % \end{macro}
 %
@@ -425,12 +434,20 @@
 %
 % \paragraph{右左起こし}
 %
-% 書籍では章は通常は奇数ページ起こしになりますが，
+% 書籍では章は通常は奇数ページ起こしになりますが，横組ではこれを
+% \texttt{openright} と表すことにしてあります。
 % \texttt{openany} で偶数ページからでも始まるようになります。
 %
+% [????-??-??] \texttt{openright} は横組では奇数ページ起こし，縦組では
+% 偶数ページ起こしを表します。ややこしいですが，これは\LaTeX の標準クラスが
+% 西欧の横組事情しか考慮せずに，奇数ページ起こしと右起こしを一緒にしてしまっ
+% たせいです。縦組での奇数ページ起こしと横組での偶数ページ起こしも表現したい
+% ので，jsclassesでは新たに \texttt{openleft} も追加しました。
+%
 %    \begin{macrocode}
-%<book|report>\DeclareOption{openright}{\@openrighttrue}
-%<book|report>\DeclareOption{openany}{\@openrightfalse}
+%<book|report>\DeclareOption{openright}{\@openrighttrue\@openleftfalse}
+%<book|report>\DeclareOption{openleft}{\@openlefttrue\@openrightfalse}
+%<book|report>\DeclareOption{openany}{\@openrightfalse\@openleftfalse}
 %    \end{macrocode}
 %
 % \paragraph{eqnarray環境と数式の位置}
@@ -2472,6 +2489,78 @@
 % \end{macro}
 % \end{macro}
 %
+% \section{改ページ（日本語\TeX{}開発コミュニティ版のみ）}\label{sec:cleardoublepage}
+%
+% \begin{macro}{\pltx@cleartorightpage}
+% \begin{macro}{\pltx@cleartoleftpage}
+% \begin{macro}{\pltx@cleartooddpage}
+% \begin{macro}{\pltx@cleartoevenpage}
+% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% 同じ命令を追加しました。
+% \begin{enumerate}
+%   \item|\pltx@cleartorightpage|：右ページになるまでページを繰る命令
+%   \item|\pltx@cleartoleftpage|：左ページになるまでページを繰る命令
+%   \item|\pltx@cleartooddpage|：奇数ページになるまでページを繰る命令
+%   \item|\pltx@cleartoevenpage|：偶数ページになるまでページを繰る命令
+% \end{enumerate}
+% となっています。
+%    \begin{macrocode}
+%<*article|book|report>
+\def\pltx@cleartorightpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \iftdir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \else
+    \ifydir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \fi\fi}
+\def\pltx@cleartoleftpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \ifydir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \else
+    \iftdir
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \fi\fi}
+\def\pltx@cleartooddpage{\clearpage\if@twoside
+  \ifodd\c@page\else
+    \hbox{}\thispagestyle{empty}\newpage
+    \if@twocolumn\hbox{}\newpage\fi
+  \fi\fi}
+\def\pltx@cleartoevenpage{\clearpage\if@twoside
+  \ifodd\c@page
+    \hbox{}\thispagestyle{empty}\newpage
+    \if@twocolumn\hbox{}\newpage\fi
+  \fi\fi}
+%</article|book|report>
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\cleardoublepage}
+% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% reportとbookクラスの場合に|\cleardoublepage|を再定義します。
+%    \begin{macrocode}
+%<*book|report>
+\if@openleft
+  \let\cleardoublepage\pltx@cleartoleftpage
+\else\if@openright
+  \let\cleardoublepage\pltx@cleartorightpage
+\fi\fi
+%</book|report>
+%    \end{macrocode}
+% \end{macro}
+%
 % \section{ページスタイル}\label{sec:pagestyle}
 %
 % ページスタイルとして，\LaTeXe （欧文版）の標準クラス
@@ -4167,16 +4256,24 @@
 %
 % タイトルを独立のページに出力するのに使われます。
 %
+% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% bookクラスでタイトルを必ず奇数ページに送るようにしました。といっても，
+% 横組クラスしかありませんでしたので，従来の挙動は何も変わっていません。
+% また，book以外の場合のページ番号のリセットもコミュニティ版\pLaTeX の
+% 標準クラス2017/02/15に合わせましたが，こちらも片面印刷あるいは
+% 独立のタイトルページを作らないクラスばかりでしたので，従来の挙動は
+% 何も変わらずに済みました。
+%
 %    \begin{macrocode}
 \newenvironment{titlepage}{%
-%<book>    \cleardoublepage
+%<book>    \pltx@cleartooddpage %% ????-??-??
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \setcounter{page}\@ne
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

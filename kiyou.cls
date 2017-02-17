@@ -1420,7 +1420,7 @@
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \setcounter{page}\@ne
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

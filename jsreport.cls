@@ -1213,11 +1213,13 @@
 \newcommand{\@chapapp}{\prechaptername}
 \newcommand{\@chappos}{\postchaptername}
 \newcommand\part{%
-  \if@openright
+  \if@openleft
+    \cleardoublepage
+  \else\if@openright
     \cleardoublepage
   \else
     \clearpage
-  \fi
+  \fi\fi
   \thispagestyle{empty}% 欧文用標準スタイルでは plain
   \if@twocolumn
     \onecolumn
@@ -1253,17 +1255,18 @@
   \@endpart}
 \def\@endpart{\vfil\newpage
   \if@twoside
-   \if@openright %% added (2016/12/13)
-    \null
-    \thispagestyle{empty}%
-    \newpage
-   \fi %% added (2016/12/13)
+   \if@openleft %% added (????/??/??)
+    \null\thispagestyle{empty}\newpage
+   \else\if@openright %% added (2016/12/13)
+    \null\thispagestyle{empty}\newpage
+   \fi\fi %% added (2016/12/13, ????/??/??)
   \fi
   \if@restonecol
     \twocolumn
   \fi}
 \newcommand{\chapter}{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \if@openleft\cleardoublepage\else
+  \if@openright\cleardoublepage\else\clearpage\fi\fi
   \plainifnotempty % 元: \thispagestyle{plain}
   \global\@topnum\z@
   \if@english \@afterindentfalse \else \@afterindenttrue \fi

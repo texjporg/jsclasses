@@ -19,7 +19,7 @@
 %
 %  Copyright 1993 1994 1995 1996 1997 1998 1999
 %  The LaTeX3 Project and any individual authors listed elsewhere
-%  in this file. 
+%  in this file.
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
@@ -3347,11 +3347,13 @@
 %    \begin{macrocode}
 %<*book>
 \newcommand\frontmatter{%
-  \if@openright
+  \if@openleft
+    \cleardoublepage
+  \else\if@openright
     \cleardoublepage
   \else
     \clearpage
-  \fi
+  \fi\fi
   \@mainmatterfalse
   \pagenumbering{roman}}
 %    \end{macrocode}
@@ -3363,11 +3365,13 @@
 %
 %    \begin{macrocode}
 \newcommand\mainmatter{%
-% \if@openright
+% \if@openleft
+%   \cleardoublepage
+% \else\if@openright
     \cleardoublepage
 % \else
 %   \clearpage
-% \fi
+% \fi\fi
   \@mainmattertrue
   \pagenumbering{arabic}}
 %    \end{macrocode}
@@ -3379,11 +3383,13 @@
 %
 %    \begin{macrocode}
 \newcommand\backmatter{%
-  \if@openright
+  \if@openleft
+    \cleardoublepage
+  \else\if@openright
     \cleardoublepage
   \else
     \clearpage
-  \fi
+  \fi\fi
   \@mainmatterfalse}
 %</book>
 %    \end{macrocode}
@@ -3433,11 +3439,13 @@
 %    \begin{macrocode}
 %<*book|report>
 \newcommand\part{%
-  \if@openright
+  \if@openleft
+    \cleardoublepage
+  \else\if@openright
     \cleardoublepage
   \else
     \clearpage
-  \fi
+  \fi\fi
   \thispagestyle{empty}% 欧文用標準スタイルでは plain
   \if@twocolumn
     \onecolumn
@@ -3553,11 +3561,11 @@
 %<*book|report>
 \def\@endpart{\vfil\newpage
   \if@twoside
-   \if@openright %% added (2016/12/13)
-    \null
-    \thispagestyle{empty}%
-    \newpage
-   \fi %% added (2016/12/13)
+   \if@openleft %% added (????/??/??)
+    \null\thispagestyle{empty}\newpage
+   \else\if@openright %% added (2016/12/13)
+    \null\thispagestyle{empty}\newpage
+   \fi\fi %% added (2016/12/13, ????/??/??)
   \fi
   \if@restonecol
     \twocolumn
@@ -3578,7 +3586,8 @@
 %    \begin{macrocode}
 %<*book|report>
 \newcommand{\chapter}{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \if@openleft\cleardoublepage\else
+  \if@openright\cleardoublepage\else\clearpage\fi\fi
   \plainifnotempty % 元: \thispagestyle{plain}
   \global\@topnum\z@
   \if@english \@afterindentfalse \else \@afterindenttrue \fi

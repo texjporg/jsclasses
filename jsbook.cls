@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2017/01/13 okumura, texjporg]
+  [2017/02/24 okumura, texjporg]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1305,11 +1305,11 @@
   \@endpart}
 \def\@endpart{\vfil\newpage
   \if@twoside
-   \if@openleft %% added (????/??/??)
+   \if@openleft %% added (2017/02/24)
     \null\thispagestyle{empty}\newpage
    \else\if@openright %% added (2016/12/13)
     \null\thispagestyle{empty}\newpage
-   \fi\fi %% added (2016/12/13, ????/??/??)
+   \fi\fi %% added (2016/12/13, 2017/02/24)
   \fi
   \if@restonecol
     \twocolumn
@@ -1530,14 +1530,14 @@
 \def\@opargbegintheorem#1#2#3{\trivlist\labelsep=1zw
       \item[\hskip \labelsep{\headfont #1\ #2（#3）}]}
 \newenvironment{titlepage}{%
-    \pltx@cleartooddpage %% ????-??-??
+    \pltx@cleartooddpage %% 2017-02-24
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% 2017-02-24
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2017/01/13 okumura, texjporg]
+  [2017/02/24 okumura, texjporg]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1420,7 +1420,7 @@
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% 2017-02-24
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

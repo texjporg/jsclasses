@@ -39,7 +39,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2017/01/13 okumura, texjporg]
+  [2017/02/24 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -191,7 +191,7 @@
 %
 % \begin{macro}{\if@openleft}
 %
-% [????-??-??] |\chapter|，|\part| を左ページ起こしにするかどうかです。
+% [2017-02-24] |\chapter|，|\part| を左ページ起こしにするかどうかです。
 %
 %    \begin{macrocode}
 %<book|report>\newif\if@openleft
@@ -438,7 +438,7 @@
 % \texttt{openright} と表すことにしてあります。
 % \texttt{openany} で偶数ページからでも始まるようになります。
 %
-% [????-??-??] \texttt{openright} は横組では奇数ページ起こし，縦組では
+% [2017-02-24] \texttt{openright} は横組では奇数ページ起こし，縦組では
 % 偶数ページ起こしを表します。ややこしいですが，これは\LaTeX の標準クラスが
 % 西欧の横組事情しか考慮せずに，奇数ページ起こしと右起こしを一緒にしてしまっ
 % たせいです。縦組での奇数ページ起こしと横組での偶数ページ起こしも表現したい
@@ -2495,7 +2495,7 @@
 % \begin{macro}{\pltx@cleartoleftpage}
 % \begin{macro}{\pltx@cleartooddpage}
 % \begin{macro}{\pltx@cleartoevenpage}
-% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% [2017-02-24] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
 % 同じ命令を追加しました。
 % \begin{enumerate}
 %   \item|\pltx@cleartorightpage|：右ページになるまでページを繰る命令
@@ -2548,7 +2548,7 @@
 % \end{macro}
 %
 % \begin{macro}{\cleardoublepage}
-% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% [2017-02-24] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
 % reportとbookクラスの場合に|\cleardoublepage|を再定義します。
 %    \begin{macrocode}
 %<*book|report>
@@ -3561,11 +3561,11 @@
 %<*book|report>
 \def\@endpart{\vfil\newpage
   \if@twoside
-   \if@openleft %% added (????/??/??)
+   \if@openleft %% added (2017/02/24)
     \null\thispagestyle{empty}\newpage
    \else\if@openright %% added (2016/12/13)
     \null\thispagestyle{empty}\newpage
-   \fi\fi %% added (2016/12/13, ????/??/??)
+   \fi\fi %% added (2016/12/13, 2017/02/24)
   \fi
   \if@restonecol
     \twocolumn
@@ -4265,7 +4265,7 @@
 %
 % タイトルを独立のページに出力するのに使われます。
 %
-% [????-??-??] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
+% [2017-02-24] コミュニティ版\pLaTeX の標準クラス2017/02/15に合わせて，
 % bookクラスでタイトルを必ず奇数ページに送るようにしました。といっても，
 % 横組クラスしかありませんでしたので，従来の挙動は何も変わっていません。
 % また，book以外の場合のページ番号のリセットもコミュニティ版\pLaTeX の
@@ -4275,14 +4275,14 @@
 %
 %    \begin{macrocode}
 \newenvironment{titlepage}{%
-%<book>    \pltx@cleartooddpage %% ????-??-??
+%<book>    \pltx@cleartooddpage %% 2017-02-24
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% 2017-02-24
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

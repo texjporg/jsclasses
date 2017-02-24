@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsreport}
-  [2017/01/13 okumura, texjporg]
+  [2017/02/24 okumura, texjporg]
 \def\jsc@clsname{jsreport}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1255,11 +1255,11 @@
   \@endpart}
 \def\@endpart{\vfil\newpage
   \if@twoside
-   \if@openleft %% added (????/??/??)
+   \if@openleft %% added (2017/02/24)
     \null\thispagestyle{empty}\newpage
    \else\if@openright %% added (2016/12/13)
     \null\thispagestyle{empty}\newpage
-   \fi\fi %% added (2016/12/13, ????/??/??)
+   \fi\fi %% added (2016/12/13, 2017/02/24)
   \fi
   \if@restonecol
     \twocolumn
@@ -1524,7 +1524,7 @@
       \@restonecolfalse\newpage
     \fi
     \thispagestyle{empty}%
-    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% ????-??-??
+    \ifodd\c@page\setcounter{page}\@ne\else\setcounter{page}\z@\fi %% 2017-02-24
   }%
   {\if@restonecol\twocolumn \else \newpage \fi
     \if@twoside\else

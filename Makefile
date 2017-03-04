@@ -1,7 +1,9 @@
-STRIPTARGET = jsarticle.cls okumacro.sty jsverb.sty okuverb.sty morisawa.sty jslogo.sty
-PDFTARGET = jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf
-DVITARGET = jsclasses.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi jslogo.dvi
-KANJI = --kanji=jis
+STRIPTARGET = jsarticle.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
+PDFTARGET = jsclasses.pdf jslogo.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf
+DVITARGET = jsclasses.dvi jslogo.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi
+KANJI = -kanji=jis
+FONTMAP = -f ipaex.map -f ptex-ipaex.map
+TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
 default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
@@ -30,10 +32,31 @@ morisawa.sty: morisawa.dtx
 	platex $(KANJI) $<
 	platex $(KANJI) $<
 .dvi.pdf:
-	dvipdfmx $<
+	dvipdfmx $(FONTMAP) $<
 
-.PHONY: clean
+.PHONY: install clean cleanstrip cleanall cleandoc
+install:
+	mkdir -p ${TEXMF}/doc/platex/jsclasses
+	cp ./LICENSE ${TEXMF}/doc/platex/jsclasses/
+	cp ./README.md ${TEXMF}/doc/platex/jsclasses/
+	cp ./*.pdf ${TEXMF}/doc/platex/jsclasses/
+	mkdir -p ${TEXMF}/source/platex/jsclasses
+	cp ./Makefile ${TEXMF}/source/platex/jsclasses/
+	cp ./*.dtx ${TEXMF}/source/platex/jsclasses/
+	cp ./*.ins ${TEXMF}/source/platex/jsclasses/
+	mkdir -p ${TEXMF}/tex/platex/jsclasses
+	cp ./*.cls ${TEXMF}/tex/platex/jsclasses/
+	cp ./*.sty ${TEXMF}/tex/platex/jsclasses/
 clean:
-	rm -f \
-	*.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
-	jsclasses.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf jslogo.pdf
+	rm -f *.cls \
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
+	$(DVITARGET)
+cleanstrip:
+	rm -f *.cls \
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
+cleanall:
+	rm -f *.cls \
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
+	$(DVITARGET) $(PDFTARGET)
+cleandoc:
+	rm -f $(DVITARGET) $(PDFTARGET)

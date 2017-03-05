@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2017/02/24 okumura, texjporg]
+  [2017/03/05 okumura, texjporg]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1240,17 +1240,11 @@
 \newcommand{\@chapapp}{\prechaptername}
 \newcommand{\@chappos}{\postchaptername}
 \newcommand\frontmatter{%
-  \if@openleft
-    \cleardoublepage
-  \else\if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi\fi
+  \pltx@cleartooddpage
   \@mainmatterfalse
   \pagenumbering{roman}}
 \newcommand\mainmatter{%
-    \cleardoublepage
+  \pltx@cleartooddpage
   \@mainmattertrue
   \pagenumbering{arabic}}
 \newcommand\backmatter{%

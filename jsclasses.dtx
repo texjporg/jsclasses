@@ -39,7 +39,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2017/02/24 okumura, texjporg]
+  [2017/03/05 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -3344,16 +3344,19 @@
 %
 % ページ番号をローマ数字にし，章番号を付けないようにします。
 %
+% [2017-03-05] |\frontmatter| と |\mainmatter| の2つの命令は，
+% 改丁または改ページした後で |\pagenumbering{...}| でノンブルを1に
+% リセットします。長い間 |\frontmatter| は \texttt{openany} のときに
+% 単なる改ページとしていましたが，これではノンブルをリセットする際に
+% 偶奇逆転が起こる場合がありました。\texttt{openany} かどうかに依らず
+% 奇数ページまで繰るように修正することで，問題を解消しました。
+% 実は，\LaTeX の標準クラスでは1998年に修正されていた問題です
+% （コミュニティ版\pLaTeX の標準クラス2017/03/05も参照）。
+%
 %    \begin{macrocode}
 %<*book>
 \newcommand\frontmatter{%
-  \if@openleft
-    \cleardoublepage
-  \else\if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi\fi
+  \pltx@cleartooddpage
   \@mainmatterfalse
   \pagenumbering{roman}}
 %    \end{macrocode}
@@ -3365,13 +3368,7 @@
 %
 %    \begin{macrocode}
 \newcommand\mainmatter{%
-% \if@openleft
-%   \cleardoublepage
-% \else\if@openright
-    \cleardoublepage
-% \else
-%   \clearpage
-% \fi\fi
+  \pltx@cleartooddpage
   \@mainmattertrue
   \pagenumbering{arabic}}
 %    \end{macrocode}

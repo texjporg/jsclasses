@@ -176,17 +176,22 @@
 % [2016-07-30] ルビと圏点の高さを合わせるつもりでしたが，間違って
 % 上シフト量を0.63zwとしていましたので，正しい値0.75zwに直しました。
 %
+% [2017-03-11] 「前後の欧文文字との間に |\xkanjiskip| が入らない」
+% 「後ろの禁則処理が効かない」問題を解決するための処理を追加。
+%
 %    \begin{macrocode}
 \def\kenten#1{%
-  \ifvmode\leavevmode\else\hskip\kanjiskip\fi
+  \okumacro@zsp
+  \kern-1zw\relax
   \setbox1=\hbox to \z@{・\hss}%
   \ht1=.63zw
-  \@kenten#1\end}
-\def\@kenten#1{%
+  \@kenten#1\end
+  \kern-1zw\relax\okumacro@zsp}
+\def\@kenten#1#2{%
   \ifx#1\end \let\next=\relax \else
-    \raise.75zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \raise.75zw\copy1\nobreak #1\ifx#2\end\else\hskip\kanjiskip\relax\fi
     \let\next=\@kenten
-  \fi\next}
+  \fi\next#2}
 %    \end{macrocode}
 % \end{macro}
 %

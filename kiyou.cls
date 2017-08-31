@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2017/03/05 okumura, texjporg]
+  [2017/08/31 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -736,7 +736,7 @@
   \belowdisplayshortskip \belowdisplayskip
   \let\@listi\@listI}
 \normalsize
-\setbox0\hbox{\char\euc"A1A1}%
+\setbox0\hbox{\char\jis"3441}%
 \setlength\Cht{\ht0}
 \setlength\Cdp{\dp0}
 \setlength\Cwd{\wd0}
@@ -1726,6 +1726,10 @@
   \def\par{%
     \@restorepar\clubpenalty\@clubpenalty\everypar{\everyparhook}\par\@endpefalse}%
   \everypar{{\setbox\z@\lastbox}\everypar{\everyparhook}\@endpefalse\everyparhook}}
+\def\@setminipage{%
+  \@minipagetrue
+  \everypar{\@minipagefalse\everypar{\everyparhook}}%
+}
 \def\@item[#1]{%
   \if@noparitem
     \@donoparitem

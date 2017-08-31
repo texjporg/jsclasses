@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2016/12/13 okumura, texjporg]
+\ProvidesPackage{okumacro}[2017/08/31 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -59,15 +59,17 @@
       \hbox to \dimen1{\kanjistrut\hfil\unhbox1\hfil}}}%
       \kern-1zw\relax\okumacro@zsp}
 \def\kenten#1{%
-  \ifvmode\leavevmode\else\hskip\kanjiskip\fi
+  \okumacro@zsp
+  \kern-1zw\relax
   \setbox1=\hbox to \z@{・\hss}%
   \ht1=.63zw
-  \@kenten#1\end}
-\def\@kenten#1{%
+  \@kenten#1\end\relax
+  \kern-1zw\relax\okumacro@zsp}
+\def\@kenten#1#2{%
   \ifx#1\end \let\next=\relax \else
-    \raise.75zw\copy1\nobreak #1\hskip\kanjiskip\relax
+    \raise.75zw\copy1\nobreak #1\ifx#2\end\else\hskip\kanjiskip\relax\fi
     \let\next=\@kenten
-  \fi\next}
+  \fi\next#2}
 \newcommand{\kintou}[2]{%
   \leavevmode
   \hbox to #1{%

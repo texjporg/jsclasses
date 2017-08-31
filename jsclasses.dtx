@@ -39,7 +39,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2017/03/05 okumura, texjporg]
+  [2017/08/31 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1659,8 +1659,10 @@
 % パラメータに実際の値を設定します。
 % たとえば |\Cwd| は |\normalfont| の全角幅（1zw）です。
 %
+% [2017-08-31] 基準とする文字を「全角空白」（EUCコード\texttt{0xA1A1}）から
+% 「漢」（JISコード\texttt{0x3441}）へ変更しました。
 %    \begin{macrocode}
-\setbox0\hbox{\char\euc"A1A1}%
+\setbox0\hbox{\char\jis"3441}%
 \setlength\Cht{\ht0}
 \setlength\Cdp{\dp0}
 \setlength\Cwd{\wd0}
@@ -5561,6 +5563,15 @@
   \def\par{%
     \@restorepar\clubpenalty\@clubpenalty\everypar{\everyparhook}\par\@endpefalse}%
   \everypar{{\setbox\z@\lastbox}\everypar{\everyparhook}\@endpefalse\everyparhook}}
+%    \end{macrocode}
+%
+% [2017-08-31] minipage環境にも対策します。
+%
+%    \begin{macrocode}
+\def\@setminipage{%
+  \@minipagetrue
+  \everypar{\@minipagefalse\everypar{\everyparhook}}%
+}
 %    \end{macrocode}
 %
 % |\item| 命令の直後です。

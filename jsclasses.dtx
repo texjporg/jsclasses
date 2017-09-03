@@ -39,7 +39,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2017/08/31 jsclasses (okumura, texjporg)]
+  [2017/09/03 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1178,11 +1178,18 @@
 % 読み込んだ場合に，数式内の添字で文字サイズが変化するようになる
 % はずのところが，変わらなくなっていましたので，修正しました。
 %
+% [2017-09-03] Yue ZHANGさん作の\texttt{fixjfm}パッケージが
+% |\documentclass| より前に |\RequirePackage{fixjfm}| として
+% 読み込まれていた場合には，その定義を優先するため，
+% このクラスファイルでは再定義しません。
+%
 %    \begin{macrocode}
+\ifx\DeclareFixJFMCJKTextFontCommand\@undefined
 \DeclareRobustCommand\textmc[1]{%
     \relax\ifmmode \expandafter\nfss@text \fi{\mcfamily #1}}
 \DeclareRobustCommand\textgt[1]{%
     \relax\ifmmode \expandafter\nfss@text \fi{\gtfamily #1}}
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2017/08/31 jsclasses (okumura, texjporg)]
+  [2017/09/03 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -470,10 +470,12 @@
 \DeclareRobustCommand\ttfamily
         {\not@math@alphabet\ttfamily\mathtt
          \romanfamily\ttdefault\kanjifamily\gtdefault\selectfont}
+\ifx\DeclareFixJFMCJKTextFontCommand\@undefined
 \DeclareRobustCommand\textmc[1]{%
     \relax\ifmmode \expandafter\nfss@text \fi{\mcfamily #1}}
 \DeclareRobustCommand\textgt[1]{%
     \relax\ifmmode \expandafter\nfss@text \fi{\gtfamily #1}}
+\fi
 \def\reDeclareMathAlphabet#1#2#3{%
   \edef\@tempa{\expandafter\@gobble\string#2}%
   \edef\@tempb{\expandafter\@gobble\string#3}%

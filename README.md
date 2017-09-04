@@ -1,21 +1,38 @@
 # jsclasses
 
-Japanese classes, originally written by Haruhiko Okumura and maintained
-by the Japanese TeX Development Community (https://texjp.org), including
-jsarticle, jsbook, and miscellaneous classes and style files.
+The bundle provides Japanese classes and packages, mainly for use with
+pLaTeX and upLaTeX. These were originally written by Haruhiko Okumura,
+and currently maintained by the Japanese TeX Development Community
+(https://texjp.org) on the GitHub repository:
+
+- https://github.com/texjporg/jsclasses
 
 The classes themselves do not automatically enable the support of
 Japanese language. You'll need to set up LaTeX environment appropriately
 so that it can handle Japanese.
 
-WWW: https://github.com/texjporg/jsclasses
+## Character encoding
 
 In the above repository, we include the pre-generated cls/sty files to
-ensure proper encoding. The files have to be in ISO-2022-JP encoding to
-work properly on Windows. These files can be generated in a Japanese
-locale by running platex on the .ins files, for example
+ensure proper encoding. All files are now encoded in UTF-8, since
+recent versions of pLaTeX/upLaTeX recognizes `\epTeXinputencoding`
+primitive of e-(u)pTeX. If you are using old (< 2015) pLaTeX/upLaTeX,
+please download files in jis/ directory.
 
-    platex -kanji=jis jsclasses.ins
+## Contents
+
+- jsclasses (jsarticle, jsbook, jsreport and miscellaneous)
+    - Japanese classes for pLaTeX/upLaTeX.
+- minijs
+    - Minimal jsclasses-like settings for pLaTeX/upLaTeX.
+- okumacro
+    - Miscellaneous macros for pLaTeX/upLaTeX, written by H. Okumura.
+- jsverb, okuverb
+    - Extended version of `\verb` and `verbatim` env. for pLaTeX/upLaTeX.
+- morisawa
+    - Enable selection of 5 standard fonts for pLaTeX + dvips.
+- jslogo
+    - Extended version of LaTeX-related logos for all *LaTeX engines.
 
 ## Release Date
 

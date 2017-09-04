@@ -36,7 +36,7 @@ morisawa.sty: morisawa.dtx
 .dvi.pdf:
 	dvipdfmx $(FONTMAP) $<
 
-.PHONY: install clean cleanstrip cleanall cleandoc
+.PHONY: install clean cleanstrip cleanall cleandoc jisfile
 install:
 	mkdir -p ${TEXMF}/doc/platex/jsclasses
 	cp ./LICENSE ${TEXMF}/doc/platex/jsclasses/
@@ -62,3 +62,15 @@ cleanall:
 	$(DVITARGET) $(PDFTARGET)
 cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
+jisfile:
+	mkdir -p jis0
+	cp *.dtx *.ins *.cls *.sty jis0/
+	for x in jis0/*; do \
+		if [ -f "$$x" ]; then \
+			iconv -f UTF-8 -t ISO-2022-JP "$$x" >"$$x.conv" ; \
+			mv "$$x.conv" "$$x" ; \
+		fi \
+	done
+	ls jis/* | grep -v Makefile | xargs rm
+	mv jis0/* jis/
+	rmdir jis0

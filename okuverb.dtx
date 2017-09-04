@@ -127,12 +127,12 @@
 %
 %    \begin{macrocode}
 \def\verb{%
-  \leavevmode\hbox % 変更
+  \leavevmode\hbox % changed
   \bgroup
     \verb@eol@error \let\do\@makeother \dospecials
     \verbatim@font\@noligs
-    \noautoxspacing % 追加
-    \verbh@@k % 追加
+    \noautoxspacing % added
+    \verbh@@k % added
     \@ifstar\@sverb\@verb}
 %    \end{macrocode}
 % \end{macro}

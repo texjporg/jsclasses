@@ -1,7 +1,7 @@
 STRIPTARGET = jsarticle.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
 PDFTARGET = jsclasses.pdf jslogo.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf
 DVITARGET = jsclasses.dvi jslogo.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi
-KANJI = -kanji=utf8
+KANJI = -kanji=jis
 FONTMAP = -f ipaex.map -f ptex-ipaex.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
@@ -9,25 +9,23 @@ default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
 all: $(STRIPTARGET) $(PDFTARGET)
 
-# for generating files, we use pdflatex incidentally.
-# otherwise, ptexenc might convert U+2212 -> U+FF0D in okumacro.sty
 jsarticle.cls: jsclasses.dtx
-	pdflatex jsclasses.ins
+	platex $(KANJI) jsclasses.ins
 
 jslogo.sty: jslogo.dtx
-	pdflatex jslogo.ins
+	platex $(KANJI) jslogo.ins
 
 okumacro.sty: okumacro.dtx
-	pdflatex okumacro.ins
+	platex $(KANJI) okumacro.ins
 
 jsverb.sty: jsverb.dtx
-	pdflatex jsverb.ins
+	platex $(KANJI) jsverb.ins
 
 okuverb.sty: okuverb.dtx
-	pdflatex okuverb.ins
+	platex $(KANJI) okuverb.ins
 
 morisawa.sty: morisawa.dtx
-	pdflatex morisawa.ins
+	platex $(KANJI) morisawa.ins
 
 .SUFFIXES: .dtx .dvi .pdf
 .dtx.dvi:

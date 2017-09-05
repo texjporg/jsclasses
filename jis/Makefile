@@ -9,6 +9,8 @@ default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
 all: $(STRIPTARGET) $(PDFTARGET)
 
+JSCLASSES = jsarticle.cls jsbook.cls jsreport.cls jspf.cls kiyou.cls
+
 jsarticle.cls: jsclasses.dtx
 	platex $(KANJI) jsclasses.ins
 

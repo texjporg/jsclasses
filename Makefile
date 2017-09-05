@@ -9,6 +9,8 @@ default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
 all: $(STRIPTARGET) $(PDFTARGET)
 
+JSCLASSES = jsarticle.cls jsbook.cls jsreport.cls jspf.cls kiyou.cls
+
 # for generating files, we use pdflatex incidentally.
 # otherwise, ptexenc might convert U+2212 -> U+FF0D in okumacro.sty
 jsarticle.cls: jsclasses.dtx
@@ -64,13 +66,13 @@ cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
 jisfile:
 	mkdir -p jis0
-	cp *.dtx *.ins *.cls *.sty jis0/
+	cp *.{dtx,ins,cls,sty} jis0/
 	for x in jis0/*; do \
 		if [ -f "$$x" ]; then \
 			iconv -f UTF-8 -t ISO-2022-JP "$$x" >"$$x.conv" ; \
 			mv "$$x.conv" "$$x" ; \
 		fi \
 	done
-	ls jis/* | grep -v Makefile | xargs rm
+	rm -f jis/*.{dtx,ins,cls,sty}
 	mv jis0/* jis/
 	rmdir jis0

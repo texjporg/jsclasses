@@ -1,5 +1,16 @@
 % ^^A -*- japanese-latex -*-
+%
+% \ifx\epTeXinputencoding\undefined\else
+%   \epTeXinputencoding utf8
+% \fi
+%
 % \iffalse
+%
+%<*driver>
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8
+\fi
+%</driver>
 %
 %   jsverb.dtx
 %   verb/verbatim 関係マクロ (煮ても焼いてもかまいません)

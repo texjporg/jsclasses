@@ -20,6 +20,9 @@
 %% original source files, as listed above, are part of the
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8
+\fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
   [2017/09/03 jsclasses (okumura, texjporg)]

@@ -67,11 +67,23 @@ cleandoc:
 jisfile:
 	mkdir -p jis0
 	cp *.{dtx,ins,cls,sty} jis0/
+	# GNU iconv can be used to convert UTF-8 -> ISO-2022-JP
 	for x in jis0/*; do \
 		if [ -f "$$x" ]; then \
-			iconv -f UTF-8 -t ISO-2022-JP "$$x" >"$$x.conv" ; \
-			mv "$$x.conv" "$$x" ; \
+			iconv -f UTF-8 -t ISO-2022-JP "$$x" >"$$x.conv"; \
+			mv "$$x.conv" "$$x"; \
 		fi \
+	done
+	# jsclasses and okumacro contains non-ASCII chars also in stripped files
+	for x in $(addprefix jis0/,$(JSCLASSES) jsclasses.dtx okumacro.dtx okumacro.sty); do \
+		perl -pi.bak -0777 -e 's/(%\n)?\\ifx\\epTeXinputencoding\\undefined.*?\n\\fi\n(%\n)?//s' $$x; \
+		rm -f $$x.bak; \
+	done
+	# others have no non-ASCII chars in stripped files
+	for x in $(addprefix jis0/,$(wildcard *.dtx)); do \
+		perl -pi.bak -0777 -e 's/(%\n)?% \\ifx\\epTeXinputencoding\\undefined.*?\n% \\fi\n(%\n)?//s' $$x; \
+		perl -pi.bak -0777 -e 's/(%\n)?%<\*driver>\n\\ifx\\epTeXinputencoding\\undefined.*?\n\\fi\n%<\/driver>\n//s' $$x; \
+		rm -f $$x.bak; \
 	done
 	rm -f jis/*.{dtx,ins,cls,sty}
 	mv jis0/* jis/

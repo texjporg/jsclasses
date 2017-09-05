@@ -74,7 +74,7 @@ jisfile:
 			mv "$$x.conv" "$$x"; \
 		fi \
 	done
-	# jsclasses and okumacro contains non-ASCII chars also in stripped files
+	# jsclasses and okumacro contain non-ASCII chars also in stripped files
 	for x in $(addprefix jis0/,$(JSCLASSES) jsclasses.dtx okumacro.dtx okumacro.sty); do \
 		perl -pi.bak -0777 -e 's/(%\n)?\\ifx\\epTeXinputencoding\\undefined.*?\n\\fi\n(%\n)?//s' $$x; \
 		rm -f $$x.bak; \

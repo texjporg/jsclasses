@@ -1188,6 +1188,12 @@
 % 読み込まれていた場合には，その定義を優先するため，
 % このクラスファイルでは再定義しません。
 %
+% [2017-09-19] 2010年の\pTeX の修正で，イタリック補正と和欧文間の
+% |\xkanjiskip| の衝突が起きなくなっていますから，もうここにある
+% ような単純化は必要ありません。ただし，このクラスファイルが
+% 古い\TeX 環境で利用される可能性も捨てきれないので，とりあえず
+% 残しておきます。
+%
 %    \begin{macrocode}
 \ifx\DeclareFixJFMCJKTextFontCommand\@undefined
 \DeclareRobustCommand\textmc[1]{%
@@ -1673,6 +1679,8 @@
 %
 % [2017-08-31] 基準とする文字を「全角空白」（EUCコード\texttt{0xA1A1}）から
 % 「漢」（JISコード\texttt{0x3441}）へ変更しました。
+%
+% [2017-09-19] 内部的に使った |\box0| を空にします。
 %    \begin{macrocode}
 \setbox0\hbox{\char\jis"3441}%
 \setlength\Cht{\ht0}
@@ -1680,6 +1688,7 @@
 \setlength\Cwd{\wd0}
 \setlength\Cvs{\baselineskip}
 \setlength\Chs{\wd0}
+\setbox0=\box\voidb@x
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

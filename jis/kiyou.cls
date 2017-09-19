@@ -744,6 +744,7 @@
 \setlength\Cwd{\wd0}
 \setlength\Cvs{\baselineskip}
 \setlength\Chs{\wd0}
+\setbox0=\box\voidb@x
 \newcommand{\small}{%
   \ifnarrowbaselines
     \jsc@setfontsize\small{8.8888}{11}%

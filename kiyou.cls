@@ -21,7 +21,7 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 \ifx\epTeXinputencoding\undefined\else
-  \epTeXinputencoding utf8 % added (2017-10-04)
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}

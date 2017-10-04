@@ -16,7 +16,7 @@
 %  ていますので，私のものもそれに準じて（modified）BSDとすることにします。
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2017/08/31 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2017/10/04 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -184,11 +184,21 @@
 % [2017-03-11] 「前後の欧文文字との間に |\xkanjiskip| が入らない」
 % 「後ろの禁則処理が効かない」問題を解決するために和文ゴースト処理を追加。
 %
+% [2017-10-04] もともと |\kenten| では
+%\begin{verbatim}
+%    \setbox1=\hbox to \z@{・\hss}%
+%\end{verbatim}
+% としていましたが，2017年9月の\pTeX (p3.7.2)に対応するため
+%\begin{verbatim}
+%    \setbox1=\hbox to\z@{\hbox to 1zw{\hss・\hss}\hss}%
+%\end{verbatim}
+% に変更しました。これで，p3.7.1以前・p3.7.2以降どちらもOKです。
+%
 %    \begin{macrocode}
 \def\kenten#1{%
   \okumacro@zsp
   \kern-1zw\relax
-  \setbox1=\hbox to \z@{・\hss}%
+  \setbox1=\hbox to\z@{\hbox to 1zw{\hss・\hss}\hss}%
   \ht1=.63zw
   \@kenten#1\end\relax
   \kern-1zw\relax\okumacro@zsp}

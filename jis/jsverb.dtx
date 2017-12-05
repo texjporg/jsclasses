@@ -1,10 +1,10 @@
 % ^^A -*- japanese-latex -*-
 % \iffalse
 %
-%   jsverb.dtx
-%   verb/verbatim 関係マクロ (煮ても焼いてもかまいません)
-%   okumura@okumuralab.org
-%   http://oku.edu.mie-u.ac.jp/~okumura/
+%  jsverb.dtx
+%  verb/verbatim 関係マクロ (煮ても焼いてもかまいません)
+%  奥村晴彦 <okumura@okumuralab.org>
+%  http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %  「煮ても焼いてもかまいません」で困る場合はmodified BSDということでお願いします。
 %
@@ -13,6 +13,8 @@
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
+\xspcode"5C=1 %% \
+\xspcode"22=1 %% "
 \usepackage{okumacro}
 \usepackage{jsverb}
 \addtolength{\textwidth}{-1in}
@@ -22,6 +24,7 @@
 \setlength\marginparsep{5pt}
 \setlength\marginparpush{0pt}
 % \OnlyDescription
+\CodelineNumbered
 \DisableCrossrefs
 \setcounter{StandardModuleDepth}{1}
 \GetFileInfo{jsverb.sty}
@@ -40,9 +43,6 @@
 % \StopEventually{}
 %
 % \MakeShortVerb{\|}
-%
-% ［2008-01-05追記］|http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html|
-% が参考になります。|upquote.sty| というものもありました。
 %
 % 旧 |okuverb| は\LaTeX の |\verb| 命令と |verbatim| 環境を拡張したもので，
 % |yen| オプションを付けると \ttbslash\ が \ttyen\ になるほか，|verbatim| 環境の
@@ -74,6 +74,9 @@
 % なお，|doc.sty| が提供する |macrocode| 環境は書き換えていませんので，
 % 以下のリストでは |` '| が \texttt{` '} になっています。
 % 
+% [2008-01-05] |http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html|
+% が参考になります。|upquote.sty| というものもありました。
+%
 % 以下は内部の解説です。
 % 
 % まずオプションの宣言です。

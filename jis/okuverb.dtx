@@ -1,20 +1,18 @@
 % ^^A -*- japanese-latex -*-
 % \iffalse
 %
-%   okuverb.dtx
-%   verb/verbatim 関係マクロ (煮ても焼いてもかまいません)
-%   okumura@okumuralab.org
-%   http://oku.edu.mie-u.ac.jp/~okumura/
-%
-%  [2002-12-19] いろいろなものに収録していただく際にライセンスを明確にする
-%  必要が生じてきました。アスキーのものが最近はmodified BSDライセンスになっ
-%  ていますので，私のものもそれに準じてmodified BSDとすることにします。
+%  okuverb.dtx
+%  verb/verbatim 関係マクロ
+%  奥村晴彦 <okumura@okumuralab.org>
+%  http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %<okuverb>\NeedsTeXFormat{pLaTeX2e}
 %<okuverb>\ProvidesFile{okuverb.sty}[2003/09/03 okumura]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
+\xspcode"5C=1 %% \
+\xspcode"22=1 %% "
 \usepackage{okumacro}
 \usepackage{okuverb}
 \addtolength{\textwidth}{-1in}
@@ -24,6 +22,7 @@
 \setlength\marginparsep{5pt}
 \setlength\marginparpush{0pt}
 % \OnlyDescription
+\CodelineNumbered
 \DisableCrossrefs
 \setcounter{StandardModuleDepth}{1}
 \GetFileInfo{okuverb.sty}
@@ -42,6 +41,13 @@
 % \StopEventually{}
 %
 % \MakeShortVerb{\|}
+%
+% |okuverb| は\LaTeX の |\verb| 命令と |verbatim| 環境を拡張したものです。
+% 今では |okuverb| を大幅に書き直した |jsverb| もあります。
+%
+% [2002-12-19] いろいろなものに収録していただく際にライセンスを明確にする
+% 必要が生じてきました。アスキーのものが最近はmodified BSDライセンスになっ
+% ていますので，私のものもそれに準じてmodified BSDとすることにします。
 %
 % まずオプションの宣言です。
 % \begin{macro}{\if@yen}

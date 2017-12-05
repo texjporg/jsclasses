@@ -1,6 +1,7 @@
 STRIPTARGET = jsarticle.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
-PDFTARGET = jsclasses.pdf jslogo.pdf okumacro.pdf jsverb.pdf okuverb.pdf morisawa.pdf
-DVITARGET = jsclasses.dvi jslogo.dvi okumacro.dvi jsverb.dvi okuverb.dvi morisawa.dvi
+DOCTARGET = jsclasses jslogo okumacro jsverb okuverb morisawa
+PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
+DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 KANJI = -kanji=utf8
 FONTMAP = -f ipaex.map -f ptex-ipaex.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
@@ -52,14 +53,14 @@ install:
 	cp ./*.cls ${TEXMF}/tex/platex/jsclasses/
 	cp ./*.sty ${TEXMF}/tex/platex/jsclasses/
 clean:
-	rm -f *.cls \
+	rm -f $(JSCLASSES) \
 	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
 	$(DVITARGET)
 cleanstrip:
-	rm -f *.cls \
+	rm -f $(JSCLASSES) \
 	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
 cleanall:
-	rm -f *.cls \
+	rm -f $(JSCLASSES) \
 	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
 	$(DVITARGET) $(PDFTARGET)
 cleandoc:

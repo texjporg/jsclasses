@@ -29,8 +29,10 @@ mv $TMP/$PROJECT/Makefile $TMP/$PROJECT/source/platex/jsclasses/
 mv $TMP/$PROJECT/*.dtx $TMP/$PROJECT/source/platex/jsclasses/
 mv $TMP/$PROJECT/*.ins $TMP/$PROJECT/source/platex/jsclasses/
 
+# winjis.sty should be removed for CTAN
 mkdir -p $TMP/$PROJECT/tex/platex/jsclasses
 mv $TMP/$PROJECT/*.cls $TMP/$PROJECT/tex/platex/jsclasses/
+rm $TMP/$PROJECT/winjis.sty
 mv $TMP/$PROJECT/*.sty $TMP/$PROJECT/tex/platex/jsclasses/
 
 cd $TMP/$PROJECT && zip -r $TMP/$PROJECT.tds.zip *
@@ -41,6 +43,7 @@ echo
 echo " * Create $PROJECT.zip ($RELEASEDATE)"
 git archive --format=tar --prefix=$PROJECT/ HEAD | (cd $TMP && tar xf -)
 # Remove generated and auxiliary files
+# winjis.sty should be removed for CTAN
 rm $TMP/$PROJECT/.gitignore
 rm $TMP/$PROJECT/create_archive.sh
 rm -f $TMP/$PROJECT/jis/*

@@ -1,7 +1,7 @@
 % minimal jsarticle-like fonts
 %
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{minijs}[2016/07/16 okumura, texjporg]
+\ProvidesPackage{minijs}[2018/02/04 okumura, texjporg]
 %
 % if jsclasses loaded, abort loading this package
 \ifx\@jsc@uplatextrue\@undefined\else
@@ -20,6 +20,7 @@
   \expandafter\let\csname JT1/mc/m/n/\@tempa\endcsname\relax
   \expandafter\let\csname JT1/gt/m/n/\@tempa\endcsname\relax
 }
+\def\Cjascale{0.924690}
 \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] jis}{}
 \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] jisg}{}
 \DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.961] tmin10}{}

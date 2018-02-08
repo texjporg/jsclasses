@@ -194,8 +194,8 @@
 \@jsc@autodetectfalse
 \DeclareOption{winjis}{%
     \ClassWarningNoLine{\jsc@clsname}{%
-      The option `winjis' has been removedred;\MessageBreak
-      Use `\usepackage{winjis}' instead}}
+      The option `winjis' has been removed;\MessageBreak
+      Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
 \DeclareOption{jis}{\jisfonttrue}
 \DeclareOption{uplatex}{\@jsc@uplatextrue}

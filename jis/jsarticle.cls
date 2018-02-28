@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsarticle}
-  [2017/10/04 jsclasses (okumura, texjporg)]
+  [2018/02/04 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsarticle}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -181,8 +181,6 @@
 \DeclareOption{disablejfam}{\@enablejfamfalse}
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
-\newif\ifwinjis
-\winjisfalse
 \newif\ifmingoth
 \mingothfalse
 \newif\ifjisfont
@@ -191,10 +189,13 @@
 \@jsc@uplatexfalse
 \newif\if@jsc@autodetect
 \@jsc@autodetectfalse
+\DeclareOption{winjis}{%
+    \ClassWarningNoLine{\jsc@clsname}{%
+      The option `winjis' has been removed;\MessageBreak
+      Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
-\DeclareOption{winjis}{\winjistrue}
 \DeclareOption{jis}{\jisfonttrue}
-\DeclareOption{uplatex}{\@jsc@uplatextrue\winjisfalse}
+\DeclareOption{uplatex}{\@jsc@uplatextrue}
 \DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
@@ -419,35 +420,29 @@
   \setlength\stockwidth{\inv@mag\stockwidth}%
   \setlength\stockheight{\inv@mag\stockheight}%
 \fi
-\ifwinjis
-  \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] winjis}{}
-  \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] winjisg}{}
-  \DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.961] winjis-v}{}
-  \DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.961] winjisg-v}{}
+\def\Cjascale{0.924690}
+\ifmingoth
+  \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ min10}{}
+  \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ goth10}{}
+  \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
+  \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
 \else
-  \ifmingoth
-    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ min10}{}
-    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ goth10}{}
+  \ifjisfont
+    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
+    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
     \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
     \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
   \else
-    \ifjisfont
+    \if@jsc@uplatex
+      \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.924690] upjisr-h}{}
+      \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.924690] upjisg-h}{}
+      \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.924690] upjisr-v}{}
+      \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.924690] upjisg-v}{}
+    \else
       \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
       \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
       \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
       \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
-    \else
-      \if@jsc@uplatex
-        \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.924690] upjisr-h}{}
-        \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.924690] upjisg-h}{}
-        \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.924690] upjisr-v}{}
-        \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.924690] upjisg-v}{}
-      \else
-        \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
-        \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
-        \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
-        \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
-      \fi
     \fi
   \fi
 \fi

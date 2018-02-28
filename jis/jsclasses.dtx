@@ -26,7 +26,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2017/10/04 jsclasses (okumura, texjporg)]
+  [2018/02/04 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -555,14 +555,20 @@
 %
 % \paragraph{和文フォントメトリックの選択}
 %
-% ここでは新しい \texttt{jis} フォントメトリックを標準で使いますが，
-% 古い \texttt{min10}，\texttt{goth10} などを使いたいときは \texttt{mingoth}
-% というオプションを指定します。
-% また，\texttt{winjis} オプションで \texttt{winjis} メトリックが使えます。
+% このクラスファイルでは，和文TFMとして東京書籍印刷の小林肇さんの
+% 作られたJISフォントメトリック（\texttt{jis}，\texttt{jisg}）
+% を標準で使うことにしますが，
+% 従来の \texttt{min10}，\texttt{goth10} などを使いたいときは
+% \texttt{mingoth} というオプションを指定します。
+% また，\texttt{winjis} オプションで \texttt{winjis} メトリック
+% （OTFパッケージと同じpsitauさん作；ソースに書かれたWindowsの
+% 機種依存文字がdvips, dvipdfmxなどで出力出来るようになる）が使えます。
+%
+% [2018-02-04] \texttt{winjis} オプションはコッソリ削除しました。
+% 代替として，同等なものをパッケージ化(winjis.sty)して，
+% GitHubにはコッソリ置いておきます。
 %
 %    \begin{macrocode}
-\newif\ifwinjis
-\winjisfalse
 \newif\ifmingoth
 \mingothfalse
 \newif\ifjisfont
@@ -571,10 +577,13 @@
 \@jsc@uplatexfalse
 \newif\if@jsc@autodetect
 \@jsc@autodetectfalse
+\DeclareOption{winjis}{%
+    \ClassWarningNoLine{\jsc@clsname}{%
+      The option `winjis' has been removed;\MessageBreak
+      Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
-\DeclareOption{winjis}{\winjistrue}
 \DeclareOption{jis}{\jisfonttrue}
-\DeclareOption{uplatex}{\@jsc@uplatextrue\winjisfalse}
+\DeclareOption{uplatex}{\@jsc@uplatextrue}
 \DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
@@ -1022,93 +1031,84 @@
 % PostScriptの単位では9.5862ポイントになります。
 % \texttt{jis} フォントなどもこの値を踏襲しています。
 %
-% この公称10ポイントのフォントをここでは13級に縮小して
+% この公称10ポイントのフォントを，ここでは13級に縮小して
 % 使うことにします。そのためには，$13/13.527 = 0.961$ 倍
-% すればいいことになります。
+% すればいいことになります（\texttt{min10} や \texttt{jis} の場合）。
+% 9.62216ポイントの和文フォントをさらに0.961倍したことにより，
+% 約9.25ポイント，
+% DTPで使う単位（1/72インチ）では9.21ポイントということになり，
+% 公称10ポイントといっても実は9ポイント強になります。
 %
-% また，ここでは和文TFMとして東京書籍印刷の小林肇さんの
-% 作られたJISフォントメトリック（\texttt{jis}，\texttt{jisg}）
-% を標準で使うことにしますが，\texttt{mingoth} オプションを付けると
-% 従来のフォントメトリック（\texttt{min}，\texttt{goth}）
-% を使うようにします。
+% [2018-02-04] 上記のとおりの「クラスファイルが意図する
+% 和文スケール値（$1\,\mathrm{zw} \div \textmc{要求サイズ}$）」を
+% 表すマクロ |\Cjascale| を定義します。このマクロが定義されて
+% いる場合，OTFパッケージ（2018/02/01以降のバージョン）はこれに
+% 従います。jsarticle, jsbook, jsreportでは，
+% $9.62216\,\mathrm{pt} * 0.961 / 10\,\mathrm{pt} = 0.924690$ です。
 %
 %    \begin{macrocode}
 %<*!jspf>
-\ifwinjis
-  \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.961] winjis}{}
-  \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.961] winjisg}{}
-  \DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.961] winjis-v}{}
-  \DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.961] winjisg-v}{}
+\def\Cjascale{0.924690}
+\ifmingoth
+  \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ min10}{}
+  \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ goth10}{}
+  \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
+  \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
 \else
-  \ifmingoth
-    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ min10}{}
-    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ goth10}{}
+  \ifjisfont
+    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
+    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
     \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
     \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
   \else
-    \ifjisfont
+    \if@jsc@uplatex
+      \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.924690] upjisr-h}{}
+      \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.924690] upjisg-h}{}
+      \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.924690] upjisr-v}{}
+      \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.924690] upjisg-v}{}
+    \else
       \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
       \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
       \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
       \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
-    \else
-      \if@jsc@uplatex
-        \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.924690] upjisr-h}{}
-        \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.924690] upjisg-h}{}
-        \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.924690] upjisr-v}{}
-        \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.924690] upjisg-v}{}
-      \else
-        \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ jis}{}
-        \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ jisg}{}
-        \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.961] \jsc@pfx@ tmin10}{}
-        \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.961] \jsc@pfx@ tgoth10}{}
-      \fi
     \fi
   \fi
 \fi
 %</!jspf>
 %    \end{macrocode}
 %
-% 9.62216ポイントの和文フォントをさらに0.961倍したことにより，
-% 約9.25ポイント，
-% DTPで使う単位（1/72インチ）では9.21ポイントということになり，
-% 公称10ポイントといっても実は9ポイント強になります。
-%
 % 某学会誌では，
 % 和文フォントをPostScriptの9ポイントにするために，
 % $9/(9.62216*72/72.27) = 0.93885$ 倍します。
 %
+% [2018-02-04] 和文スケール値 |\Cjascale| は
+% $9.62216\,\mathrm{pt} * 0.93885 / 10\,\mathrm{pt} = 0.903375$ です。
+%
 %    \begin{macrocode}
 %<*jspf>
-\ifwinjis
-  \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.93885] winjis}{}
-  \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.93885] winjisg}{}
-  \DeclareFontShape{JT1}{mc}{m}{n}{<-> s * [0.93885] winjis-v}{}
-  \DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.93885] winjisg-v}{}
+\def\Cjascale{0.903375}
+\ifmingoth
+  \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ min10}{}
+  \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ goth10}{}
+  \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tmin10}{}
+  \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tgoth10}{}
 \else
-  \ifmingoth
-    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ min10}{}
-    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ goth10}{}
+  \ifjisfont
+    \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jis}{}
+    \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jisg}{}
     \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tmin10}{}
     \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tgoth10}{}
   \else
-    \ifjisfont
+    \if@jsc@uplatex
+      \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.903375] upjisr-h}{}
+      \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.903375] upjisg-h}{}
+      \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.903375] upjisr-v}{}
+      \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.903375] upjisg-v}{}
+    \else
       \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jis}{}
       \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jisg}{}
       \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tmin10}{}
       \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tgoth10}{}
-    \else
-      \if@jsc@uplatex
-        \DeclareFontShape{JY2}{mc}{m}{n}{<-> s * [0.903375] upjisr-h}{}
-        \DeclareFontShape{JY2}{gt}{m}{n}{<-> s * [0.903375] upjisg-h}{}
-        \DeclareFontShape{JT2}{mc}{m}{n}{<-> s * [0.903375] upjisr-v}{}
-        \DeclareFontShape{JT2}{gt}{m}{n}{<-> s * [0.903375] upjisg-v}{}
-      \else
-        \DeclareFontShape{\jsc@JYn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jis}{}
-        \DeclareFontShape{\jsc@JYn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ jisg}{}
-        \DeclareFontShape{\jsc@JTn}{mc}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tmin10}{}
-        \DeclareFontShape{\jsc@JTn}{gt}{m}{n}{<-> s * [0.93885] \jsc@pfx@ tgoth10}{}
-      \fi
     \fi
   \fi
 \fi

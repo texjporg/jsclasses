@@ -32,6 +32,9 @@ please download files in jis/ directory.
 - jslogo
     - Extended version of LaTeX-related logos for all *LaTeX engines.
 
+The package [morisawa](https://github.com/texjporg/morisawa) is now
+distributed separately.
+
 ## Release Date
 
 $RELEASEDATE

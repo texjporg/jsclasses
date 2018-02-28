@@ -1,5 +1,5 @@
-STRIPTARGET = jsarticle.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
-DOCTARGET = jsclasses jslogo okumacro jsverb okuverb morisawa
+STRIPTARGET = jsarticle.cls jslogo.sty okumacro.sty jsverb.sty okuverb.sty
+DOCTARGET = jsclasses jslogo okumacro jsverb okuverb
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 KANJI = -kanji=jis
@@ -27,9 +27,6 @@ jsverb.sty: jsverb.dtx
 okuverb.sty: okuverb.dtx
 	platex $(KANJI) okuverb.ins
 
-morisawa.sty: morisawa.dtx
-	platex $(KANJI) morisawa.ins
-
 .SUFFIXES: .dtx .dvi .pdf
 .dtx.dvi:
 	platex $(KANJI) $<
@@ -52,14 +49,14 @@ install:
 	cp ./*.sty ${TEXMF}/tex/platex/jsclasses/
 clean:
 	rm -f $(JSCLASSES) \
-	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty \
 	$(DVITARGET)
 cleanstrip:
 	rm -f $(JSCLASSES) \
-	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty
 cleanall:
 	rm -f $(JSCLASSES) \
-	jslogo.sty okumacro.sty jsverb.sty okuverb.sty morisawa.sty \
+	jslogo.sty okumacro.sty jsverb.sty okuverb.sty \
 	$(DVITARGET) $(PDFTARGET)
 cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)

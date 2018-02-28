@@ -29,8 +29,6 @@ please download files in jis/ directory.
     - Miscellaneous macros for pLaTeX/upLaTeX, written by H. Okumura.
 - jsverb, okuverb
     - Extended version of `\verb` and `verbatim` env. for pLaTeX/upLaTeX.
-- morisawa
-    - Enable selection of 5 standard fonts for pLaTeX + dvips.
 - jslogo
     - Extended version of LaTeX-related logos for all *LaTeX engines.
 

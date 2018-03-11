@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2018/02/04 jsclasses (okumura, texjporg)]
+  [2018/03/11 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1556,12 +1556,12 @@
     \color@begingroup
       \@makefntext{%
         \rule\z@\footnotesep\ignorespaces}%
-      \futurelet\next\fo@t}
-\def\fo@t{\ifcat\bgroup\noexpand\next \let\next\f@@t
-                                \else \let\next\f@t\fi \next}
-\def\f@@t{\bgroup\aftergroup\@foot\let\next}
-\def\f@t#1{#1\@foot}
-\def\@foot{\@finalstrut\strutbox\color@endgroup\egroup
+      \futurelet\jsc@next\jsc@fo@t}
+\def\jsc@fo@t{\ifcat\bgroup\noexpand\jsc@next \let\jsc@next\jsc@f@@t
+                                \else \let\jsc@next\jsc@f@t\fi \jsc@next}
+\def\jsc@f@@t{\bgroup\aftergroup\jsc@@foot\let\jsc@next}
+\def\jsc@f@t#1{#1\jsc@@foot}
+\def\jsc@@foot{\@finalstrut\strutbox\color@endgroup\egroup
   \ifx\pltx@foot@penalty\@undefined\else
     \ifhmode\null\fi
     \ifnum\pltx@foot@penalty=\z@\else

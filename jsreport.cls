@@ -780,13 +780,13 @@
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
 \newcommand{\headfont}{\gtfamily\sffamily}
 \setlength\columnsep{2zw}
-\setlength\columnseprule{0\jsc@mpt}
+\setlength\columnseprule{\z@}
 \setlength\lineskip{1\jsc@mpt}
 \setlength\normallineskip{1\jsc@mpt}
 \setlength\lineskiplimit{1\jsc@mpt}
 \setlength\normallineskiplimit{1\jsc@mpt}
 \renewcommand{\baselinestretch}{}
-\setlength\parskip{0\jsc@mpt}
+\setlength\parskip{\z@}
 \if@slide
   \setlength\parindent{0zw}
 \else

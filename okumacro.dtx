@@ -849,7 +849,9 @@
  {\end{minipage}\egroup
   \dimen0=\linewidth \removept{\dimen0}{\hsPT}%
   \divide \dimen0 by 2 \removept{\dimen0}{\hhsPT}%
-  \dimen0=\ht\scb@x \advance \dimen0 by 10pt
+  \dimen0=\dp\scb@x \advance \dimen0 by 5pt
+  \removept{\dimen0}{\hdxPT}%
+  \advance \dimen0 by \ht\scb@x \advance \dimen0 by 5pt
   \removept{\dimen0}{\htxPT}%
   \begin{flushleft}
     \vspace{6.5pt}%
@@ -858,7 +860,7 @@
       \put(0,0){\line(0,1){\htxPT}}
       \put(\hsPT,0){\line(0,1){\htxPT}}
       \put(\hhsPT,0){\oval(\hsPT,10)[b]}
-      \put(10,5){\ifdim\screensc@le pt=1pt \box\scb@x
+      \put(10,\hdxPT){\ifdim\screensc@le pt=1pt \box\scb@x
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}

@@ -24,7 +24,7 @@
   \epTeXinputencoding utf8 % ^^A added (2017-10-04)
 \fi
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2017/10/04 okumura, texjporg]
+\ProvidesPackage{okumacro}[2018/06/11 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -328,8 +328,10 @@
   \dimen0=\linewidth \removept{\dimen0}{\hsPT}%
   \divide \dimen0 by 2 \removept{\dimen0}{\hhsPT}%
   \dimen0=\dp\scb@x \advance \dimen0 by 5pt
+  \advance \dimen0 by -.5\cdp %% !
   \removept{\dimen0}{\hdxPT}%
   \advance \dimen0 by \ht\scb@x \advance \dimen0 by 5pt
+  \advance \dimen0 by -.5\cdp %% !
   \removept{\dimen0}{\htxPT}%
   \begin{flushleft}
     \vspace{6.5pt}%

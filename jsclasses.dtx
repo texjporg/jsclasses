@@ -31,7 +31,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2018/03/11 jsclasses (okumura, texjporg)]
+  [2018/06/23 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -3777,6 +3777,7 @@
 % \end{macro}
 %
 % \begin{macro}{\paragraph}
+% \begin{macro}{\jsParagraphMark}
 %
 %    見出しの後ろで改行されません。
 %
@@ -3804,6 +3805,7 @@
 %<!jspf>    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \fi
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\subparagraph}
@@ -5041,12 +5043,24 @@
 % \end{macro}
 %
 % \begin{macro}{\@dottedtocline}
+% \begin{macro}{\jsTocLine}
 %
 % \LaTeX 本体（\texttt{ltsect.dtx} 参照）での定義と同じですが，
 % |\@tempdima| を |\@lnumwidth| に変えています。
 %
+% [2018-06-23] デフォルトでは\jsTocLine のようにベースラインになります。\par
+% これを変更可能にするため，|\jsTocLine| というマクロに切り出しました。
+% 例えば，仮想ボディの中央
+% {\renewcommand{\jsTocLine}{\leaders \hbox {\hss ・\hss}\hfill}\jsTocLine}
+% に変更したい場合は
+%\begin{verbatim}
+%  \renewcommand{\jsTocLine}{\leaders \hbox {\hss ・\hss}\hfill}
+%\end{verbatim}
+% とします。
+%
 %    \begin{macrocode}
-\def\jsTocLine{\leaders\hbox{$\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
+\def\jsTocLine{\leaders\hbox{%
+  $\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
   \vskip \z@ \@plus.2\jsc@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
@@ -5059,6 +5073,7 @@
     \jsTocLine \nobreak\hb@xt@\@pnumwidth{%
          \hfil\normalfont \normalcolor #5}\par}\fi}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \paragraph{図目次と表目次}

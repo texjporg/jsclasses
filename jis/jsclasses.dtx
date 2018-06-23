@@ -26,7 +26,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2018/03/11 jsclasses (okumura, texjporg)]
+  [2018/06/23 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -229,7 +229,7 @@
 % \pLaTeXe の \texttt{b5paper}
 % は $257\,\mathrm{mm} \times 182\,\mathrm{mm}$ になっています。
 % ここでは\pLaTeXe にならってJISに従いました。
-% 
+%
 % デフォルトは \texttt{a4paper} です。
 %
 % \texttt{b5var}（B5変形，182mm×230mm），
@@ -358,6 +358,7 @@
 \DeclareOption{nomag}{\jsc@magfalse\jsc@mag@xrealfalse}
 \DeclareOption{nomag*}{\jsc@magfalse\jsc@mag@xrealtrue}
 %    \end{macrocode}
+%
 %
 % \paragraph{トンボオプション}
 %
@@ -626,7 +627,7 @@
 %</book>
 %    \end{macrocode}
 %
-% \paragraph{jslogoパッケージの読み込み}
+% \paragraph{\texttt{jslogo}パッケージの読み込み}
 %
 % \LaTeX 関連のロゴを再定義する\texttt{jslogo}パッケージを
 % 読み込まないオプション\texttt{nojslogo}を新設しました。
@@ -640,8 +641,7 @@
 %
 % \paragraph{オプションの実行}
 %
-% デフォルトのオプションを実行し，|dvi| ファイルの先頭にdvipsのpapersize
-% specialを書き込みます。このspecialはdvipsや最近のdvioutが対応しています。
+% デフォルトのオプションを実行します。
 % |multicols| や |url| を |\RequirePackage| するのはやめました。
 %
 %    \begin{macrocode}
@@ -716,8 +716,13 @@
 %
 % \paragraph{papersizeスペシャルの出力}
 %
-% dvipsのpapersizeスペシャルを出力します。
-% これでdvipsや新しいdvioutで出力領域が自動設定できます。
+% |dvi| ファイルの先頭にdvipsのpapersize specialを書き込むことで，
+% 出力用紙サイズを設定します。これはdvipdfmxや最近のdvioutにも有効です。
+% どうやらpapersize specialにはtrue付の単位は許されず，かつ単位は
+% 常にtrueなものと扱われるようです。
+% そこで，後で出てくる（☆）の部分，「|\mag|にあわせてスケール」よりも
+% 手前で実行しておくことになります。
+%
 % トンボの付いたときの用紙サイズは無意味ですが，
 % いわゆる「ノビ」サイズという縦横1インチずつ長い用紙に出力することを考えて，
 % 1インチずつ加えました。
@@ -981,6 +986,8 @@
 % \end{macro}
 % \end{macro}
 %
+% |\paperwidth|，|\paperheight|を|\mag|にあわせてスケールしておきます（☆）。
+%
 % [2016-07-11] 新しく追加した|\stockwidth|，|\stockheight|も|\mag|にあわせて
 % スケールします。
 %
@@ -1041,7 +1048,7 @@
 %
 % [2018-02-04] 上記のとおりの「クラスファイルが意図する
 % 和文スケール値（$1\,\mathrm{zw} \div \textmc{要求サイズ}$）」を
-% 表すマクロ |\Cjascale| を定義します。このマクロが定義されて
+% 表す実数値マクロ |\Cjascale| を定義します。このマクロが定義されて
 % いる場合，OTFパッケージ（2018/02/01以降のバージョン）はこれに
 % 従います。jsarticle, jsbook, jsreportでは，
 % $9.62216\,\mathrm{pt} * 0.961 / 10\,\mathrm{pt} = 0.924690$ です。
@@ -1690,10 +1697,10 @@
 %
 % |\small| も |\normalsize| と同様に設定します。
 % 行送りは，|\normalsize| が16ポイントなら，
-% 割合からすれば $16 \times 0.9 = 14.4$ ポイントになりますが，
+% 割合からすれば$16 \times 0.9 = 14.4$ポイントになりますが，
 % |\small| の使われ方を考えて，ここでは和文13ポイント，
 % 欧文11ポイントとします。
-% また，|\topsep| と |\parsep| は，元はそれぞれ $4 \pm 2$，$2 \pm 1$
+% また，|\topsep| と |\parsep| は，元はそれぞれ$4 \pm 2$，$2 \pm 1$
 % ポイントでしたが，ここではゼロ（|\z@|）にしました。
 %
 %    \begin{macrocode}
@@ -1719,7 +1726,7 @@
 % \begin{macro}{\footnotesize}
 %
 % |\footnotesize| も同様です。
-% |\topsep| と |\parsep| は，元はそれぞれ $3 \pm 1$，$2 \pm 1$
+% |\topsep| と |\parsep| は，元はそれぞれ$3 \pm 1$，$2 \pm 1$
 % ポイントでしたが，ここではゼロ（|\z@|）にしました。
 %
 %    \begin{macrocode}
@@ -1831,7 +1838,7 @@
 %    \begin{macrocode}
 %<!kiyou>\setlength\columnsep{2zw}
 %<kiyou>\setlength\columnsep{28truebp}
-\setlength\columnseprule{0\jsc@mpt}
+\setlength\columnseprule{\z@}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1883,7 +1890,7 @@
 % |\parindent| は段落の先頭の字下げ幅です。
 %
 %    \begin{macrocode}
-\setlength\parskip{0\jsc@mpt}
+\setlength\parskip{\z@}
 \if@slide
   \setlength\parindent{0zw}
 \else
@@ -1922,7 +1929,7 @@
 % \begin{macro}{\brokenpenalty}
 %
 % ページの最後の行がハイフンで終わる際のペナルティです。
-% デフォルトは 100 です。
+% デフォルトは100です。
 %
 %    \begin{macrocode}
 % \brokenpenalty 100
@@ -2517,6 +2524,7 @@
 %   \item|\pltx@cleartoevenpage|：偶数ページになるまでページを繰る命令
 % \end{enumerate}
 % となっています。
+%
 %    \begin{macrocode}
 %<*article|book|report>
 \def\pltx@cleartorightpage{\clearpage\if@twoside
@@ -2579,7 +2587,7 @@
 % ページスタイルとして，\LaTeXe （欧文版）の標準クラス
 % では |empty|，|plain|，|headings|，|myheadings| があります。
 % このうち |empty|，|plain| スタイルは\LaTeXe 本体
-% で定義されています。 
+% で定義されています。
 %
 % アスキーのクラスファイルでは |headnombre|，|footnombre|，
 % |bothstyle|，|jpl@in| が追加されていますが，
@@ -3764,6 +3772,7 @@
 % \end{macro}
 %
 % \begin{macro}{\paragraph}
+% \begin{macro}{\jsParagraphMark}
 %
 %    見出しの後ろで改行されません。
 %
@@ -3791,6 +3800,7 @@
 %<!jspf>    {\normalfont\normalsize\headfont\jsParagraphMark}}
 \fi
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\subparagraph}
@@ -4629,8 +4639,8 @@
 %    \begin{macrocode}
 %<*!jspf>
 % \long\def\@makecaption#1#2{{\small
-%   \advance\leftskip 10\jsc@mmm
-%   \advance\rightskip 10\jsc@mmm
+%   \advance\leftskip10\jsc@mmm
+%   \advance\rightskip10\jsc@mmm
 %   \vskip\abovecaptionskip
 %   \sbox\@tempboxa{#1\hskip1zw\relax #2}%
 %   \ifdim \wd\@tempboxa >\hsize
@@ -5028,11 +5038,24 @@
 % \end{macro}
 %
 % \begin{macro}{\@dottedtocline}
+% \begin{macro}{\jsTocLine}
 %
 % \LaTeX 本体（\texttt{ltsect.dtx} 参照）での定義と同じですが，
 % |\@tempdima| を |\@lnumwidth| に変えています。
 %
+% [2018-06-23] デフォルトでは\jsTocLine のようにベースラインになります。\par
+% これを変更可能にするため，|\jsTocLine| というマクロに切り出しました。
+% 例えば，仮想ボディの中央
+% {\renewcommand{\jsTocLine}{\leaders \hbox {\hss ・\hss}\hfill}\jsTocLine}
+% に変更したい場合は
+%\begin{verbatim}
+%  \renewcommand{\jsTocLine}{\leaders \hbox {\hss ・\hss}\hfill}
+%\end{verbatim}
+% とします。
+%
 %    \begin{macrocode}
+\def\jsTocLine{\leaders\hbox{%
+  $\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
   \vskip \z@ \@plus.2\jsc@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
@@ -5042,10 +5065,10 @@
    \@lnumwidth #3\relax
    \advance\leftskip \@lnumwidth \null\nobreak\hskip -\leftskip
     {#4}\nobreak
-    \leaders\hbox{$\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep 
-       mu$}\hfill \nobreak\hb@xt@\@pnumwidth{%
+    \jsTocLine \nobreak\hb@xt@\@pnumwidth{%
          \hfil\normalfont \normalcolor #5}\par}\fi}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \paragraph{図目次と表目次}
@@ -5331,7 +5354,8 @@
 % \begin{macro}{\footnote}
 % \begin{macro}{\footnotemark}
 %
-% 和文の句読点・閉じかっこ類の直後で用いた際に余分なアキが入るのを防ぐため，
+% 和文の句読点・閉じかっこ類の直後で用いた際に
+% 余分なアキが入るのを防ぐため，
 % |\inhibitglue| を入れることにします。
 % p\LaTeX の日付が2016/09/03より新しい場合は，このパッチが不要なのであてません。
 %
@@ -5398,7 +5422,7 @@
 % 「注1」の形式にするには次のようにしてください。
 %
 %    \begin{macrocode}
-% \def\thefootnote{\ifnum\c@footnote>\z@注\kern0.1zw\@arabic\c@footnote\fi}
+% \def\thefootnote{\ifnum\c@footnote>\z@ 注\kern0.1zw\@arabic\c@footnote\fi}
 %    \end{macrocode}
 %
 % \end{macro}

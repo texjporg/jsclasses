@@ -7,7 +7,7 @@
 %   http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2017/10/04 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2018/06/11 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -827,6 +827,11 @@
 % また，新たにokuscreen環境を追加します。これはascmacと干渉せず，常に横の
 % 倍率を指定できるスクリーン風の環境になります。
 %
+% [2018-06-11] 2017/10/04版までは，枠の中身の深さを考慮していなかったので，
+% 表(tabular)や深さのある数式を囲むと枠からはみ出していました。この問題を
+% 修正しましたが，なるべく既存文書のレイアウトが変わらないように，通常の
+% テキストの深さ分だけ引いておきました（|!| と印をつけた部分）。
+%
 %    \begin{macrocode}
 \expandafter\ifx\csname ver@tascmac.sty\endcsname\relax
   \newdimen\@scw
@@ -844,7 +849,11 @@
  {\end{minipage}\egroup
   \dimen0=\linewidth \removept{\dimen0}{\hsPT}%
   \divide \dimen0 by 2 \removept{\dimen0}{\hhsPT}%
-  \dimen0=\ht\scb@x \advance \dimen0 by 10pt
+  \dimen0=\dp\scb@x \advance \dimen0 by 5pt
+  \advance \dimen0 by -.5\cdp %% !
+  \removept{\dimen0}{\hdxPT}%
+  \advance \dimen0 by \ht\scb@x \advance \dimen0 by 5pt
+  \advance \dimen0 by -.5\cdp %% !
   \removept{\dimen0}{\htxPT}%
   \begin{flushleft}
     \vspace{6.5pt}%
@@ -853,7 +862,7 @@
       \put(0,0){\line(0,1){\htxPT}}
       \put(\hsPT,0){\line(0,1){\htxPT}}
       \put(\hhsPT,0){\oval(\hsPT,10)[b]}
-      \put(10,5){\ifdim\screensc@le pt=1pt \box\scb@x
+      \put(10,\hdxPT){\ifdim\screensc@le pt=1pt \box\scb@x
                  \else\scalebox{\screensc@le}[1]{\box\scb@x}\fi}
     \end{picture}%
   \end{flushleft}}

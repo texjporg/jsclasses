@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2018/03/11 jsclasses (okumura, texjporg)]
+  [2018/06/23 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -781,13 +781,13 @@
 \everydisplay=\expandafter{\the\everydisplay \narrowbaselines}
 \newcommand{\headfont}{\gtfamily\sffamily}
 \setlength\columnsep{2zw}
-\setlength\columnseprule{0\jsc@mpt}
+\setlength\columnseprule{\z@}
 \setlength\lineskip{1\jsc@mpt}
 \setlength\normallineskip{1\jsc@mpt}
 \setlength\lineskiplimit{1\jsc@mpt}
 \setlength\normallineskiplimit{1\jsc@mpt}
 \renewcommand{\baselinestretch}{}
-\setlength\parskip{0\jsc@mpt}
+\setlength\parskip{\z@}
 \if@slide
   \setlength\parindent{0zw}
 \else
@@ -1672,6 +1672,8 @@
           \@dottedtocline{5}{\@tempdima}{6.5zw}}
 \newdimen\@lnumwidth
 \def\numberline#1{\hb@xt@\@lnumwidth{#1\hfil}\hspace{0pt}}
+\def\jsTocLine{\leaders\hbox{%
+  $\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
   \vskip \z@ \@plus.2\jsc@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
@@ -1681,8 +1683,7 @@
    \@lnumwidth #3\relax
    \advance\leftskip \@lnumwidth \null\nobreak\hskip -\leftskip
     {#4}\nobreak
-    \leaders\hbox{$\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
-       mu$}\hfill \nobreak\hb@xt@\@pnumwidth{%
+    \jsTocLine \nobreak\hb@xt@\@pnumwidth{%
          \hfil\normalfont \normalcolor #5}\par}\fi}
 \newcommand{\listoffigures}{%
   \if@twocolumn\@restonecoltrue\onecolumn

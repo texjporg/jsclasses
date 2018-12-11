@@ -25,7 +25,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2018/06/23 jsclasses (okumura, texjporg)]
+  [2018/12/11 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1591,7 +1591,7 @@
   \vskip\abovecaptionskip
   \sbox\@tempboxa{#1\hskip1zw\relax #2}%
   \ifdim \wd\@tempboxa <\hsize \centering \fi
-  #1\hskip1zw\relax #2\par
+  #1{\hskip1zw\relax}#2\par
   \vskip\belowcaptionskip}}
 \DeclareOldFontCommand{\mc}{\normalfont\mcfamily}{\mathmc}
 \DeclareOldFontCommand{\gt}{\normalfont\gtfamily}{\mathgt}

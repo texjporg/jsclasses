@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2018/06/23 jsclasses (okumura, texjporg)]
+  [2018/12/11 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse

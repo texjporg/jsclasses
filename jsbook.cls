@@ -1981,20 +1981,20 @@
 \newcount\heisei \heisei\year \advance\heisei-1988\relax
 \def\pltx@today@year@#1{%
   \ifnum\numexpr\year-#1=1 元\else
-\ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi
-  \kansuji\numexpr\year-#1\relax
-\else
-  \number\numexpr\year-#1\relax\nobreak
-\fi
+    \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi
+      \kansuji\numexpr\year-#1\relax
+    \else
+      \number\numexpr\year-#1\relax\nobreak
+    \fi
   \fi 年
 }
 \def\pltx@today@year{%
   \ifnum\numexpr\year*10000+\month*100+\day<19890108
-昭和\pltx@today@year@{1925}%
+    昭和\pltx@today@year@{1925}%
   \else\ifnum\numexpr\year*10000+\month*100+\day<20190501
-平成\pltx@today@year@{1988}%
+    平成\pltx@today@year@{1988}%
   \else
-令和\pltx@today@year@{2018}%
+    令和\pltx@today@year@{2018}%
   \fi\fi}
 \def\today{%
   \if@english
@@ -2004,12 +2004,12 @@
       \space\number\day, \number\year
   \else\if西暦
     \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi \kansuji\year
-\else\number\year\nobreak\fi 年
+    \else\number\year\nobreak\fi 年
   \else
-\pltx@today@year
+    \pltx@today@year
   \fi
   \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi
-\kansuji\month 月
+    \kansuji\month 月
     \kansuji\day 日
   \else
     \number\month\nobreak 月

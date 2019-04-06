@@ -10,7 +10,7 @@
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
-%  Copyright 2016-2018 Japanese TeX Development Community
+%  Copyright 2016-2019 Japanese TeX Development Community
 %
 % \fi
 %
@@ -26,7 +26,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2018/12/11 jsclasses (okumura, texjporg)]
+  [2019/04/06 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -879,7 +879,7 @@
   \fi
   \ifnum\@ptsize=-1
     \def\n@baseline{15}%
-  \fi  
+  \fi
 \fi
 %<*kiyou>
 \def\jsc@magscale{0.9769230}
@@ -888,7 +888,7 @@
   \def\inv@mag{1.02354}
   \jsc@mpt=1\p@
   \jsc@mmm=1mm
-\else 
+\else
   \jsc@mpt=\jsc@magscale\p@
   \jsc@mmm=\jsc@magscale mm
   \def\inv@mag{1}
@@ -1335,10 +1335,10 @@
 \xspcode`+=3
 \xspcode`\%=3
 %    \end{macrocode}
-% 
+%
 % これ以外にT1エンコーディングで80〜ffの文字もすべて欧文文字ですので，
 % 両側の和文文字との間にスペースが入らなければなりません。
-% 
+%
 %    \begin{macrocode}
 \xspcode`^^80=3
 \xspcode`^^81=3
@@ -5861,8 +5861,13 @@
 % \paragraph{今日の日付}
 %
 % \LaTeX で処理した日付を出力します。
-% |jarticle| などと違って，標準を西暦にし，余分な空白が入らないように改良しました。
+% ^^A |jarticle| などと違って，標準を西暦にし，
+% ^^A 余分な空白が入らないように改良しました。
+% ^^A -- 2018年7月以降は |jarticle| なども標準が西暦，
+% ^^A -- 2019年4月以降は余分な空白が入らなくなっています。
 % 和暦にするには |\和暦| と書いてください。
+% ちなみにこの文章の作成日は西暦では{\西暦\today}で，
+% 和暦では{\和暦\today}です。
 %
 % \begin{macro}{\today}
 %    \begin{macrocode}
@@ -5870,23 +5875,42 @@
 \def\西暦{\西暦true}
 \def\和暦{\西暦false}
 \newcount\heisei \heisei\year \advance\heisei-1988\relax
+\def\pltx@today@year@#1{%
+  \ifnum\numexpr\year-#1=1 元\else
+    \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi
+      \kansuji\numexpr\year-#1\relax
+    \else
+      \number\numexpr\year-#1\relax\nobreak
+    \fi
+  \fi 年
+}
+\def\pltx@today@year{%
+  \ifnum\numexpr\year*10000+\month*100+\day<19890108
+    昭和\pltx@today@year@{1925}%
+  \else\ifnum\numexpr\year*10000+\month*100+\day<20190501
+    平成\pltx@today@year@{1988}%
+  \else
+    令和\pltx@today@year@{2018}%
+  \fi\fi}
 \def\today{%
   \if@english
     \ifcase\month\or
       January\or February\or March\or April\or May\or June\or
       July\or August\or September\or October\or November\or December\fi
       \space\number\day, \number\year
+  \else\if西暦
+    \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi \kansuji\year
+    \else\number\year\nobreak\fi 年
   \else
-    \if西暦
-      \number\year 年
-      \number\month 月
-      \number\day 日
-    \else
-      平成\number\heisei 年
-      \number\month 月
-      \number\day 日
-    \fi
-  \fi}
+    \pltx@today@year
+  \fi
+  \ifnum1=\iftdir\ifmdir0\else1\fi\else0\fi
+    \kansuji\month 月
+    \kansuji\day 日
+  \else
+    \number\month\nobreak 月
+    \number\day\nobreak 日
+  \fi\fi}
 %    \end{macrocode}
 % \end{macro}
 %

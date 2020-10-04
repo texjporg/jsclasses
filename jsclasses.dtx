@@ -746,6 +746,11 @@
 % [2017-01-11] トンボオプションが指定されているとき「だけ」|\stockwidth|，
 % |\stockheight|を定義するようにしました。
 %
+% [2020-10-04] \LaTeXe~2020-10-01でカーネルの |\shipout| コードが拡張され
+% |\AtBeginDvi| の実行タイミングが変化したので、この時点で
+% 発行する |\special| の中身を展開しておくようにしました。
+% こうしないと、用紙サイズ設定を間違ってしまいます(Issue \#72)。
+%
 %    \begin{macrocode}
 \iftombow
   \newdimen\stockwidth \newdimen\stockheight
@@ -756,10 +761,11 @@
 \fi
 \ifpapersize
   \iftombow
-    \AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
+    \edef\jsc@papersize@special{papersize=\the\stockwidth,\the\stockheight}
   \else
-    \AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}
+    \edef\jsc@papersize@special{papersize=\the\paperwidth,\the\paperheight}
   \fi
+  \AtBeginDvi{\special{\jsc@papersize@special}}
 \fi
 %    \end{macrocode}
 %

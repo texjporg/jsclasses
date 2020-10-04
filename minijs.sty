@@ -1,18 +1,19 @@
-% minimal jsarticle-like fonts
+%% minimal jsarticle-like fonts
 %
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{minijs}[2020/03/20 okumura, texjporg]
+\ProvidesPackage{minijs}
+  [2020/10/04 okumura, texjporg]
 %
-% if jsclasses loaded, abort loading this package
+%% if jsclasses loaded, abort loading this package
 \ifx\@jsc@uplatextrue\@undefined\else
   \PackageInfo{minijs}{jsclasses does not need minijs, exiting}
   \expandafter\endinput
 \fi
 %
-% "fake" jsarticle
+%% "fake" jsarticle
 \expandafter\def\csname ver@jsarticle.cls\endcsname{}
 %
-% min/goth -> jis/jisg (for pLaTeX only)
+%% min/goth -> jis/jisg (for pLaTeX only)
 \ifx\ucs\@undefined
 \@for\@tempa:=5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88\do{%
   \expandafter\let\csname JY1/mc/m/n/\@tempa\endcsname\relax
@@ -27,17 +28,7 @@
 \DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.961] tgoth10}{}
 \fi
 %
-% \@setfontsize with \parindent and \(x)kanjiskip settings
-\def\@setfontsize#1#2#3{\@nomath#1%
-  \ifx\protect\@typeset@protect
-    \let\@currsize#1%
-  \fi
-  \fontsize{#2}{#3}\selectfont
-  \ifdim\parindent>\z@ \parindent=1zw \fi
-  \kanjiskip=0zw plus .1zw minus .01zw
-  \xkanjiskip=0.25em plus 0.15em minus 0.06em}
-%
-% ad-hoc "relation font"
+%% ad-hoc "relation font"
 \ifx\@rmfamilyhook\@undefined  % old
 \DeclareRobustCommand\rmfamily
         {\not@math@alphabet\rmfamily\mathrm
@@ -68,5 +59,15 @@
   {\prepare@family@series@update@kanji{gt}\gtdefault}
 \fi
 \normalsize
+%
+%% \@setfontsize with \parindent and \(x)kanjiskip settings
+\def\@setfontsize#1#2#3{\@nomath#1%
+  \ifx\protect\@typeset@protect
+    \let\@currsize#1%
+  \fi
+  \fontsize{#2}{#3}\selectfont
+  \ifdim\parindent>\z@ \parindent=1zw \fi
+  \kanjiskip=0zw plus .1zw minus .01zw
+  \xkanjiskip=0.25em plus 0.15em minus 0.06em}
 %
 \endinput

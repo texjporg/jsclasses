@@ -58,7 +58,6 @@
 \g@addto@macro\@ttfamilyhook
   {\prepare@family@series@update@kanji{gt}\gtdefault}
 \fi
-\normalsize
 %
 %% \@setfontsize with \parindent and \(x)kanjiskip settings
 \def\@setfontsize#1#2#3{\@nomath#1%
@@ -69,5 +68,8 @@
   \ifdim\parindent>\z@ \parindent=1zw \fi
   \kanjiskip=0zw plus .1zw minus .01zw
   \xkanjiskip=0.25em plus 0.15em minus 0.06em}
+%
+%% initialize
+\normalsize
 %
 \endinput

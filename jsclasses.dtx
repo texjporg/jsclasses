@@ -31,7 +31,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2020/02/02 jsclasses (okumura, texjporg)]
+  [2020/10/04 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -747,9 +747,9 @@
 % |\stockheight|を定義するようにしました。
 %
 % [2020-10-04] \LaTeXe~2020-10-01でカーネルの |\shipout| コードが拡張され
-% |\AtBeginDvi| の実行タイミングが変化したので、この時点で
+% |\AtBeginDvi| の実行タイミングが変化したので，この時点で
 % 発行する |\special| の中身を展開しておくようにしました。
-% こうしないと、用紙サイズ設定を間違ってしまいます(Issue \#72)。
+% こうしないと，用紙サイズ設定を間違ってしまいます(Issue \#72)。
 %
 %    \begin{macrocode}
 \iftombow
@@ -1176,7 +1176,10 @@
 % 従来のコードも\LaTeXe~2019-10-01以前のために残してありますが，
 % \texttt{mweights}パッケージ対策も施しました(forum:2763)。
 %
+% [2020-10-04] \LaTeXe~2020-10-01では |\AddToHook| を利用します。
+%
 %    \begin{macrocode}
+\ifx\AddToHook\@undefined  % --- for 2020-02-02 or older BEGIN
 \ifx\@rmfamilyhook\@undefined  % old
 \DeclareRobustCommand\rmfamily
         {\not@math@alphabet\rmfamily\mathrm
@@ -1206,6 +1209,14 @@
 \g@addto@macro\@ttfamilyhook
   {\prepare@family@series@update@kanji{gt}\gtdefault}
 \fi
+\else % --- for 2020-02-02 or older END & for 2020-10-01 BEGIN
+\AddToHook{rmfamily}%
+  {\prepare@family@series@update@kanji{mc}\mcdefault}
+\AddToHook{sffamily}%
+  {\prepare@family@series@update@kanji{gt}\gtdefault}
+\AddToHook{ttfamily}%
+  {\prepare@family@series@update@kanji{gt}\gtdefault}
+\fi % --- for 2020-10-01 END
 %    \end{macrocode}
 %
 % \begin{macro}{\textmc}

@@ -10,7 +10,8 @@ default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
 all: $(STRIPTARGET) $(PDFTARGET)
 
-JSCLASSES = jsarticle.cls jsbook.cls jsreport.cls jspf.cls kiyou.cls
+JSCLASSES = jsarticle.cls jsbook.cls jsreport.cls jspf.cls kiyou.cls \
+	minijs.sty
 
 # for generating files, we use pdflatex incidentally.
 # otherwise, ptexenc might convert U+2212 -> U+FF0D in okumacro.sty

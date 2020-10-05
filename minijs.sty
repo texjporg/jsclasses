@@ -13,7 +13,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesPackage{minijs}
-  [2020/10/04 jsclasses (okumura, texjporg)]
+  [2020/10/05 jsclasses (okumura, texjporg)]
 %% if jsclasses loaded, abort loading this package
 \ifx\@jsc@uplatextrue\@undefined\else
   \PackageInfo{minijs}{jsclasses does not need minijs, exiting}
@@ -36,7 +36,9 @@
 \DeclareFontShape{JT1}{gt}{m}{n}{<-> s * [0.961] tgoth10}{}
 \fi
 %% ad-hoc "relation font"
-\ifx\AddToHook\@undefined  % --- for 2020-02-02 or older BEGIN
+\@ifl@t@r\fmtversion{2020/10/01}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch          % --- for 2020-02-02 or older BEGIN
 \ifx\@rmfamilyhook\@undefined  % old
 \DeclareRobustCommand\rmfamily
         {\not@math@alphabet\rmfamily\mathrm

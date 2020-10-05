@@ -9,7 +9,7 @@
 %  pLaTeX2ε新ドキュメントクラス（日本語 TeX 開発コミュニティ版）
 %  原作者：奥村晴彦 <okumura@okumuralab.org>
 %
-%  Copyright 1993-2019
+%  Copyright 1993-2020
 %  The LaTeX3 Project and any individual authors listed elsewhere
 %  in this file.
 %
@@ -32,7 +32,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2020/10/04 jsclasses (okumura, texjporg)]
+  [2020/10/05 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1212,11 +1212,20 @@
 %
 % [2020-10-04] \LaTeXe~2020-10-01では |\AddToHook| を利用します。
 %
+% ^^A Note that |\AddToHook| is defined as follows:
+% ^^A \begin{itemize}
+% ^^A   \item Format date 2020-02-02 or older: undefined
+% ^^A   \item Format date 2020-10-01 or newer: available
+% ^^A   \item ... under \texttt{latexrelease} rollback: defined but no-op
+% ^^A \end{itemize}
+%
 %    \begin{macrocode}
 %</class>
 %<*class|minijs>
 %% ad-hoc "relation font"
-\ifx\AddToHook\@undefined  % --- for 2020-02-02 or older BEGIN
+\@ifl@t@r\fmtversion{2020/10/01}
+    {\jsc@needsp@tchfalse}{\jsc@needsp@tchtrue}
+\ifjsc@needsp@tch          % --- for 2020-02-02 or older BEGIN
 \ifx\@rmfamilyhook\@undefined  % old
 \DeclareRobustCommand\rmfamily
         {\not@math@alphabet\rmfamily\mathrm

@@ -49,7 +49,7 @@ rm $TMP/$PROJECT/create_archive.sh
 rm -rf $TMP/$PROJECT/tests
 rm -rf $TMP/$PROJECT/jis
 rm $TMP/$PROJECT/*.cls
-ls $TMP/$PROJECT/*.sty | grep -v minijs.sty | xargs rm
+rm $TMP/$PROJECT/*.sty
 perl -pi.bak -e "s/\\\$RELEASEDATE/$RELEASEDATE/g" $TMP/$PROJECT/README.md
 rm -f $TMP/$PROJECT/README.md.bak
 

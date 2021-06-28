@@ -12,7 +12,7 @@
   \epTeXinputencoding utf8 % ^^A added (2017-10-04)
 \fi
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2019/07/25 okumura, texjporg]
+\ProvidesPackage{okumacro}[2021/06/28 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -125,7 +125,7 @@
     \rule[0.8ex]{0.15ex}{0.7ex}}}
 \def\−−{―\kern-.5zw―\kern-.5zw―}
 \def\――{―\kern-.5zw―\kern-.5zw―}
-\ifx\ucs\@undefined\else
+\ifnum\jis"2121="3000 % upTeX check
   \begingroup
     \kansujichar1="FF0D
     \kansujichar2="2014

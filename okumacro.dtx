@@ -12,7 +12,7 @@
 %   http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2019/07/25 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2021/06/28 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -399,7 +399,7 @@
 % [2016-12-04] \pLaTeX で通るコードが \upLaTeX で通らなくなることを防ぐために，u\pLaTeX の場合にはU+FF0D，U+2014で定義したものも別途用意しました。
 %
 %    \begin{macrocode}
-\ifx\ucs\@undefined\else
+\ifnum\jis"2121="3000 % upTeX check
   \begingroup
     \kansujichar1="FF0D
     \kansujichar2="2014

@@ -12,7 +12,7 @@
   \epTeXinputencoding utf8 % ^^A added (2017-10-04)
 \fi
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2021/06/28 okumura, texjporg]
+\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -435,11 +435,6 @@
 \newcommand{\ANGLE}[1]{%
   $\langle$\kern0pt\nobreak{#1}\kern0pt\nobreak$\rangle$}
 \newcommand{\株}{\hspace{\kanjiskip}\<（株）\<\hspace{\kanjiskip}}
-\@ifundefined{widebaselines}{}{%
-  \let\endmathdisplaysave=\endmathdisplay
-  \def\endmathdisplay{\widebaselines\endmathdisplaysave}}
-  \let\start@alignsave=\start@align
-  \def\start@align{\vspace{4pt}\start@alignsave}
 \endinput
 %%
 %% End of file `okumacro.sty'.

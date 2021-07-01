@@ -7,7 +7,7 @@
 %   http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2019/07/25 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -394,7 +394,7 @@
 % [2016-12-04] \pLaTeX で通るコードが \upLaTeX で通らなくなることを防ぐために，u\pLaTeX の場合にはU+FF0D，U+2014で定義したものも別途用意しました。
 %
 %    \begin{macrocode}
-\ifx\ucs\@undefined\else
+\ifnum\jis"2121="3000 % upTeX check
   \begingroup
     \kansujichar1="FF0D
     \kansujichar2="2014
@@ -1156,12 +1156,19 @@
 % とりあえず |amsmath| の |equation(*)|，|align(*)| 環境の類だけここで直しておきます。
 % このあたりはまた見直します。
 %
+% [2021-07-01] |okumacro| が有ると |xalignat| 上部のアキが大きくなる現象
+% (forum:3029)が報告されました。|js*| クラスのための修正だったはずですが，
+% |js*| クラスを使った場合でも「修正しない方がバランスが良い」という挙動
+% ^^A 少なくとも\TeX\ Live 2014--2021は同じ挙動。
+% ^^A https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=3029
+% だったため，削除しました。
+%
 %    \begin{macrocode}
-\@ifundefined{widebaselines}{}{%
-  \let\endmathdisplaysave=\endmathdisplay
-  \def\endmathdisplay{\widebaselines\endmathdisplaysave}}
-  \let\start@alignsave=\start@align
-  \def\start@align{\vspace{4pt}\start@alignsave}
+%\@ifundefined{widebaselines}{}{%
+%  \let\endmathdisplaysave=\endmathdisplay
+%  \def\endmathdisplay{\widebaselines\endmathdisplaysave}}
+%  \let\start@alignsave=\start@align
+%  \def\start@align{\vspace{4pt}\start@alignsave}
 %    \end{macrocode}
 %
 % 以上で終わりです。

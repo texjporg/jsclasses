@@ -9,7 +9,7 @@
 %% Maintained on GitHub: https://github.com/texjporg/jsclasses
 %% 
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2019/07/25 okumura, texjporg]
+\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -122,7 +122,7 @@
     \rule[0.8ex]{0.15ex}{0.7ex}}}
 \def\−−{―\kern-.5zw―\kern-.5zw―}
 \def\――{―\kern-.5zw―\kern-.5zw―}
-\ifx\ucs\@undefined\else
+\ifnum\jis"2121="3000 % upTeX check
   \begingroup
     \kansujichar1="FF0D
     \kansujichar2="2014
@@ -432,11 +432,6 @@
 \newcommand{\ANGLE}[1]{%
   $\langle$\kern0pt\nobreak{#1}\kern0pt\nobreak$\rangle$}
 \newcommand{\株}{\hspace{\kanjiskip}\<（株）\<\hspace{\kanjiskip}}
-\@ifundefined{widebaselines}{}{%
-  \let\endmathdisplaysave=\endmathdisplay
-  \def\endmathdisplay{\widebaselines\endmathdisplaysave}}
-  \let\start@alignsave=\start@align
-  \def\start@align{\vspace{4pt}\start@alignsave}
 \endinput
 %%
 %% End of file `okumacro.sty'.

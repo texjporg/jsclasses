@@ -4,13 +4,13 @@
 %  pLaTeX2ε新ドキュメントクラス（日本語 TeX 開発コミュニティ版）
 %  原作者：奥村晴彦 <okumura@okumuralab.org>
 %
-%  Copyright 1993-2020
+%  Copyright 1993-2021
 %  The LaTeX3 Project and any individual authors listed elsewhere
 %  in this file.
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
-%  Copyright 2016-2020 Japanese TeX Development Community
+%  Copyright 2016-2021 Japanese TeX Development Community
 %
 % \fi
 %
@@ -27,7 +27,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2020/10/09 jsclasses (okumura, texjporg)]
+  [2021/06/28 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -1083,7 +1083,7 @@
 %</class>
 %<*minijs>
 %% min/goth -> jis/jisg (for pLaTeX only)
-\ifx\ucs\@undefined
+\ifnum\jis"2121="3000 \else
 \@for\@tempa:=5,6,7,8,9,10,10.95,12,14.4,17.28,20.74,24.88\do{%
   \expandafter\let\csname JY1/mc/m/n/\@tempa\endcsname\relax
   \expandafter\let\csname JY1/gt/m/n/\@tempa\endcsname\relax

@@ -601,16 +601,16 @@
 \jisfontfalse
 \newif\if@jsc@uplatex
 \@jsc@uplatexfalse
-\newif\if@jsc@autodetect
-\@jsc@autodetectfalse
 \DeclareOption{winjis}{%
     \ClassWarningNoLine{\jsc@clsname}{%
       The option `winjis' has been removed;\MessageBreak
       Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
 \DeclareOption{jis}{\jisfonttrue}
-\DeclareOption{uplatex}{\@jsc@uplatextrue}
-\DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
+\let\jsc@engine@given=*
+\DeclareOption{platex}{\let\jsc@engine@given=p\@jsc@uplatexfalse}
+\DeclareOption{uplatex}{\let\jsc@engine@given=u\@jsc@uplatextrue}
+\DeclareOption{autodetect-engine}{\let\jsc@engine@given=*}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
 \def\jsc@pfx@{\if@jsc@uplatex u\else \fi}
@@ -693,20 +693,28 @@
 %
 % \paragraph{使用エンジンの検査・自動判定}
 %
-% ユーザが |uplatex| オプションの有無により指定したエンジンが，実際に
-% 使われているものと一致しているかを検査し，一致しない場合はエラー
-% メッセージを表示します。
+% デフォルトで現在使われているエンジンが pLaTeX か upLaTeX かを判定します。
+% ユーザによって |platex| オプションまたは |uplatex| オプションが明示的に
+% 指定されている場合は、実際に使われているもの一致しているかを検査し，一致
+% しない場合はエラーメッセージを表示します。
 %
 % [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション |autodetect-engine| を新設しました。
 % up\LaTeX の場合は，グローバルオプションに |uplatex| を追加することで，
 % 自動判定に応じて |otf| パッケージにも |uplatex| オプションが渡るようにします。
 %
+% [2022-03-28] |autodetect-engine| 指定時の挙動を規定化しました。
+%
 %    \begin{macrocode}
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
-  \if@jsc@autodetect
+  \ifx *\jsc@engine@given
     \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
     \@jsc@uplatextrue
     \g@addto@macro\@classoptionslist{,uplatex}
+  \fi
+  \ifx p\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'platex' used but you are running upLaTeX.}
+      {\@ehc}
   \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
@@ -724,16 +732,22 @@
 %
 %    \begin{macrocode}
 \else
+  \ifx *\jsc@engine@given
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
+    \@jsc@uplatexfalse
+    \g@addto@macro\@classoptionslist{,platex}
+  \fi
+  \ifx u\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'uplatex' used but you are running pLaTeX.}
+      {\@ehc}
+  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak
        Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
        the class option list}
       {\@ehc}
-    \@jsc@uplatexfalse
-  \fi
-  \if@jsc@autodetect
-    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
     \@jsc@uplatexfalse
   \fi
 \fi

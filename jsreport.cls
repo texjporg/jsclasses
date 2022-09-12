@@ -13,7 +13,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsreport}
-  [2021/06/28 jsclasses (okumura, texjporg)]
+  [2022/09/12 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsreport}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -240,7 +240,8 @@
   \fi
 \fi
 \iftombow
-  \newdimen\stockwidth \newdimen\stockheight
+  \ifx\stockwidth\@undefined\newdimen\stockwidth\fi
+  \ifx\stockheight\@undefined\newdimen\stockheight\fi
   \setlength{\stockwidth}{\paperwidth}
   \setlength{\stockheight}{\paperheight}
   \advance \stockwidth 2in

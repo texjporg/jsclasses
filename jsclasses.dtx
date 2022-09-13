@@ -15,7 +15,7 @@
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
-%  Copyright 2016-2021 Japanese TeX Development Community
+%  Copyright 2016-2022 Japanese TeX Development Community
 %
 % \fi
 %
@@ -32,7 +32,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2022/09/12 jsclasses (okumura, texjporg)]
+  [2022/09/13 jsclasses (okumura, texjporg)]
 %<*driver>
 \documentclass{jsarticle}
 \usepackage{doc}
@@ -481,10 +481,14 @@
 %    ようですので，少し小さくします。
 %    また，中央の要素も |\displaystyle| にします。
 %
+% [2022-09-13] \LaTeXe~2021-11-15 (ltmath.dtx 2021/10/14 v1.2j)で
+% |\@currentcounter|が追加されましたので，追随します。
+%
 %    \begin{macrocode}
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
+   \def\@currentcounter{equation}%
    \global\@eqnswtrue
    \m@th
    \global\@eqcnt\z@
@@ -504,6 +508,9 @@
 % \texttt{fleqn} で数式が本文左端から一定距離のところに出力されます。
 % 森本さんにしたがって訂正しました。
 %
+% [2022-09-13] \LaTeXe~2021-11-15 (ltmath.dtx 2021/10/14 v1.2j)で
+% |\@currentcounter|が追加されましたので，追随します。
+%
 %    \begin{macrocode}
 \DeclareOption{leqno}{\input{leqno.clo}}
 \DeclareOption{fleqn}{\input{fleqn.clo}%
@@ -511,6 +518,7 @@
   \def\eqnarray{%
     \stepcounter{equation}%
     \def\@currentlabel{\p@equation\theequation}%
+    \def\@currentcounter{equation}%
     \global\@eqnswtrue\m@th
     \global\@eqcnt\z@
     \tabskip\mathindent
@@ -5595,6 +5603,9 @@
 %
 % [2018-03-11] |\next|などいくつかの内部命令を |\jsc@...| 付きの
 % ユニークな名前にしました。
+%
+% [2022-09-13] \LaTeXe~2021-11-15 (ltfloat.dtx 2021/10/14 v1.2g)で
+% |\@currentcounter|が追加されましたので，追随します。
 %    \begin{macrocode}
 \long\def\@footnotetext{%
   \insert\footins\bgroup
@@ -5603,6 +5614,7 @@
     \splittopskip\footnotesep
     \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
     \hsize\columnwidth \@parboxrestore
+    \def\@currentcounter{footnote}%
     \protected@edef\@currentlabel{%
        \csname p@footnote\endcsname\@thefnmark
     }%

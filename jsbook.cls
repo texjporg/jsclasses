@@ -13,7 +13,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2022/09/12 jsclasses (okumura, texjporg)]
+  [2022/09/13 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -133,6 +133,7 @@
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
+   \def\@currentcounter{equation}%
    \global\@eqnswtrue
    \m@th
    \global\@eqcnt\z@
@@ -150,6 +151,7 @@
   \def\eqnarray{%
     \stepcounter{equation}%
     \def\@currentlabel{\p@equation\theequation}%
+    \def\@currentcounter{equation}%
     \global\@eqnswtrue\m@th
     \global\@eqcnt\z@
     \tabskip\mathindent
@@ -1827,6 +1829,7 @@
     \splittopskip\footnotesep
     \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
     \hsize\columnwidth \@parboxrestore
+    \def\@currentcounter{footnote}%
     \protected@edef\@currentlabel{%
        \csname p@footnote\endcsname\@thefnmark
     }%

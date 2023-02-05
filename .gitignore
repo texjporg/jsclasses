@@ -156,8 +156,14 @@ pythontex-files-*/
 *.ttt
 *.fff
 
+# hypdoc
+*.hd
+
 # Latexian
 TSWLatexianTemp*
+
+# tests
+tests/*.pdf
 
 # temporary directory
 jis0/*

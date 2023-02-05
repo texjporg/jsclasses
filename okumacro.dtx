@@ -14,7 +14,8 @@
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
 %<okumacro>\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
 %<*driver>
-\documentclass{jsarticle}
+\RequirePackage{plautopatch}
+\documentclass[dvipdfmx]{jsarticle}
 \usepackage{doc}
 \xspcode"5C=1 %% \
 \xspcode"22=1 %% "

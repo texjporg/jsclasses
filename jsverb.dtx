@@ -22,7 +22,8 @@
 %<jsverb>\NeedsTeXFormat{pLaTeX2e}
 %<jsverb>\ProvidesFile{jsverb.sty}[2007/01/28 okumura]
 %<*driver>
-\documentclass{jsarticle}
+\RequirePackage{plautopatch}
+\documentclass[dvipdfmx]{jsarticle}
 \usepackage{doc}
 \xspcode"5C=1 %% \
 \xspcode"22=1 %% "

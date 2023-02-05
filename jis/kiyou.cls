@@ -10,7 +10,7 @@
 %% 
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2021/06/28 jsclasses (okumura, texjporg)]
+  [2022/09/13 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -124,6 +124,7 @@
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
+   \def\@currentcounter{equation}%
    \global\@eqnswtrue
    \m@th
    \global\@eqcnt\z@
@@ -141,6 +142,7 @@
   \def\eqnarray{%
     \stepcounter{equation}%
     \def\@currentlabel{\p@equation\theequation}%
+    \def\@currentcounter{equation}%
     \global\@eqnswtrue\m@th
     \global\@eqcnt\z@
     \tabskip\mathindent
@@ -232,7 +234,8 @@
   \fi
 \fi
 \iftombow
-  \newdimen\stockwidth \newdimen\stockheight
+  \ifx\stockwidth\@undefined\newdimen\stockwidth\fi
+  \ifx\stockheight\@undefined\newdimen\stockheight\fi
   \setlength{\stockwidth}{\paperwidth}
   \setlength{\stockheight}{\paperheight}
   \advance \stockwidth 2in
@@ -1691,6 +1694,7 @@
     \splittopskip\footnotesep
     \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
     \hsize\columnwidth \@parboxrestore
+    \def\@currentcounter{footnote}%
     \protected@edef\@currentlabel{%
        \csname p@footnote\endcsname\@thefnmark
     }%

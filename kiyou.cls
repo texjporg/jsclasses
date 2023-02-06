@@ -13,7 +13,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2022/09/13 jsclasses (okumura, texjporg)]
+  [2023/02/12 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse

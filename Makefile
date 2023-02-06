@@ -65,7 +65,7 @@ cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
 jisfile:
 	mkdir -p jis0
-	cp *.{dtx,ins,cls,sty} jis0/
+	cp *.dtx *.ins *.cls *.sty jis0/
 	# GNU iconv can be used to convert UTF-8 -> ISO-2022-JP
 	for x in jis0/*; do \
 		if [ -f "$$x" ]; then \

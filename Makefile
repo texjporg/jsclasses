@@ -63,6 +63,8 @@ cleanall:
 	$(DVITARGET) $(PDFTARGET)
 cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
+cleantmp:
+	rm -f *.aux *.log *.dvi
 jisfile:
 	mkdir -p jis0
 	cp *.dtx *.ins *.cls *.sty jis0/

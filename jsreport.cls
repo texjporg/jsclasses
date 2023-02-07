@@ -221,7 +221,7 @@
   \fi
   \ifx p\jsc@engine@given
     \ClassError\jsc@clsname
-      {Option 'platex' used but you are running upLaTeX.}
+      {Option 'platex' is specified but you are running upLaTeX.}
       {\@ehc}
   \fi
   \if@jsc@uplatex\else
@@ -240,7 +240,7 @@
   \fi
   \ifx u\jsc@engine@given
     \ClassError\jsc@clsname
-      {Option 'uplatex' used but you are running pLaTeX.}
+      {Option 'uplatex' is specified but you are running pLaTeX.}
       {\@ehc}
   \fi
   \if@jsc@uplatex

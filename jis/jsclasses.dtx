@@ -699,7 +699,7 @@
 %
 % デフォルトで現在使われているエンジンが p\LaTeX か up\LaTeX かを判定します。
 % ユーザによって |platex| オプションまたは |uplatex| オプションが明示的に
-% 指定されている場合は、実際に使われているもの一致しているかを検査し，一致
+% 指定されている場合は、実際に使われているエンジンと一致しているかを検査し，一致
 % しない場合はエラーメッセージを表示します。
 %
 % [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション |autodetect-engine| を新設しました。
@@ -719,7 +719,7 @@
   \fi
   \ifx p\jsc@engine@given
     \ClassError\jsc@clsname
-      {Option 'platex' used but you are running upLaTeX.}
+      {Option 'platex' is specified but you are running upLaTeX.}
       {\@ehc}
   \fi
   \if@jsc@uplatex\else
@@ -738,7 +738,7 @@
   \fi
   \ifx u\jsc@engine@given
     \ClassError\jsc@clsname
-      {Option 'uplatex' used but you are running pLaTeX.}
+      {Option 'uplatex' is specified but you are running pLaTeX.}
       {\@ehc}
   \fi
   \if@jsc@uplatex

@@ -3,7 +3,7 @@ DOCTARGET = jsclasses jslogo okumacro jsverb okuverb
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 KANJI = -kanji=utf8
-FONTMAP = -f haranoaji.map -f ptex-haranoaji.map
+FONTMAP = -f ptex-haranoaji.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
 default: $(STRIPTARGET) $(DVITARGET)

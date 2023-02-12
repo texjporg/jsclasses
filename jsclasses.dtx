@@ -15,7 +15,7 @@
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
-%  Copyright 2016-2022 Japanese TeX Development Community
+%  Copyright 2016-2023 Japanese TeX Development Community
 %
 % \fi
 %
@@ -32,7 +32,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2022/09/13 jsclasses (okumura, texjporg)]
+  [2023/02/12 jsclasses (okumura, texjporg)]
 %<*driver>
 \RequirePackage{plautopatch}
 \documentclass[dvipdfmx]{jsarticle}
@@ -610,16 +610,16 @@
 \jisfontfalse
 \newif\if@jsc@uplatex
 \@jsc@uplatexfalse
-\newif\if@jsc@autodetect
-\@jsc@autodetectfalse
 \DeclareOption{winjis}{%
     \ClassWarningNoLine{\jsc@clsname}{%
       The option `winjis' has been removed;\MessageBreak
       Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
 \DeclareOption{jis}{\jisfonttrue}
-\DeclareOption{uplatex}{\@jsc@uplatextrue}
-\DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
+\let\jsc@engine@given=*
+\DeclareOption{platex}{\let\jsc@engine@given=p\@jsc@uplatexfalse}
+\DeclareOption{uplatex}{\let\jsc@engine@given=u\@jsc@uplatextrue}
+\DeclareOption{autodetect-engine}{\let\jsc@engine@given=*}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
 \def\jsc@pfx@{\if@jsc@uplatex u\else \fi}
@@ -702,20 +702,30 @@
 %
 % \paragraph{使用エンジンの検査・自動判定}
 %
-% ユーザが |uplatex| オプションの有無により指定したエンジンが，実際に
-% 使われているものと一致しているかを検査し，一致しない場合はエラー
-% メッセージを表示します。
+% デフォルトで現在使われているエンジンが p\LaTeX か up\LaTeX かを判定します。
+% ユーザによって |platex| オプションまたは |uplatex| オプションが明示的に
+% 指定されている場合は、実際に使われているエンジンと一致しているかを検査し，一致
+% しない場合はエラーメッセージを表示します。
 %
 % [2016-11-09] p\LaTeX / up\LaTeX を自動判別するオプション |autodetect-engine| を新設しました。
 % up\LaTeX の場合は，グローバルオプションに |uplatex| を追加することで，
 % 自動判定に応じて |otf| パッケージにも |uplatex| オプションが渡るようにします。
 %
+% [2023-02-12] |autodetect-engine| 指定時の挙動を規定化しました。
+% また |platex| を新設しました。オプション |autodetect-engine|, |platex|, |uplatex| の
+% うち最後に指定されたものが有効になります。
+%
 %    \begin{macrocode}
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
-  \if@jsc@autodetect
+  \ifx *\jsc@engine@given
     \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
     \@jsc@uplatextrue
     \g@addto@macro\@classoptionslist{,uplatex}
+  \fi
+  \ifx p\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'platex' is specified but you are running upLaTeX.}
+      {\@ehc}
   \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
@@ -725,24 +735,23 @@
       {\@ehc}
     \@jsc@uplatextrue
   \fi
-%    \end{macrocode}
-%
-% [2016-11-11] p\LaTeX の場合は，オプション |uplatex| が指定されていれば必ずエラーを出します。
-% |autodetect-engine| が有効になっていてもエラーを出しますが，これは |otf| パッケージに
-% |uplatex| オプションが渡ってしまうのを防ぐためです。
-%
-%    \begin{macrocode}
 \else
+  \ifx *\jsc@engine@given
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
+    \@jsc@uplatexfalse
+    \g@addto@macro\@classoptionslist{,platex}
+  \fi
+  \ifx u\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'uplatex' is specified but you are running pLaTeX.}
+      {\@ehc}
+  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak
        Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
        the class option list}
       {\@ehc}
-    \@jsc@uplatexfalse
-  \fi
-  \if@jsc@autodetect
-    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
     \@jsc@uplatexfalse
   \fi
 \fi
@@ -5608,8 +5617,8 @@
 % [2022-09-13] \LaTeXe~2021-11-15 (ltfloat.dtx 2021/10/14 v1.2g)で
 % |\@currentcounter|が追加されましたので，追随します。
 % なお，\LaTeXe~2021-06-01 (ltfloat.dtx 2021/02/10 v1.2e)で
-% parhook対応として\cs{par}が追加されていますが，
-% 実は同時に\cs{color@endgroup}も\cs{endgraf}するように変更
+% parhook対応として |\par| が追加されていますが，
+% 実は同時に |\color@endgroup| も |\endgraf| するように変更
 % されていますので，不要だと思います。というわけで追加しません。
 %    \begin{macrocode}
 \long\def\@footnotetext{%

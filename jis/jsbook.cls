@@ -10,7 +10,7 @@
 %% 
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jsbook}
-  [2022/09/13 jsclasses (okumura, texjporg)]
+  [2023/02/12 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jsbook}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -179,16 +179,16 @@
 \jisfontfalse
 \newif\if@jsc@uplatex
 \@jsc@uplatexfalse
-\newif\if@jsc@autodetect
-\@jsc@autodetectfalse
 \DeclareOption{winjis}{%
     \ClassWarningNoLine{\jsc@clsname}{%
       The option `winjis' has been removed;\MessageBreak
       Use `\string\usepackage{winjis}' instead}}
 \DeclareOption{mingoth}{\mingothtrue}
 \DeclareOption{jis}{\jisfonttrue}
-\DeclareOption{uplatex}{\@jsc@uplatextrue}
-\DeclareOption{autodetect-engine}{\@jsc@autodetecttrue}
+\let\jsc@engine@given=*
+\DeclareOption{platex}{\let\jsc@engine@given=p\@jsc@uplatexfalse}
+\DeclareOption{uplatex}{\let\jsc@engine@given=u\@jsc@uplatextrue}
+\DeclareOption{autodetect-engine}{\let\jsc@engine@given=*}
 \def\jsc@JYn{\if@jsc@uplatex JY2\else JY1\fi}
 \def\jsc@JTn{\if@jsc@uplatex JT2\else JT1\fi}
 \def\jsc@pfx@{\if@jsc@uplatex u\else \fi}
@@ -215,10 +215,15 @@
   \setlength\paperwidth {\@tempdima}
 \fi
 \ifnum \ifx\ucs\@undefined\z@\else\ucs"3000 \fi ="3000
-  \if@jsc@autodetect
+  \ifx *\jsc@engine@given
     \ClassInfo\jsc@clsname{Autodetected engine: upLaTeX}
     \@jsc@uplatextrue
     \g@addto@macro\@classoptionslist{,uplatex}
+  \fi
+  \ifx p\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'platex' is specified but you are running upLaTeX.}
+      {\@ehc}
   \fi
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
@@ -229,16 +234,22 @@
     \@jsc@uplatextrue
   \fi
 \else
+  \ifx *\jsc@engine@given
+    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
+    \@jsc@uplatexfalse
+    \g@addto@macro\@classoptionslist{,platex}
+  \fi
+  \ifx u\jsc@engine@given
+    \ClassError\jsc@clsname
+      {Option 'uplatex' is specified but you are running pLaTeX.}
+      {\@ehc}
+  \fi
   \if@jsc@uplatex
     \ClassError\jsc@clsname
       {You are running pLaTeX.\MessageBreak
        Please use upLaTeX instead, or remove 'uplatex' from\MessageBreak
        the class option list}
       {\@ehc}
-    \@jsc@uplatexfalse
-  \fi
-  \if@jsc@autodetect
-    \ClassInfo\jsc@clsname{Autodetected engine: pLaTeX}
     \@jsc@uplatexfalse
   \fi
 \fi

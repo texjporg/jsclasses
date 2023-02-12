@@ -3,7 +3,7 @@ DOCTARGET = jsclasses jslogo okumacro jsverb okuverb
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 KANJI = -kanji=utf8
-FONTMAP = -f haranoaji.map -f ptex-haranoaji.map
+FONTMAP = -f ptex-haranoaji.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
 default: $(STRIPTARGET) $(DVITARGET)
@@ -63,9 +63,11 @@ cleanall:
 	$(DVITARGET) $(PDFTARGET)
 cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
+cleantmp:
+	rm -f *.aux *.log *.dvi
 jisfile:
 	mkdir -p jis0
-	cp *.{dtx,ins,cls,sty} jis0/
+	cp *.dtx *.ins *.cls *.sty jis0/
 	# GNU iconv can be used to convert UTF-8 -> ISO-2022-JP
 	for x in jis0/*; do \
 		if [ -f "$$x" ]; then \

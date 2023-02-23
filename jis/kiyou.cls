@@ -10,7 +10,7 @@
 %% 
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2023/02/12 jsclasses (okumura, texjporg)]
+  [2023/02/23 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -219,7 +219,7 @@
   \if@jsc@uplatex\else
     \ClassError\jsc@clsname
       {You are running upLaTeX.\MessageBreak
-       Please use pLaTeX instead, or add 'uplatex' to\MessageBreak
+       Please use pLaTeX instead, or remove 'platex' from\MessageBreak
        the class option list}
       {\@ehc}
     \@jsc@uplatextrue

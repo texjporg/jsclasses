@@ -15,7 +15,7 @@
 %
 %  Copyright 1995-1999 ASCII Corporation.
 %  Copyright 1999-2016 Haruhiko Okumura
-%  Copyright 2016-2023 Japanese TeX Development Community
+%  Copyright 2016-2025 Japanese TeX Development Community
 %
 % \fi
 %
@@ -32,7 +32,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2023/02/23 jsclasses (okumura, texjporg)]
+  [2025/04/27 jsclasses (okumura, texjporg)]
 %<*driver>
 \RequirePackage{plautopatch}
 \documentclass[dvipdfmx]{jsarticle}
@@ -5620,6 +5620,9 @@
 % parhook対応として |\par| が追加されていますが，
 % 実は同時に |\color@endgroup| も |\endgraf| するように変更
 % されていますので，不要だと思います。というわけで追加しません。
+%
+% [2025-04-27] |\footnote|の内容の先頭に |\inhibitglue\ignorespaces|
+% が挿入されるようにしました。
 %    \begin{macrocode}
 \long\def\@footnotetext{%
   \insert\footins\bgroup

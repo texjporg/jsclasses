@@ -10,7 +10,7 @@
 %% 
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{kiyou}
-  [2023/02/23 jsclasses (okumura, texjporg)]
+  [2025/04/27 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{kiyou}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -1715,7 +1715,8 @@
       \futurelet\jsc@next\jsc@fo@t}
 \def\jsc@fo@t{\ifcat\bgroup\noexpand\jsc@next \let\jsc@next\jsc@f@@t
                                 \else \let\jsc@next\jsc@f@t\fi \jsc@next}
-\def\jsc@f@@t{\bgroup\aftergroup\jsc@@foot\let\jsc@next}
+\def\jsc@f@@t@prefix{\inhibitglue\ignorespaces}
+\def\jsc@f@@t{\bgroup\aftergroup\jsc@@foot\afterassignment\jsc@f@@t@prefix\let\jsc@next}
 \def\jsc@f@t#1{#1\jsc@@foot}
 \def\jsc@@foot{\@finalstrut\strutbox\color@endgroup\egroup
   \ifx\pltx@foot@penalty\@undefined\else

@@ -1,0 +1,22 @@
+% https://okumuralab.org/tex/mod/forum/discuss.php?d=3925
+% https://github.com/texjporg/jsclasses/issues/79
+\documentclass[dvipdfmx,autodetect-engine]{jsarticle}
+\begin{document}
+
+% jsclasses release 2025-05-10 (date: 2025/04/27)
+% 全ての場合について \inhibitglue と \ignorespaces が効く
+
+あいうえお\footnote{実験（改行なし）\verb|\verb動作確認|}
+
+あいうえお\footnote{
+実験（改行あり）\verb|\verb動作確認|}
+
+あいうえお\footnote{「実験（改行なし）」\verb|\verb動作確認|}
+
+あいうえお\footnote{
+「実験（改行あり）」\verb|\verb動作確認|}
+
+あいうえお\footnote グループなし\par
+あいうえお\footnote 「グループなし
+
+\end{document}

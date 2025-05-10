@@ -1,0 +1,16 @@
+% https://github.com/texjporg/jsclasses/pull/35
+\documentclass{jsarticle}
+\usepackage{okumacro}
+\begin{document}
+\fboxsep=0pt
+
+\framebox[15zw][s]{私は保毛です。}\par
+\framebox[15zw][s]{私は\ruby{保毛}{ほげ}です。}
+
+A保毛B\par
+A\ruby{保毛}{ほげ}B
+
+\fbox{\parbox{5zw}{%
+私は「保毛」です。\par
+私は「\ruby{保毛}{ほげ}」です。}}
+\end{document}

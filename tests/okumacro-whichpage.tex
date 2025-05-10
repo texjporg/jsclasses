@@ -1,0 +1,17 @@
+% https://okumuralab.org/tex/mod/forum/discuss.php?d=3545
+% https://github.com/texjporg/jsclasses/issues/78
+\documentclass{jsarticle}
+\usepackage{okumacro}
+\begin{document}
+
+\section{初めの節}
+\label{初めの節}
+この節番号は\ref{初めの節}で，\whichpage{初めの節}です.
+次の節番号は\ref{次の節}で．\whichpage{次の節}です．
+\newpage
+\section{次の節}
+\label{次の節}
+前の節番号は\ref{初めの節}で，\whichpage{初めの節}です.
+この節番号は\ref{次の節}で．\whichpage{次の節}です．
+
+\end{document}

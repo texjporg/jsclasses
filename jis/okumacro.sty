@@ -9,7 +9,7 @@
 %% Maintained on GitHub: https://github.com/texjporg/jsclasses
 %% 
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
+\ProvidesPackage{okumacro}[2025/05/10 okumura, texjporg]
 \providecommand{\rubyfamily}{}
 \def\kanjistrut{\iftdir
   \vrule \@height0.5zw \@depth0.5zw \@width\z@
@@ -352,17 +352,21 @@
 \newcommand{\ENDEXC}[1]{\end{quotation}\nobreak
   \begin{flushright}\footnotesize#1\end{flushright}\bigbreak}
 
+\def\okumacro@pageref#1{%
+  \expandafter\expandafter\expandafter
+      \okumacro@pageref@a\csname r@#1\endcsname{0}\@nil}
+\def\okumacro@pageref@a#1#2#3\@nil{#2}
 \def\whichpage#1{%
   \expandafter\ifx\csname r@#1\endcsname\relax
   \else
-    \@tempcnta\pageref{#1}\relax
+    \@tempcnta\okumacro@pageref{#1}\relax
     \advance\@tempcnta-\c@page
     \ifnum\@tempcnta=0
     \else
       \ifnum\@tempcnta=1 （次ページ）
       \else
         \ifnum\@tempcnta=-1 （前ページ）
-        \else （\pageref{#1}ページ）
+        \else （\okumacro@pageref{#1}ページ）
         \fi
       \fi
     \fi

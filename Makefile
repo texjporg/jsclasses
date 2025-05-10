@@ -65,6 +65,8 @@ cleandoc:
 	rm -f $(DVITARGET) $(PDFTARGET)
 cleantmp:
 	rm -f *.aux *.log *.dvi
+	# for recent LaTeX with hyperref/hyperdoc
+	rm -f *.out *.hd
 jisfile:
 	mkdir -p jis0
 	cp *.dtx *.ins *.cls *.sty jis0/

@@ -12,7 +12,7 @@
 %   http://oku.edu.mie-u.ac.jp/~okumura/
 %
 %<okumacro>\NeedsTeXFormat{pLaTeX2e}
-%<okumacro>\ProvidesPackage{okumacro}[2021/07/01 okumura, texjporg]
+%<okumacro>\ProvidesPackage{okumacro}[2025/05/10 okumura, texjporg]
 %<*driver>
 \RequirePackage{plautopatch}
 \documentclass[dvipdfmx]{jsarticle}
@@ -913,18 +913,28 @@
 % そうでなければ（次ページ）（前ページ）（123ページ）のような形式で
 % 場所を出力します。
 %
+% [2025-05-10] \LaTeXe~2022-06-01以降で
+% |! Missing number, treated as zero.|エラーが
+% 出るようになっていたので，修正します。
+% まず「展開可能版の |\pageref|」を別に用意して，
+% |\whichpage| の実装中でそれを使うようにしました。
+%
 %    \begin{macrocode}
+\def\okumacro@pageref#1{%
+  \expandafter\expandafter\expandafter
+      \okumacro@pageref@a\csname r@#1\endcsname{0}\@nil}
+\def\okumacro@pageref@a#1#2#3\@nil{#2}
 \def\whichpage#1{%
   \expandafter\ifx\csname r@#1\endcsname\relax
   \else
-    \@tempcnta\pageref{#1}\relax
+    \@tempcnta\okumacro@pageref{#1}\relax
     \advance\@tempcnta-\c@page
     \ifnum\@tempcnta=0
     \else
       \ifnum\@tempcnta=1 （次ページ）
       \else
         \ifnum\@tempcnta=-1 （前ページ）
-        \else （\pageref{#1}ページ）
+        \else （\okumacro@pageref{#1}ページ）
         \fi
       \fi
     \fi

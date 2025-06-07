@@ -27,7 +27,7 @@
 %<*driver>
 \ProvidesFile{jsclasses.dtx}
 %</driver>
-  [2025/04/27 jsclasses (okumura, texjporg)]
+  [2025/05/26 jsclasses (okumura, texjporg)]
 %<*driver>
 \RequirePackage{plautopatch}
 \documentclass[dvipdfmx]{jsarticle}
@@ -480,7 +480,12 @@
 % [2022-09-13] \LaTeXe~2021-11-15 (ltmath.dtx 2021/10/14 v1.2j)で
 % |\@currentcounter|が追加されましたので，追随します。
 %
+% [2025-05-26] \LaTeXe~2025-06-01に追従し，最初の|$$|を|\dollardollar@begin|に
+% 変更しました。|\providecommand|で|\dollardollar@begin|を定義しているので，
+% 古い\LaTeXe カーネルでも問題ありません。
+%
 %    \begin{macrocode}
+\providecommand\dollardollar@begin{$$}
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
@@ -490,7 +495,7 @@
    \global\@eqcnt\z@
    \tabskip\@centering
    \let\\\@eqncr
-   $$\everycr{}\halign to\displaywidth\bgroup
+   \dollardollar@begin\everycr{}\halign to\displaywidth\bgroup
        \hskip\@centering$\displaystyle\tabskip\z@skip{##}$\@eqnsel
       &\global\@eqcnt\@ne \hfil$\displaystyle{{}##{}}$\hfil
       &\global\@eqcnt\tw@ $\displaystyle{##}$\hfil\tabskip\@centering
@@ -527,7 +532,7 @@
     \setlength\belowdisplayskip{\abovedisplayskip}%
     \setlength\belowdisplayshortskip{\abovedisplayskip}%
     \setlength\abovedisplayshortskip{\abovedisplayskip}%
-    $$\everycr{}\halign to\linewidth% $$
+    \dollardollar@begin\everycr{}\halign to\linewidth% $$
     \bgroup
       \hskip\@centering$\displaystyle\tabskip\z@skip{##}$\@eqnsel
       &\global\@eqcnt\@ne \hfil$\displaystyle{{}##{}}$\hfil

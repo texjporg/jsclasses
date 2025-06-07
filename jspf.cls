@@ -13,7 +13,7 @@
 \fi
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{jspf}
-  [2025/04/27 jsclasses (okumura, texjporg)]
+  [2025/05/26 jsclasses (okumura, texjporg)]
 \def\jsc@clsname{jspf}
 \newif\ifjsc@needsp@tch
 \jsc@needsp@tchfalse
@@ -124,6 +124,7 @@
 \DeclareOption{twocolumn}{\@twocolumntrue}
 \DeclareOption{titlepage}{\@titlepagetrue}
 \DeclareOption{notitlepage}{\@titlepagefalse}
+\providecommand\dollardollar@begin{$$}
 \def\eqnarray{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
@@ -133,7 +134,7 @@
    \global\@eqcnt\z@
    \tabskip\@centering
    \let\\\@eqncr
-   $$\everycr{}\halign to\displaywidth\bgroup
+   \dollardollar@begin\everycr{}\halign to\displaywidth\bgroup
        \hskip\@centering$\displaystyle\tabskip\z@skip{##}$\@eqnsel
       &\global\@eqcnt\@ne \hfil$\displaystyle{{}##{}}$\hfil
       &\global\@eqcnt\tw@ $\displaystyle{##}$\hfil\tabskip\@centering
@@ -158,7 +159,7 @@
     \setlength\belowdisplayskip{\abovedisplayskip}%
     \setlength\belowdisplayshortskip{\abovedisplayskip}%
     \setlength\abovedisplayshortskip{\abovedisplayskip}%
-    $$\everycr{}\halign to\linewidth% $$
+    \dollardollar@begin\everycr{}\halign to\linewidth% $$
     \bgroup
       \hskip\@centering$\displaystyle\tabskip\z@skip{##}$\@eqnsel
       &\global\@eqcnt\@ne \hfil$\displaystyle{{}##{}}$\hfil
